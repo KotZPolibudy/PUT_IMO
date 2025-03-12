@@ -1,7 +1,7 @@
 from utils import *
 from algo.greedy_near import greedy_nearest_neighbor
 from algo.greedy_cheap import greedy_cheapest_insertion
-from algo.regret import *
+from algo.regret import two_regret, weighted_two_regret
 
 
 def show_paths(data, path1, path2):
@@ -40,8 +40,8 @@ if __name__ == '__main__':
     algorithms = [
         greedy_nearest_neighbor,
         greedy_cheapest_insertion,
-        two_regret,
-        weighted_two_regret
+        # two_regret,
+        # weighted_two_regret
     ]
     for path in paths:
         data = read_data(path)
