@@ -1,7 +1,7 @@
 from utils import *
 from algo.greedy_near import greedy_nearest_neighbor
 from algo.greedy_cheap import greedy_cheapest_insertion
-# from algo.regret import two_regret, weighted_two_regret
+from algo.regret_first import two_regret, weighted_two_regret
 from algo.regret_basic import two_regret_basic
 from algo.regret_global import two_regret_global
 from algo.regret_global_balanced import two_regret_global_balanced
@@ -40,16 +40,18 @@ def algorithm_loop(algorithm, data, distances, n=100):
 
 
 if __name__ == '__main__':
-    paths = ['data/' + f'kro{i}200.tsp' for i in ['A', 'B']]
+    # paths = ['data/' + f'kro{i}200.tsp' for i in ['A', 'B']]
+    paths = ['data/kroA200.tsp', 'data/kroB200.tsp']
+    # paths = ['data/kroA200.tsp']
     algorithms = [
-        # greedy_nearest_neighbor,
-        # greedy_cheapest_insertion,
+        greedy_nearest_neighbor,
+        greedy_cheapest_insertion,
         # two_regret,
         # weighted_two_regret,
-        # two_regret_basic,
-        # two_regret_global,
+        two_regret_basic,
+        two_regret_global,
         # two_regret_global_balanced,
-        genetic_2tsp,
+        # genetic_2tsp,
     ]
     for path in paths:
         data = read_data(path)
