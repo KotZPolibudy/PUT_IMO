@@ -1,7 +1,8 @@
 from utils import *
 from algo.greedy_near import greedy_nearest_neighbor
 from algo.greedy_cheap import greedy_cheapest_insertion
-from algo.regret import two_regret, weighted_two_regret
+# from algo.regret import two_regret, weighted_two_regret
+from algo.regret_basic import two_regret
 
 
 def show_paths(data, path1, path2):
@@ -38,14 +39,16 @@ def algorithm_loop(algorithm, data, distances, n=100):
 if __name__ == '__main__':
     paths = ['data/' + f'kro{i}200.tsp' for i in ['A', 'B']]
     algorithms = [
-        greedy_nearest_neighbor,
-        greedy_cheapest_insertion,
+        # greedy_nearest_neighbor,
+        # greedy_cheapest_insertion,
         # two_regret,
         # weighted_two_regret
+        two_regret
     ]
     for path in paths:
         data = read_data(path)
         distances = measure_distances(data)
+        # print(distances)
         for algorithm in algorithms:
             best_cost, avg_cost, best_paths = algorithm_loop(algorithm, data, distances)
             if best_cost is None or avg_cost is None or best_paths is None:
