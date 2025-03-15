@@ -56,9 +56,53 @@ Główny algorytm natomiast, wygląda następująco: \\
 
 \subsection{Algorytm zachłanny - metoda rozbudowy cyklu}\label{subsec:algorytm-zachanny---metoda-rozbudowy-cyklu}
 
+Algorytm ten korzysta z funkcji znajdywania najlepszego wstawienia, a działa ona w następujący sposób:
+
+\begin{verbatim}
+    Przyjmuje jako argumenty obecny cykl, macierz dystansów, oraz tablicę indeksów odwiedzonych miast
+    Tworzy listę możliwości (nieodwiedzonych wierzchołków)
+    ustawia najtańszy koszt na maksymalnie dużą wartość
+    dla każdej możliwości z listy możliwości:
+        dla każdego możliwego wstawienia w cykl:
+             - oblicza wzrost dystansu, jaki spowoduje wstawienie (a więc przy wstawianiu między a i b wierzchołka c, oblicza dystans ac + bc - ab)
+             - zapisuje najmniejszy znaleziony wzrost dystansu oraz miejsce jego wstawienia
+        jeśli koszt wstawienia obecnie znalezionego wierzchołka jest mniejszy niż obecnie pamiętany najtańszy koszt wstawienia, zapisuje ten koszt jako obecnie najtańszy, oraz wierzchołek i miejsce jego wstawienia
+    Po przejrzeniu wszystkich możliwości zwraca parę <wierzchołek, miejsce wstawienia>
+
+\end{verbatim}
+
+\begin{verbatim}
+    Dwukrotnie przydziela wierzchołki startowe do cykli pierwszego i drugiego jako początek i koniec cyklu)
+    Tworzy tablicę indeksów miast, zaznaczając wszystkie poza startowymi jako nieodwiedzone
+    dopóki istnieją jakieś nieodwiedzone miasta, powtarza następujące 7 kroków:
+        Znajduje najtańsze wstawienie, czyli parę <wierzchołek, miejsce w cyklu> dla cyklu 1
+        Wstawia w odpowiednie miejsce cyklu 1 znaleziony wierzchołek
+        Zapisuje wierzchołek jako już odwiedzony
+        Znajduje najtańsze wstawienie dla cyklu 2
+        Jeśli ono nie istnieje (np. bo ostatni wierzchołek został już wstawiony) to kończy pętlę
+        Wstawia w odpowiednie miejsce cyklu 2 znaleziony wierzchołek
+        Zapisuje wierzchołek jako już odwiedzony
+    Kiedy już nie ma żadnych nieodwiedzonych miast zwraca oba cykle jako znalezione ścieżki
+
+\end{verbatim}
+
 \subsection{Algorytm z żalem - metoda rozbudowy cyklu}\label{subsec:algorytm-z-zalem---metoda-rozbudowy-cyklu}
 
+\begin{verbatim}
+    kodkodkod
+\end{verbatim}
+
 \subsection{Algorytm z żalem - metoda rozbudowy cyklu z żalem ważonym}\label{subsec:algorytm-z-zalem---metoda-rozbudowy-cyklu-z-zalem-wazonym}
+
+\begin{verbatim}
+    kodkodkod
+\end{verbatim}
+
+\subsection{Własny jakiś dziki algorytm, jak nam się będzie chciało, bo imo bym zrobił coś}
+
+\begin{verbatim}
+    kodkodkod
+\end{verbatim}
 
 
 \section{Wyniki eksperymentu obliczeniowego}\label{sec:wyniki-eksperymenty-obliczeniowego}
@@ -66,6 +110,9 @@ Główny algorytm natomiast, wygląda następująco: \\
 cccccc i wizualizacje
 
 \section{Wnioski}\label{sec:wnioski}
+
+Żal nie działa, chociaż byśmy chcieli, ale żal rozwiązuje zwykły TSP.
+Może w połączeniu z algorytmem klastrującym, jakimś k-means zadziałałby lepiej, ale strasznie krzywdzące dla niego jest też to że ścieżki MUSZĄ być równej długości
 
 \section{Link do repo}\label{sec:link-do-repo}
 
