@@ -4,14 +4,9 @@
 % Packages
 \usepackage{amsmath}
 
-
-\title{Zadanie 1. heurystyki konstrukcyjne }
-\author{Oskar Kiliańczyk 151xxx \& Wojciech Kot 151876}
+\title{Zadanie 1. Heurystyki konstrukcyjne}
+\author{Oskar Kiliańczyk 151863 \& Wojciech Kot 151876}
 \date{}
-
-
-
-
 
 % Document
 \begin{document}
@@ -19,24 +14,30 @@
 \maketitle
 \newpage
 
-\chapter{Opis zadania}\label{ch:opis-zadania}
+\section{Opis zadania}\label{sec:opis-zadania}
 
-aaaaa
+Podczas zajęć rozważamy zmodyfikowany problem komiwojażera.
+Początkowo, obliczamy macierz odległości pomiędzy miastami.
+Obliczona macierz odległości między wierzchołkami grafu będzie podstawą dla każdego algorytmu,
+a celem jest wyznaczenie dwóch rozłącznych zamkniętych ścieżek (cykli), z których każda zawiera 50\% wierzchołków.
+Jeśli liczba wierzchołków jest nieparzysta, pierwsza ścieżka zawiera jeden wierzchołek więcej.
+Kryterium optymalizacji jest minimalizacja łącznej długości obu cykli.
 
-\chapter{Zaimplementowane algorytmy}\label{ch:zaimplementowane-algorytmy}
+Rozważane instancje problemu pochodzą z biblioteki TSPLib, w szczególności kroa200 oraz krob200.
+Są to instancje dwuwymiarowe euklidesowe, w których każdemu wierzchołkowi przypisane są współrzędne na płaszczyźnie.
+Odległość między wierzchołkami liczona jest jako odległość euklidesowa i zaokrąglana do najbliższej liczby całkowitej.
+W implementacji wykorzystywana będzie wyłącznie macierz odległości, co zapewnia możliwość zastosowania kodu do innych instancji problemu.
 
-    bbbbb
+\section{Zaimplementowane algorytmy}\label{sec:zaimplementowane-algorytmy}
 
+bbbbb
 
-\chapter{Wyniki eksperymenty obliczeniowego}\label{ch:wyniki-eksperymenty-obliczeniowego}
+\section{Wyniki eksperymentu obliczeniowego}\label{sec:wyniki-eksperymenty-obliczeniowego}
 
+cccccc i wizualizacje
 
-cccccc
-i wizualizacje
+\section{Wnioski}\label{sec:wnioski}
 
-
-\chapter{Wnioski}\label{ch:wnioski}
-
-\chapter{link do repo}\label{ch:link-do-repo}
+\section{Link do repo}\label{sec:link-do-repo}
 
 \end{document}
