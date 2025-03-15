@@ -19,6 +19,9 @@ def show_paths(data, path1, path2, save_path=None, show=False):
         plt.plot([data[path2[i]].x, data[path2[i + 1]].x], [data[path2[i]].y, data[path2[i + 1]].y], 'b')
 
     if save_path:
+        dir_name = os.path.dirname(save_path)
+        if dir_name and not os.path.exists(dir_name):
+            os.mkdir(save_path)
         plt.savefig(save_path)
 
     if show:
@@ -67,7 +70,7 @@ if __name__ == '__main__':
     ]
 
     results = {}
-    os.makedirs("best_paths", exist_ok=True)
+    os.makedirs("../best_paths", exist_ok=True)
 
     for algorithm in algorithms:
         algo_name = algorithm.__name__
@@ -80,7 +83,7 @@ if __name__ == '__main__':
                 results[algo_name].append("N/A")
             else:
                 results[algo_name].append(f"{avg:.2f} ; {best:.2f} ; {worst:.2f}")
-                save_path = f"best_paths/{algo_name}_{os.path.basename(path)}.png"
+                save_path = f"../best_paths/{algo_name}_{os.path.basename(path)}.png"
                 show_paths(data, *best_paths, save_path)
 
     # Print results in table format
