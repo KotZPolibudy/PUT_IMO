@@ -28,7 +28,7 @@ def show_paths(data, path1, path2, save_path=None, show=False):
 
 
 def use_algorithm(algorithm, data, distances):
-    return algorithm(data, distances, choose_starting_nodes(data, distances))
+    return algorithm(distances, choose_starting_nodes(data, distances))
 
 
 def algorithm_loop(algorithm, data, distances, n=100):
@@ -53,7 +53,7 @@ def algorithm_loop(algorithm, data, distances, n=100):
 
 if __name__ == '__main__':
     # paths = ['data/' + f'kro{i}200.tsp' for i in ['A', 'B']]
-    paths = ['data/kroA200.tsp', 'data/kroB200.tsp']
+    paths = ['../data/kroA200.tsp', '../data/kroB200.tsp']
     # paths = ['data/kroA200.tsp']
     algorithms = [
         greedy_nearest_neighbor,

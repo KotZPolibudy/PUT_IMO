@@ -1,5 +1,5 @@
-def greedy_cheapest_insertion(data, distances, starting_nodes):
-    n = len(data)
+def greedy_cheapest_insertion(distances, starting_nodes):
+    n = len(distances)
 
     def cheapest_insertion(path, distances, visited):
         possibilities = [i for i in range(n) if not visited[i]]

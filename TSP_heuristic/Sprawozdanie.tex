@@ -30,13 +30,36 @@ W implementacji algorytmów wykorzystywana będzie wyłącznie macierz odległo�
 
 \section{Zaimplementowane algorytmy}\label{sec:zaimplementowane-algorytmy}
 
-\subsection{Algorytm zachłanny - metoda najbliższego sąsiada}
+\subsection{Algorytm zachłanny - metoda najbliższego sąsiada}\label{subsec:algorytm-zachanny---metoda-najblizszego-sasiada}
 
-\subsection{Algorytm zachłanny - metoda rozbudowy cyklu}
+Algorytm ten wykorzystuje funkcję znajdującą najbliższego sąsiada dla danego wierzchołka (miasta)
+Działa ona w następujący sposób: \\
+dla każdego miasta, sprawdza czy zostało już odwiedzone \\
+jeśli nie, to sprawdza czy dystans jest mniejszy od dystansu z danego miasta do obecnie zapamiętanego jako najbliższe \\
+jeśli jest bliższe niż obecnie pamiętane jako najbliższe, zapamiętuje je jako najbliższe \\
+jeśli nie ma żadnego miasta obecnie pamiętanego jako najbliższe, przypisuje to miasto \\
 
-\subsection{Algorytm z żalem - metoda rozbudowy cyklu}
+Główny algorytm natomiast, wygląda następująco: \\
 
-\subsection{Algorytm z żalem - metoda rozbudowy cyklu z żalem ważonym}
+\begin{verbatim}
+    Przydziela wierzchołki startowe do cykli pierwszego i drugiego
+    Tworzy tablicę indeksów miast, zaznaczając wszystkie poza startowymi jako nieodwiedzone
+    dopóki istnieją jakieś nieodwiedzone miasta, powtarza następujące 4 kroki:
+        Znajduje najbliższego nieodwiedzonego sąsiada do ostatniego wierzchołka cyklu 1.
+        dodaje go do cyklu1 oraz zapisuje w tablicy jako odwiedzony
+        Znajduje najbliższego nieodwiedzonego sąsiada do ostatniego wierzchołka cyklu 2.
+        dodaje go do cyklu2 oraz zapisuje w tablicy jako odwiedzony
+    Kiedy już nie ma żadnych nieodwiedzonych miast, dopisuje na koniec cykli ich wierzchołki startowe
+    Zwraca oba cykle jako znalezione ścieżki
+
+\end{verbatim}
+
+\subsection{Algorytm zachłanny - metoda rozbudowy cyklu}\label{subsec:algorytm-zachanny---metoda-rozbudowy-cyklu}
+
+\subsection{Algorytm z żalem - metoda rozbudowy cyklu}\label{subsec:algorytm-z-zalem---metoda-rozbudowy-cyklu}
+
+\subsection{Algorytm z żalem - metoda rozbudowy cyklu z żalem ważonym}\label{subsec:algorytm-z-zalem---metoda-rozbudowy-cyklu-z-zalem-wazonym}
+
 
 \section{Wyniki eksperymentu obliczeniowego}\label{sec:wyniki-eksperymenty-obliczeniowego}
 

@@ -1,5 +1,5 @@
-def greedy_nearest_neighbor(data, distances, starting_nodes):
-    n = len(data)
+def greedy_nearest_neighbor(distances, starting_nodes):
+    n = len(distances)
 
     def nearest_neighbor(town_id, distances, visited):
         nearest = None
