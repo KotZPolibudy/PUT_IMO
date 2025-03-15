@@ -9,7 +9,7 @@ from algo.regret_global_balanced import two_regret_global_balanced
 from algo.our_own_genetic import genetic_2tsp
 
 
-def show_paths(data, path1, path2, save_path=None):
+def show_paths(data, path1, path2, save_path=None, show=False):
     x = [town.x for town in data]
     y = [town.y for town in data]
     plt.scatter(x, y)
@@ -20,7 +20,10 @@ def show_paths(data, path1, path2, save_path=None):
 
     if save_path:
         plt.savefig(save_path)
-    plt.show()
+
+    if show:
+        plt.show()
+
     plt.close()
 
 
