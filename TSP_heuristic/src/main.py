@@ -9,7 +9,7 @@ from algo.regret_first import two_regret, weighted_two_regret
 #from algo.our_own_genetic import genetic_2tsp
 #from algo.regret_new import two_regret_global
 #from algo.regret_new_balanced import two_regret_global_balanced
-from algo.split_regret import split_paths_regret_TSP
+from algo.split_regret import split_paths_regret_TSP, weighted_split_paths_regret_TSP
 
 
 def show_paths(data, path1, path2, save_path=None, show=False):
@@ -72,7 +72,8 @@ if __name__ == '__main__':
         # genetic_2tsp, # to była okropna pomyłka, tam nie patrzeć
         # two_regret_global,
         # two_regret_global_balanced,
-        split_paths_regret_TSP
+        split_paths_regret_TSP,
+        weighted_split_paths_regret_TSP,
     ]
 
     results = {}

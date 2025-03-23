@@ -1,4 +1,4 @@
-def split_paths_regret_TSP(distances, starting_nodes):
+def split_paths_regret_TSP(distances, starting_nodes, use_weights=False):
     n = len(distances)
 
     start1, start2 = starting_nodes
@@ -26,7 +26,7 @@ def split_paths_regret_TSP(distances, starting_nodes):
                     assigned.add(node)
                     break
 
-    def two_regret_heuristic(path, nodes, distances):
+    def two_regret_heuristic(path, nodes, distances, use_weights=False, w1=1, w2=-1):
         visited = set(path)
         while len(path) < len(nodes) + 1:
             # to +1 powoduje, że nie omijamy żadnego miasta ;) bo zaczynamy z startowym 2 razy, żeby domknąć cykl
@@ -46,7 +46,10 @@ def split_paths_regret_TSP(distances, starting_nodes):
                 insertion_costs.sort()
 
                 if len(insertion_costs) > 1:
-                    regret = insertion_costs[1][0] - insertion_costs[0][0]
+                    if use_weights:
+                        regret = w1 * insertion_costs[1][0] - w2 * insertion_costs[0][0]
+                    else:
+                        regret = insertion_costs[1][0] - insertion_costs[0][0]
                 else:
                     regret = float('inf')
 
@@ -64,9 +67,12 @@ def split_paths_regret_TSP(distances, starting_nodes):
     # Debug prints
     # print("nodes1 len = ", len(nodes1))
     # print("nodes2 len = ", len(nodes2))
-    path1 = two_regret_heuristic([start1, start1], nodes1, distances)
-    path2 = two_regret_heuristic([start2, start2], nodes2, distances)
+    path1 = two_regret_heuristic([start1, start1], nodes1, distances, use_weights)
+    path2 = two_regret_heuristic([start2, start2], nodes2, distances, use_weights)
     # print("path1 len = ", len(path1))
     # print("path2 len = ", len(path2))
 
     return path1, path2
+
+def weighted_split_paths_regret_TSP(distances, starting_nodes):
+    return split_paths_regret_TSP(distances, starting_nodes, use_weights=True)
