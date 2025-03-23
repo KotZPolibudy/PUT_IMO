@@ -3,7 +3,8 @@
 
 % Packages
 \usepackage{amsmath}
-\usepackage[a4paper, margin=0.5in]{geometry} % daj an 1in jak chcesz normalniejszy margines, ale kod mi się w linii nie mieści :P
+\usepackage[a4paper, margin=0.5in]{geometry}
+\usepackage{graphicx} % daj an 1in jak chcesz normalniejszy margines, ale kod mi się w linii nie mieści :P
 
 \title{Zadanie 1. Heurystyki konstrukcyjne}
 \author{Oskar Kiliańczyk 151863 \& Wojciech Kot 151876}
@@ -108,7 +109,38 @@ Algorytm ten korzysta z funkcji znajdywania najlepszego wstawienia, a działa on
 
 \section{Wyniki eksperymentu obliczeniowego}\label{sec:wyniki-eksperymenty-obliczeniowego}
 
-cccccc i wizualizacje
+\subsection{Algorytm zachłanny - metoda najbliższego sąsiada}\label{subsec:algorytm-zachanny---metoda-najblizszego-sasiada2}
+
+Graficzną reprezentację wyników dla algorytmu zachłannego metodą najbliższego sąsiada przestawiono na~\ref{fig:Greedy-nearest-kroA, fig:Greedy-nearest-kroB}
+\begin{figure}[H]
+    \centering
+    \includegraphics{best_paths/greedy_nearest_neighbor_kroA200.tsp}
+    \caption{Instancja kroA200}
+    \label{fig:Greedy-nearest-kroA}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics{best_paths/greedy_nearest_neighbor_kroB200.tsp}
+    \caption{Instancja kroB200}
+    \label{fig:Greedy-nearest-kroB}
+\end{figure}
+
+
+\subsection{Algorytm zachłanny - metoda rozbudowy cyklu}\label{subsec:algorytm-zachanny---metoda-rozbudowy-cyklu2}
+
+Graficzną reprezentację wyników dla algorytmu zachłannego metodą rozbudowy cyklu przestawiono na~\ref{fig:Greedy-cycle-kroA, fig:Greedy-cycle-kroB}
+\begin{figure}[H]
+    \centering
+    \includegraphics{best_paths/greedy_cheapest_insertion_kroA200.tsp}
+    \caption{Instancja kroA200}
+    \label{fig:Greedy-cycle-kroA}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics{best_paths/greedy_cheapest_insertion_kroB200.tsp}
+    \caption{Instancja kroB200}
+    \label{fig:Greedy-cycle-kroB}
+\end{figure}
 
 \section{Wnioski}\label{sec:wnioski}
 
