@@ -1,5 +1,5 @@
-def two_regret(data, distances, starting_nodes, use_weights=False):
-    n = len(data)
+def two_regret(distances, starting_nodes, use_weights=False):
+    n = len(distances)
 
     def calc_regret(path, distances, visited, use_weights=False, w1=1, w2=-1):
         possibilites = [i for i in range(n) if not visited[i]]
@@ -42,5 +42,5 @@ def two_regret(data, distances, starting_nodes, use_weights=False):
     return path1, path2
 
 
-def weighted_two_regret(data, distances, starting_nodes):
-    return two_regret(data, distances, starting_nodes, use_weights=True)
+def weighted_two_regret(distances, starting_nodes):
+    return two_regret(distances, starting_nodes, use_weights=True)

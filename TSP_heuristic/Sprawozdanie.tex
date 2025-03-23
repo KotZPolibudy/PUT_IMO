@@ -5,6 +5,11 @@
 \usepackage{amsmath}
 \usepackage[a4paper, margin=0.5in]{geometry}
 \usepackage{graphicx} % daj an 1in jak chcesz normalniejszy margines, ale kod mi się w linii nie mieści :P
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+\usepackage{float}
+\usepackage{hyperref}
 
 \title{Zadanie 1. Heurystyki konstrukcyjne}
 \author{Oskar Kiliańczyk 151863 \& Wojciech Kot 151876}
@@ -41,64 +46,123 @@ jeśli nie, to sprawdza czy dystans jest mniejszy od dystansu z danego miasta do
 jeśli jest bliższe niż obecnie pamiętane jako najbliższe, zapamiętuje je jako najbliższe \\
 jeśli nie ma żadnego miasta obecnie pamiętanego jako najbliższe, przypisuje to miasto \\
 
-Główny algorytm natomiast, wygląda następująco: \\
+Główny algorytm natomiast, wygląda następująco:
 
-\begin{verbatim}
-    Przydziela wierzchołki startowe do cykli pierwszego i drugiego
-    Tworzy tablicę indeksów miast, zaznaczając wszystkie poza startowymi jako nieodwiedzone
-    dopóki istnieją jakieś nieodwiedzone miasta, powtarza następujące 4 kroki:
-        Znajduje najbliższego nieodwiedzonego sąsiada do ostatniego wierzchołka cyklu 1.
-        dodaje go do cyklu1 oraz zapisuje w tablicy jako odwiedzony
-        Znajduje najbliższego nieodwiedzonego sąsiada do ostatniego wierzchołka cyklu 2.
-        dodaje go do cyklu2 oraz zapisuje w tablicy jako odwiedzony
-    Kiedy już nie ma żadnych nieodwiedzonych miast, dopisuje na koniec cykli ich wierzchołki startowe
-    Zwraca oba cykle jako znalezione ścieżki
+\begin{enumerate}
+    \item Przydziela wierzchołki startowe do cykli pierwszego i drugiego.
+    \item Tworzy tablicę indeksów miast, zaznaczając wszystkie poza startowymi jako nieodwiedzone.
+    \item Dopóki istnieją jakieś nieodwiedzone miasta, powtarza następujące kroki:
+    \begin{itemize}
+        \item Znajduje najbliższego nieodwiedzonego sąsiada do ostatniego wierzchołka cyklu 1.
+        \item Dodaje go do cyklu 1 oraz zapisuje w tablicy jako odwiedzony.
+        \item Znajduje najbliższego nieodwiedzonego sąsiada do ostatniego wierzchołka cyklu 2.
+        \item Dodaje go do cyklu 2 oraz zapisuje w tablicy jako odwiedzony.
+    \end{itemize}
+    \item Kiedy już nie ma żadnych nieodwiedzonych miast, dopisuje na koniec cykli ich wierzchołki startowe.
+    \item Zwraca oba cykle jako znalezione ścieżki.
+\end{enumerate}
 
-\end{verbatim}
 
 \subsection{Algorytm zachłanny - metoda rozbudowy cyklu}\label{subsec:algorytm-zachanny---metoda-rozbudowy-cyklu}
 
 Algorytm ten korzysta z funkcji znajdywania najlepszego wstawienia, a działa ona w następujący sposób:
 
-\begin{verbatim}
-    Przyjmuje jako argumenty obecny cykl, macierz dystansów, oraz tablicę indeksów odwiedzonych miast
-    Tworzy listę możliwości (nieodwiedzonych wierzchołków)
-    ustawia najtańszy koszt na maksymalnie dużą wartość
-    dla każdej możliwości z listy możliwości:
-        dla każdego możliwego wstawienia w cykl:
-             - oblicza wzrost dystansu, jaki spowoduje wstawienie (a więc przy wstawianiu między a i b wierzchołka c, oblicza dystans ac + bc - ab)
-             - zapisuje najmniejszy znaleziony wzrost dystansu oraz miejsce jego wstawienia
-        jeśli koszt wstawienia obecnie znalezionego wierzchołka jest mniejszy niż obecnie pamiętany najtańszy koszt wstawienia, zapisuje ten koszt jako obecnie najtańszy, oraz wierzchołek i miejsce jego wstawienia
-    Po przejrzeniu wszystkich możliwości zwraca parę <wierzchołek, miejsce wstawienia>
+\begin{enumerate}
+    \item Przyjmuje jako argumenty:
+    \begin{itemize}
+        \item obecny cykl,
+        \item macierz dystansów,
+        \item tablicę indeksów odwiedzonych miast.
+    \end{itemize}
+    \item Tworzy listę możliwości (nieodwiedzonych wierzchołków).
+    \item Ustawia najtańszy koszt na maksymalnie dużą wartość.
+    \item Dla każdej możliwości z listy możliwości:
+    \begin{enumerate}
+        \item Dla każdego możliwego wstawienia w cykl:
+        \begin{itemize}
+            \item Oblicza wzrost dystansu, jaki spowoduje wstawienie (a więc przy wstawianiu między \(a\) i \(b\) wierzchołka \(c\), oblicza dystans \(|ac| + |bc| - |ab|\)).
+            \item Zapisuje najmniejszy znaleziony wzrost dystansu oraz miejsce jego wstawienia.
+        \end{itemize}
+        \item Jeśli koszt wstawienia obecnie znalezionego wierzchołka jest mniejszy niż obecnie pamiętany najtańszy koszt wstawienia:
+        \begin{itemize}
+            \item Zapisuje ten koszt jako obecnie najtańszy.
+            \item Zapisuje wierzchołek oraz miejsce jego wstawienia.
+        \end{itemize}
+    \end{enumerate}
+    \item Po przejrzeniu wszystkich możliwości zwraca parę \(\langle\)wierzchołek, miejsce wstawienia\(\rangle\).
+    \item Dwukrotnie przydziela wierzchołki startowe do cykli pierwszego i drugiego jako początek i koniec cyklu.
+    \item Tworzy tablicę indeksów miast, zaznaczając wszystkie poza startowymi jako nieodwiedzone.
+    \item Dopóki istnieją jakieś nieodwiedzone miasta, powtarza następujące kroki:
+    \begin{enumerate}
+        \item Znajduje najtańsze wstawienie, czyli parę \(\langle\)wierzchołek, miejsce w cyklu\(\rangle\) dla cyklu 1.
+        \item Wstawia w odpowiednie miejsce cyklu 1 znaleziony wierzchołek.
+        \item Zapisuje wierzchołek jako już odwiedzony.
+        \item Znajduje najtańsze wstawienie dla cyklu 2.
+        \item Jeśli ono nie istnieje (np. bo ostatni wierzchołek został już wstawiony), to kończy pętlę.
+        \item Wstawia w odpowiednie miejsce cyklu 2 znaleziony wierzchołek.
+        \item Zapisuje wierzchołek jako już odwiedzony.
+    \end{enumerate}
+    \item Kiedy już nie ma żadnych nieodwiedzonych miast, zwraca oba cykle jako znalezione ścieżki.
+\end{enumerate}
 
-\end{verbatim}
+Sam algorytm:
+\begin{enumerate}
+    \item Dwukrotnie przydziela wierzchołki startowe do cykli pierwszego i drugiego jako początek i koniec cyklu.
+    \item Tworzy tablicę indeksów miast, zaznaczając wszystkie poza startowymi jako nieodwiedzone.
+    \item Dopóki istnieją jakieś nieodwiedzone miasta, powtarza następujące kroki:
+    \begin{enumerate}
+        \item Znajduje najtańsze wstawienie, czyli parę \(\langle\)wierzchołek, miejsce w cyklu\(\rangle\) dla cyklu 1.
+        \item Wstawia w odpowiednie miejsce cyklu 1 znaleziony wierzchołek.
+        \item Zapisuje wierzchołek jako już odwiedzony.
+        \item Znajduje najtańsze wstawienie dla cyklu 2.
+        \item Jeśli ono nie istnieje (np. bo ostatni wierzchołek został już wstawiony), to kończy pętlę.
+        \item Wstawia w odpowiednie miejsce cyklu 2 znaleziony wierzchołek.
+        \item Zapisuje wierzchołek jako już odwiedzony.
+    \end{enumerate}
+    \item Kiedy już nie ma żadnych nieodwiedzonych miast, zwraca oba cykle jako znalezione ścieżki.
+\end{enumerate}
 
-\begin{verbatim}
-    Dwukrotnie przydziela wierzchołki startowe do cykli pierwszego i drugiego jako początek i koniec cyklu)
-    Tworzy tablicę indeksów miast, zaznaczając wszystkie poza startowymi jako nieodwiedzone
-    dopóki istnieją jakieś nieodwiedzone miasta, powtarza następujące 7 kroków:
-        Znajduje najtańsze wstawienie, czyli parę <wierzchołek, miejsce w cyklu> dla cyklu 1
-        Wstawia w odpowiednie miejsce cyklu 1 znaleziony wierzchołek
-        Zapisuje wierzchołek jako już odwiedzony
-        Znajduje najtańsze wstawienie dla cyklu 2
-        Jeśli ono nie istnieje (np. bo ostatni wierzchołek został już wstawiony) to kończy pętlę
-        Wstawia w odpowiednie miejsce cyklu 2 znaleziony wierzchołek
-        Zapisuje wierzchołek jako już odwiedzony
-    Kiedy już nie ma żadnych nieodwiedzonych miast zwraca oba cykle jako znalezione ścieżki
-
-\end{verbatim}
 
 \subsection{Algorytm z żalem - metoda rozbudowy cyklu}\label{subsec:algorytm-z-zalem---metoda-rozbudowy-cyklu}
 
-\begin{verbatim}
-    kodkodkod
-\end{verbatim}
+\begin{enumerate}
+    \item Dwukrotnie przydziela wierzchołki startowe do cykli pierwszego i drugiego jako początek i koniec cyklu.
+    \item Tworzy tablicę indeksów miast, zaznaczając wszystkie poza startowymi jako nieodwiedzone.
+    \item Dopóki istnieją jakieś nieodwiedzone miasta, powtarza następujące kroki:
+    \begin{enumerate}
+        \item Dla każdego cyklu:
+        \begin{enumerate}
+            \item Oblicz koszt rozbudowy cyklu o każde możliwe nieodwiedzone dotąd miasto dla każdego możliwego punktu rozbudowy cyklu.
+            \item Posortuj listę kosztów (rosnąco).
+            \item Oblicz dwużal jako różnicę pomiędzy drugim najlepszym a najlepszym wynikiem z listy kosztów.
+            \item Jeżeli wyliczony żal jest większy niż dla jakiegokolwiek innego wstawienia miasta, to uznaj go za najlepszy.
+        \end{enumerate}
+        \item Rozszerz cykl w miejscu wskazanym dla najlepszego wyliczonego dwużalu.
+        \item Zapisz wierzchołek jako już odwiedzony.
+    \end{enumerate}
+    \item Kiedy już nie ma żadnych nieodwiedzonych miast, zwraca oba cykle jako znalezione ścieżki.
+\end{enumerate}
+
 
 \subsection{Algorytm z żalem - metoda rozbudowy cyklu z żalem ważonym}\label{subsec:algorytm-z-zalem---metoda-rozbudowy-cyklu-z-zalem-wazonym}
 
-\begin{verbatim}
-    kodkodkod
-\end{verbatim}
+\begin{enumerate}
+    \item Dwukrotnie przydziela wierzchołki startowe do cykli pierwszego i drugiego jako początek i koniec cyklu.
+    \item Tworzy tablicę indeksów miast, zaznaczając wszystkie poza startowymi jako nieodwiedzone.
+    \item Dopóki istnieją jakieś nieodwiedzone miasta, powtarza następujące kroki:
+    \begin{enumerate}
+        \item Dla każdego cyklu:
+        \begin{enumerate}
+            \item Oblicz koszt rozbudowy cyklu o każde możliwe nieodwiedzone dotąd miasto dla każdego możliwego punktu rozbudowy cyklu.
+            \item Posortuj listę kosztów (rosnąco).
+            \item Oblicz dwużal ważony jako różnicę pomiędzy drugim najlepszym a najlepszym wynikiem z listy kosztów z odpowiednimi wagami (domyślnie $waga_2 = (-1) \cdot waga_1$).
+            \item Jeżeli wyliczony żal jest większy niż dla jakiegokolwiek innego wstawienia miasta, to uznaj go za najlepszy.
+        \end{enumerate}
+        \item Rozszerz cykl w miejscu wskazanym dla najlepszego wyliczonego dwużalu.
+        \item Zapisz wierzchołek jako już odwiedzony.
+    \end{enumerate}
+    \item Kiedy już nie ma żadnych nieodwiedzonych miast, zwraca oba cykle jako znalezione ścieżki.
+\end{enumerate}
 
 \subsection{Własny jakiś dziki algorytm, jak nam się będzie chciało, bo imo bym zrobił coś}
 
@@ -114,13 +178,13 @@ Algorytm ten korzysta z funkcji znajdywania najlepszego wstawienia, a działa on
 Graficzną reprezentację wyników dla algorytmu zachłannego metodą najbliższego sąsiada przestawiono na~\ref{fig:Greedy-nearest-kroA, fig:Greedy-nearest-kroB}
 \begin{figure}[H]
     \centering
-    \includegraphics{best_paths/greedy_nearest_neighbor_kroA200.tsp}
+    \includegraphics{best_paths/greedy_nearest_neighbor_kroA200.tsp.png}
     \caption{Instancja kroA200}
     \label{fig:Greedy-nearest-kroA}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics{best_paths/greedy_nearest_neighbor_kroB200.tsp}
+    \includegraphics{best_paths/greedy_nearest_neighbor_kroB200.tsp.png}
     \caption{Instancja kroB200}
     \label{fig:Greedy-nearest-kroB}
 \end{figure}
@@ -131,16 +195,68 @@ Graficzną reprezentację wyników dla algorytmu zachłannego metodą najbliższ
 Graficzną reprezentację wyników dla algorytmu zachłannego metodą rozbudowy cyklu przestawiono na~\ref{fig:Greedy-cycle-kroA, fig:Greedy-cycle-kroB}
 \begin{figure}[H]
     \centering
-    \includegraphics{best_paths/greedy_cheapest_insertion_kroA200.tsp}
+    \includegraphics{best_paths/greedy_cheapest_insertion_kroA200.tsp.png}
     \caption{Instancja kroA200}
     \label{fig:Greedy-cycle-kroA}
 \end{figure}
 \begin{figure}[H]
     \centering
-    \includegraphics{best_paths/greedy_cheapest_insertion_kroB200.tsp}
+    \includegraphics{best_paths/greedy_cheapest_insertion_kroB200.tsp.png}
     \caption{Instancja kroB200}
     \label{fig:Greedy-cycle-kroB}
 \end{figure}
+
+\subsection{Algorytm dwużal}\label{subsec:algorytm-dwużal}
+Graficzną reprezentację wyników dla algorytmu dwużalu przestawiono na~\ref{fig:Two-regret-kroA, fig:Two-regret-kroB}
+\begin{figure}[H]
+    \centering
+    \includegraphics{best_paths/two_regret_kroA200.tsp.png}
+    \caption{Instancja kroA200}
+    \label{fig:Two-regret-kroA}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics{best_paths/two_regret_kroB200.tsp.png}
+    \caption{Instancja kroB200}
+    \label{fig:Two-regret-kroB}
+\end{figure}
+
+\subsection{Algorytm dwużal ważony}\label{subsec:algorytm-dwużal-ważony}
+Graficzną reprezentację wyników dla algorytmu dwużalu ważonego przestawiono na~\ref{fig:Two-regret-weighted-kroA, fig:Two-regret-weighted-kroB}
+\begin{figure}[H]
+    \centering
+    \includegraphics{best_paths/weighted_two_regret_kroA200.tsp.png}
+    \caption{Instancja kroA200}
+    \label{fig:Two-regret-weighted-kroA}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics{best_paths/weighted_two_regret_kroB200.tsp.png}
+    \caption{Instancja kroB200}
+    \label{fig:Two-regret-weighted-kroB}
+\end{figure}
+
+\section{Porównanie algorytmów}\label{sec:porównanie-algorytmów}
+\begin{table}[H]
+    \centering
+    \begin{tabular}{|c||c|c|c||c|c|c|}
+        \hline
+        Algorytm & \multicolumn{3}{c||}{KroA200.tsp} & \multicolumn{3}{c|}{KroB200.tsp} \\
+        \cline{2-4} \cline{5-7}
+        & Min & Średnia & Max & Min & Średnia & Max   \\
+        \hline
+        Nearest Neighbor Greedy & 36755.00 & 42701.26 & 47080.00 & 38121.00 & 42122.12 & 47313.00 \\
+        \hline
+        Cycle Extension Greedy & 35396.00 & 37966.75 & 41224.00 & 35733.00 & 38455.32 &  39991.00 \\
+        \hline
+        Two regret & 42450.00 & 44536.57 & 46038.00 & 42029.00 & 43420.64 & 45065.00 \\
+        \hline
+        Weighted Two regret & 50016.00 & 51307.46 & 53146.00 & 48945.00 & 50277.95 & 52187.00 \\
+        \hline
+    \end{tabular}
+    \label{tab:wyniki-eksperymentu}
+    \caption{Wyniki eksperymentu obliczeniowego}
+\end{table}
 
 \section{Wnioski}\label{sec:wnioski}
 
@@ -148,5 +264,7 @@ Graficzną reprezentację wyników dla algorytmu zachłannego metodą rozbudowy 
 Może w połączeniu z algorytmem klastrującym, jakimś k-means zadziałałby lepiej, ale strasznie krzywdzące dla niego jest też to że ścieżki MUSZĄ być równej długości
 
 \section{Link do repo}\label{sec:link-do-repo}
+Kod źródłowy w repozytorium GitHub dostępny pod linkiem: \\
+\href{https://github.com/KotZPolibudy/PUT_IMO/tree/main/TSP_heuristic}{Repozytorium TSP Heuristics}.
 
 \end{document}

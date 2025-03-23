@@ -61,8 +61,8 @@ if __name__ == '__main__':
     algorithms = [
         greedy_nearest_neighbor,
         greedy_cheapest_insertion,
-        # two_regret,
-        # weighted_two_regret,
+        two_regret,
+        weighted_two_regret,
         # two_regret_basic,
         # two_regret_global,
         # two_regret_global_balanced,
@@ -82,7 +82,7 @@ if __name__ == '__main__':
             if best is None:
                 results[algo_name].append("N/A")
             else:
-                results[algo_name].append(f"{avg:.2f} ; {best:.2f} ; {worst:.2f}")
+                results[algo_name].append(f"{best:.2f} ; {avg:.2f} ; {worst:.2f}")
                 save_path = f"../best_paths/{algo_name}_{os.path.basename(path)}.png"
                 show_paths(data, *best_paths, save_path)
 
