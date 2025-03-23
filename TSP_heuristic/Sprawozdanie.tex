@@ -153,11 +153,38 @@ Sam algorytm:
     \item Kiedy już nie ma żadnych nieodwiedzonych miast, zwraca oba cykle jako znalezione ścieżki.
 \end{enumerate}
 
-\subsection{Własny jakiś dziki algorytm, jak nam się będzie chciało, bo imo bym zrobił coś}\label{subsec:wasny-jakis-dziki-algorytm-jak-nam-sie-bedzie-chciao-bo-imo-bym-zrobi-cos}
+\subsection{Nasz własny algorytm}\label{subsec:nasz-wasny-algorytm}
 
-\begin{verbatim}
-    kodkodkod
-\end{verbatim}
+Po zobaczeniu wyników dla pierwszych czterech opisanych tu algorytmów zdecydowaliśmy się na napisanie jeszcze jednego, własnego algorytmu.
+Głównym powodem było nasze ogromne niezadowolenie ze skuteczności podejścia korzystającego z dwużalu, oraz to jaki potencjał w tym podejściu zauważyliśmy.
+Jak da się zauważyć w tabeli~\ref{tab:wyniki-eksperymentu} zamieszczonej w~\ref{sec:wyniki-eksperymenty-obliczeniowego} algorytmy oparte na dwużalu nie osiągnęły zadowalających nas wyników,
+wobec czego wyciągnęliśmy wnioski opsisane w~\ref{sec:wnioski} i zdecydowaliśmy się skorzystać z dwużalu dzieląc wcześniej zbiór wierzchołków na dwa równe podzbiory,
+a następnie rozwiązanie standardowego problemu komiwojażera na każdym z podzbiorów.
+Trzymając się tematu zajęć podział na podzbiory został wykonany podejściem zachłannym:
+
+\begin{enumerate}
+    \item Utworzenie listy pozostałych wierzchołków (wszystkie możliwe, poza startowymi)
+    \item Utworzenie dwóch list zawierających odpowiednio dystanse każdego wierzchołka do pierwszego i do drugiego wierzchołka startowego
+    \item Sortowanie utworzonych uprzednio list dystansów wierzchołków
+    \item Aż do przydzielenia wszystkich wierzchołków z listy pozostałych wierzchołków wykonuje:
+    \item Zmianę decyzji do którego zestawu wierzchołków obecnie będzie przydzielać wierzchołek (aby robić to naprzemiennie)
+    \item Wyszukuje pierwszy wierzchołek na liście dystansów który nie został jeszcze przydzielony do żadnego zestawu i przydziela go tam
+\end{enumerate}
+
+W skutek zastosowania takiego przydziału uzyskujemy dwa równo-liczne zbiory, oraz zapewniamy że gdyby ilość badanych wierzchołków była nieparzysta, to zbiory będą różnić się długością najwyżej o 1.
+
+Następnie wykorzystujemy tradycyjny algorytm rozbudowy cyklu w oparciu o dwużal, osobno na obu listach. Wygląda on następująco:
+
+\begin{enumerate}
+    \item Algorytm zaczyna od ścieżki zawierającej wierzchołek startowy podwójnie
+    \item Dopóki w ścieżce nie znajdują sie wszystkie wierzchołki z zadanego mu zestawu powtarza:
+    \item dla każdego nieodwiedzonego wierzchołka oblicza koszty jego wstawienia
+    \item następnie oblicza żal (dwużal) dla danego wierzchołka
+    \item rozbudowuje cykl o wierzchołek z największym obliczonym żalem i zaznacza go jako odwiedzonego
+    \item zwraca ścieżkę
+\end{enumerate}
+
+Używając takiej funkcji osobno na obu zbiorach wierzchołków uzyskujemy dwie ścieżki i zwracamy do programu głównego.
 
 
 \section{Wyniki eksperymentu obliczeniowego}\label{sec:wyniki-eksperymenty-obliczeniowego}
@@ -227,6 +254,23 @@ Graficzną reprezentację wyników dla algorytmu dwużalu ważonego przestawiono
     \label{fig:Two-regret-weighted-kroB}
 \end{figure}
 
+\subsection{Algorytm własny}\label{subsec:algorytm-wlasny}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics{best_paths/split_paths_regret_TSP_kroA200.tsp.png}
+    \caption{Instancja kroA200}
+    \label{fig:Our-kroA}
+\end{figure}
+\begin{figure}[H]
+    \centering
+    \includegraphics{best_paths/split_paths_regret_TSP_kroB200.tsp.png}
+    \caption{Instancja kroB200}
+    \label{fig:Our-kroB}
+\end{figure}
+
+Graficzną reprezentację wyników dla naszego algorytmu przestawiono na~\ref{fig:Our-kroA, fig:Our-kroB}
+
 \section{Porównanie algorytmów}\label{sec:porównanie-algorytmów}
 \begin{table}[H]
     \centering
@@ -243,6 +287,8 @@ Graficzną reprezentację wyników dla algorytmu dwużalu ważonego przestawiono
         Two regret & 42450.00 & 44536.57 & 46038.00 & 42029.00 & 43420.64 & 45065.00 \\
         \hline
         Weighted Two regret & 50016.00 & 51307.46 & 53146.00 & 48945.00 & 50277.95 & 52187.00 \\
+        \hline
+        Split + Two regret & 30293.00 & 32952.21 & 37192.00 & 31341.00 & 33193.50 & 36531.00 \\
         \hline
     \end{tabular}
     \caption{Wyniki eksperymentu obliczeniowego}
@@ -264,6 +310,8 @@ a następnie branie go pod uwagę tylko dla cyklu który ma mniejszy żal dołą
 To niestety znów powoduje problemy z balansowaniem długości obu cykli i ma tendencję do tworzenia jednego cyklu obejmującego znaczną większośc wierzchołków
 (>90\% oraz drugiego, drobnego na kilka wierzchołków lub czasem obejmującego tylko wierzchołek startowy).
 Próby wymuszenia balansowania cykli niestety prowadziły do wyników bardzo zbliżonych do podstawowych algorytmów wykorzystujących dwużal oraz dwużal ważony.
+Znacznie lepiej jednak zadziałał algorytm z pierwszego pomysłu, mimo że nie wykorzystaliśmy w nim k-means do podziału zbioru wierzchołków a zachłanną metodę znajdywania n/2 najbliższych do wierzchołka startowego.
+Główny powód dla którego zdecydowaliśmy się na taką metodę podziału, to aby zostać w duchu pozostałych algorytmów i porównać ze sobą metody zachłanne.
 
 \section{Link do repozytorium}\label{sec:link-do-repo}
 Kod źródłowy w repozytorium GitHub dostępny pod linkiem: \\
