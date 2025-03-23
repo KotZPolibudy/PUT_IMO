@@ -10,6 +10,7 @@
 \usepackage[polish]{babel}
 \usepackage{float}
 \usepackage{hyperref}
+\usepackage{cleveref}
 
 \title{Zadanie 1. Heurystyki konstrukcyjne}
 \author{Oskar Kiliańczyk 151863 \& Wojciech Kot 151876}
@@ -190,8 +191,8 @@ Używając takiej funkcji osobno na obu zbiorach wierzchołków uzyskujemy dwie 
 \section{Wyniki eksperymentu obliczeniowego}\label{sec:wyniki-eksperymenty-obliczeniowego}
 
 \subsection{Algorytm zachłanny - metoda najbliższego sąsiada}\label{subsec:algorytm-zachanny---metoda-najblizszego-sasiada2}
+Graficzną reprezentację wyników dla algorytmu zachłannego metodą najbliższego sąsiada przestawiono na~\ref{fig:Greedy-nearest-kroA} oraz~\ref{fig:Greedy-nearest-kroB}.
 
-Graficzną reprezentację wyników dla algorytmu zachłannego metodą najbliższego sąsiada przestawiono na~\ref{fig:Greedy-nearest-kroA, fig:Greedy-nearest-kroB}
 \begin{figure}[H]
     \centering
     \includegraphics{best_paths/greedy_nearest_neighbor_kroA200.tsp.png}
@@ -205,10 +206,9 @@ Graficzną reprezentację wyników dla algorytmu zachłannego metodą najbliższ
     \label{fig:Greedy-nearest-kroB}
 \end{figure}
 
-
 \subsection{Algorytm zachłanny - metoda rozbudowy cyklu}\label{subsec:algorytm-zachanny---metoda-rozbudowy-cyklu2}
+Graficzną reprezentację wyników dla algorytmu zachłannego metodą rozbudowy cyklu przestawiono na~\ref{fig:Greedy-cycle-kroA} oraz~\ref{fig:Greedy-cycle-kroB}.
 
-Graficzną reprezentację wyników dla algorytmu zachłannego metodą rozbudowy cyklu przestawiono na~\ref{fig:Greedy-cycle-kroA, fig:Greedy-cycle-kroB}
 \begin{figure}[H]
     \centering
     \includegraphics{best_paths/greedy_cheapest_insertion_kroA200.tsp.png}
@@ -223,6 +223,7 @@ Graficzną reprezentację wyników dla algorytmu zachłannego metodą rozbudowy 
 \end{figure}
 
 \subsection{Algorytm dwużal}\label{subsec:algorytm-dwużal}
+Graficzną reprezentację wyników dla algorytmu dwużalu przestawiono na~\ref{fig:Two-regret-kroA} oraz ~\ref{fig:Two-regret-kroB}.
 
 \begin{figure}[H]
     \centering
@@ -237,10 +238,9 @@ Graficzną reprezentację wyników dla algorytmu zachłannego metodą rozbudowy 
     \label{fig:Two-regret-kroB}
 \end{figure}
 
-Graficzną reprezentację wyników dla algorytmu dwużalu przestawiono na~\ref{fig:Two-regret-kroA, fig:Two-regret-kroB}
-
 \subsection{Algorytm dwużal ważony}\label{subsec:algorytm-dwużal-ważony}
-Graficzną reprezentację wyników dla algorytmu dwużalu ważonego przestawiono na~\ref{fig:Two-regret-weighted-kroA, fig:Two-regret-weighted-kroB}
+Graficzną reprezentację wyników dla algorytmu dwużalu ważonego przestawiono na~\ref{fig:Two-regret-weighted-kroA} oraz~\ref{fig:Two-regret-weighted-kroB}.
+
 \begin{figure}[H]
     \centering
     \includegraphics{best_paths/weighted_two_regret_kroA200.tsp.png}
@@ -255,6 +255,7 @@ Graficzną reprezentację wyników dla algorytmu dwużalu ważonego przestawiono
 \end{figure}
 
 \subsection{Algorytm własny}\label{subsec:algorytm-wlasny}
+Graficzną reprezentację wyników dla naszego algorytmu przestawiono na~\ref{fig:Our-kroA} oraz~\ref{fig:Our-kroB}.
 
 \begin{figure}[H]
     \centering
@@ -269,8 +270,6 @@ Graficzną reprezentację wyników dla algorytmu dwużalu ważonego przestawiono
     \label{fig:Our-kroB}
 \end{figure}
 
-Graficzną reprezentację wyników dla naszego algorytmu przestawiono na~\ref{fig:Our-kroA, fig:Our-kroB}
-
 \section{Porównanie algorytmów}\label{sec:porównanie-algorytmów}
 \begin{table}[H]
     \centering
@@ -280,15 +279,15 @@ Graficzną reprezentację wyników dla naszego algorytmu przestawiono na~\ref{fi
         \cline{2-4} \cline{5-7}
         & Min & Średnia & Max & Min & Średnia & Max   \\
         \hline
-        Nearest Neighbor Greedy & 37841.00 & 42344.56 & 48120.00 & 38444.00 & 42088.28 & 45918.00 \\
+        Nearest Neighbor Greedy & 36851.00 & 42103.95 & 48120.00 & 38444.00 & 42340.77 & 45918.00 \\
         \hline
-        Cycle Extension Greedy & 35323.00 & 38183.38 & 41224.00 & 35733.00 & 38778.79 & 40325.00 \\
+        Cycle Extension Greedy & 35396.00 & 38319.41 & 39990.00 & 35295.00 & 38455.17 & 40028.00 \\
         \hline
-        Two regret & 42450.00 & 44358.42 & 46201.00 & 41176.00 & 43443.10 & 45065.00 \\
+        Two regret & 42468.00 & 44647.83 & 46393.00 & 41176.00 & 43544.62 & 44972.00 \\
         \hline
-        Weighted Two regret & 49770.00 & 51169.82 & 53146.00 & 48911.00 & 50312.95 & 51882.00 \\
+        Weighted Two regret & 49770.00 & 51252.74 & 52662.00 & 48911.00 & 50172.06 & 52187.00 \\
         \hline
-        Split + Two regret & 30591.00 & 33382.07 & 37192.00 & 31341.00 & 33223.19 & 35740.00 \\
+        Split + Two regret & 30293.00 & 33044.22 & 36854.00 & 31218.00 & 33317.82 & 36913.00 \\
         \hline
     \end{tabular}
     \caption{Wyniki eksperymentu obliczeniowego}
