@@ -39,13 +39,13 @@ W implementacji algorytmów wykorzystywana będzie wyłącznie macierz odległo�
 
 \subsection{Algorytm zachłanny - metoda najbliższego sąsiada}\label{subsec:algorytm-zachanny---metoda-najblizszego-sasiada}
 
-Algorytm ten wykorzystuje funkcję znajdującą najbliższego sąsiada dla danego wierzchołka (miasta) \\
-Działa ona w następujący sposób: \\
+Algorytm ten wykorzystuje funkcję znajdującą najbliższego sąsiada dla danego wierzchołka (miasta).
+Działa ona w następujący sposób:
 \begin{enumerate}
-\item dla każdego miasta, sprawdza czy zostało już odwiedzone \\
-\item jeśli nie, to sprawdza czy dystans jest mniejszy od dystansu z danego miasta do obecnie zapamiętanego jako najbliższe \\
-\item jeśli jest bliższe niż obecnie pamiętane jako najbliższe, zapamiętuje je jako najbliższe \\
-\item jeśli nie ma żadnego miasta obecnie pamiętanego jako najbliższe, przypisuje to miasto \\
+\item Dla każdego miasta, sprawdza czy zostało już odwiedzone
+\item Jeśli nie, to sprawdza czy dystans jest mniejszy od dystansu z danego miasta do obecnie zapamiętanego jako najbliższe
+\item Jeśli jest bliższe niż obecnie pamiętane jako najbliższe, zapamiętuje je jako najbliższe
+\item Jeśli nie ma żadnego miasta obecnie pamiętanego jako najbliższe, przypisuje to miasto
 \end{enumerate}
 
 Główny algorytm natomiast, wygląda następująco:
@@ -178,10 +178,10 @@ Następnie wykorzystujemy tradycyjny algorytm rozbudowy cyklu w oparciu o dwuża
 \begin{enumerate}
     \item Algorytm zaczyna od ścieżki zawierającej wierzchołek startowy podwójnie
     \item Dopóki w ścieżce nie znajdują sie wszystkie wierzchołki z zadanego mu zestawu powtarza:
-    \item dla każdego nieodwiedzonego wierzchołka oblicza koszty jego wstawienia
-    \item następnie oblicza żal (dwużal) dla danego wierzchołka
-    \item rozbudowuje cykl o wierzchołek z największym obliczonym żalem i zaznacza go jako odwiedzonego
-    \item zwraca ścieżkę
+    \item Dla każdego nieodwiedzonego wierzchołka oblicza koszty jego wstawienia
+    \item Następnie oblicza żal (dwużal) dla danego wierzchołka
+    \item Rozbudowuje cykl o wierzchołek z największym obliczonym żalem i zaznacza go jako odwiedzonego
+    \item Zwraca ścieżkę
 \end{enumerate}
 
 Używając takiej funkcji osobno na obu zbiorach wierzchołków uzyskujemy dwie ścieżki i zwracamy do programu głównego.
@@ -280,15 +280,15 @@ Graficzną reprezentację wyników dla naszego algorytmu przestawiono na~\ref{fi
         \cline{2-4} \cline{5-7}
         & Min & Średnia & Max & Min & Średnia & Max   \\
         \hline
-        Nearest Neighbor Greedy & 36755.00 & 42701.26 & 47080.00 & 38121.00 & 42122.12 & 47313.00 \\
+        Nearest Neighbor Greedy & 37841.00 & 42344.56 & 48120.00 & 38444.00 & 42088.28 & 45918.00 \\
         \hline
-        Cycle Extension Greedy & 35396.00 & 37966.75 & 41224.00 & 35733.00 & 38455.32 &  39991.00 \\
+        Cycle Extension Greedy & 35323.00 & 38183.38 & 41224.00 & 35733.00 & 38778.79 & 40325.00 \\
         \hline
-        Two regret & 42450.00 & 44536.57 & 46038.00 & 42029.00 & 43420.64 & 45065.00 \\
+        Two regret & 42450.00 & 44358.42 & 46201.00 & 41176.00 & 43443.10 & 45065.00 \\
         \hline
-        Weighted Two regret & 50016.00 & 51307.46 & 53146.00 & 48945.00 & 50277.95 & 52187.00 \\
+        Weighted Two regret & 49770.00 & 51169.82 & 53146.00 & 48911.00 & 50312.95 & 51882.00 \\
         \hline
-        Split + Two regret & 30293.00 & 32952.21 & 37192.00 & 31341.00 & 33193.50 & 36531.00 \\
+        Split + Two regret & 30591.00 & 33382.07 & 37192.00 & 31341.00 & 33223.19 & 35740.00 \\
         \hline
     \end{tabular}
     \caption{Wyniki eksperymentu obliczeniowego}
