@@ -7,8 +7,9 @@ from algo.regret_first import two_regret, weighted_two_regret
 #from algo.regret_global import two_regret_global
 #from algo.regret_global_balanced import two_regret_global_balanced
 #from algo.our_own_genetic import genetic_2tsp
-from algo.regret_new import two_regret_global
-from algo.regret_new_balanced import two_regret_global_balanced
+#from algo.regret_new import two_regret_global
+#from algo.regret_new_balanced import two_regret_global_balanced
+from algo.split_regret import split_paths_regret_TSP
 
 
 def show_paths(data, path1, path2, save_path=None, show=False):
@@ -61,16 +62,17 @@ if __name__ == '__main__':
     paths = ['../data/kroA200.tsp', '../data/kroB200.tsp']
     # paths = ['data/kroA200.tsp']
     algorithms = [
-        # greedy_nearest_neighbor,
-        # greedy_cheapest_insertion,
-        # two_regret,
-        # weighted_two_regret,
+        greedy_nearest_neighbor,
+        greedy_cheapest_insertion,
+        two_regret,
+        weighted_two_regret,
         # two_regret_basic,
         # two_regret_global,
         # two_regret_global_balanced,
-        # genetic_2tsp,
-        two_regret_global,
-        two_regret_global_balanced
+        # genetic_2tsp, # to była okropna pomyłka, tam nie patrzeć
+        # two_regret_global,
+        # two_regret_global_balanced,
+        split_paths_regret_TSP
     ]
 
     results = {}
