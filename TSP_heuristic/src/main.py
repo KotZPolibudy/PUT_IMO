@@ -3,10 +3,11 @@ from utils import *
 from algo.greedy_near import greedy_nearest_neighbor
 from algo.greedy_cheap import greedy_cheapest_insertion
 from algo.regret_first import two_regret, weighted_two_regret
-from algo.regret_basic import two_regret_basic
-from algo.regret_global import two_regret_global
-from algo.regret_global_balanced import two_regret_global_balanced
-from algo.our_own_genetic import genetic_2tsp
+#from algo.regret_basic import two_regret_basic
+#from algo.regret_global import two_regret_global
+#from algo.regret_global_balanced import two_regret_global_balanced
+#from algo.our_own_genetic import genetic_2tsp
+from algo.regret_new import two_regret_global
 
 
 def show_paths(data, path1, path2, save_path=None, show=False):
@@ -59,14 +60,15 @@ if __name__ == '__main__':
     paths = ['../data/kroA200.tsp', '../data/kroB200.tsp']
     # paths = ['data/kroA200.tsp']
     algorithms = [
-        greedy_nearest_neighbor,
-        greedy_cheapest_insertion,
-        two_regret,
-        weighted_two_regret,
+        # greedy_nearest_neighbor,
+        # greedy_cheapest_insertion,
+        # two_regret,
+        # weighted_two_regret,
         # two_regret_basic,
         # two_regret_global,
         # two_regret_global_balanced,
         # genetic_2tsp,
+        two_regret_global
     ]
 
     results = {}
