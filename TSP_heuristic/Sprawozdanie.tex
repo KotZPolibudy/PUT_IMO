@@ -153,7 +153,7 @@ Sam algorytm:
     \item Kiedy już nie ma żadnych nieodwiedzonych miast, zwraca oba cykle jako znalezione ścieżki.
 \end{enumerate}
 
-\subsection{Własny jakiś dziki algorytm, jak nam się będzie chciało, bo imo bym zrobił coś}
+\subsection{Własny jakiś dziki algorytm, jak nam się będzie chciało, bo imo bym zrobił coś}\label{subsec:wasny-jakis-dziki-algorytm-jak-nam-sie-bedzie-chciao-bo-imo-bym-zrobi-cos}
 
 \begin{verbatim}
     kodkodkod
@@ -196,7 +196,7 @@ Graficzną reprezentację wyników dla algorytmu zachłannego metodą rozbudowy 
 \end{figure}
 
 \subsection{Algorytm dwużal}\label{subsec:algorytm-dwużal}
-Graficzną reprezentację wyników dla algorytmu dwużalu przestawiono na~\ref{fig:Two-regret-kroA, fig:Two-regret-kroB}
+
 \begin{figure}[H]
     \centering
     \includegraphics{best_paths/two_regret_kroA200.tsp.png}
@@ -209,6 +209,8 @@ Graficzną reprezentację wyników dla algorytmu dwużalu przestawiono na~\ref{f
     \caption{Instancja kroB200}
     \label{fig:Two-regret-kroB}
 \end{figure}
+
+Graficzną reprezentację wyników dla algorytmu dwużalu przestawiono na~\ref{fig:Two-regret-kroA, fig:Two-regret-kroB}
 
 \subsection{Algorytm dwużal ważony}\label{subsec:algorytm-dwużal-ważony}
 Graficzną reprezentację wyników dla algorytmu dwużalu ważonego przestawiono na~\ref{fig:Two-regret-weighted-kroA, fig:Two-regret-weighted-kroB}
@@ -243,14 +245,25 @@ Graficzną reprezentację wyników dla algorytmu dwużalu ważonego przestawiono
         Weighted Two regret & 50016.00 & 51307.46 & 53146.00 & 48945.00 & 50277.95 & 52187.00 \\
         \hline
     \end{tabular}
-    \label{tab:wyniki-eksperymentu}
     \caption{Wyniki eksperymentu obliczeniowego}
+    \label{tab:wyniki-eksperymentu}
 \end{table}
 
 \section{Wnioski}\label{sec:wnioski}
 
-Żal nie działa, chociaż byśmy chcieli, ale żal rozwiązuje zwykły TSP.
-Może w połączeniu z algorytmem klastrującym, jakimś k-means zadziałałby lepiej, ale strasznie krzywdzące dla niego jest też to że ścieżki MUSZĄ być równej długości
+Obydwa podejścia wykorzystujące heurystyki związane z żalem przyniosły znacznie gorsze skutki niż znacznie prostsze od nich podejścia zachłanne,
+takie jak dodawanie najbliższego sąsiada do obecnie budowanego cyklu, czy rozbudowa cyklu o najtańszy węzeł.
+Z graficznej reprezentacji można wywnioskować potencjalne powody dlaczego tak się dzieje - przede wszystkim, obydwa algorytmy oparte na dwu-żalu skonstruowały rozłączne cykle które często się przecinały,
+podczas gdy algorytm rozbudowy cyklu o najtańszy wierzchołek budował cykle które ``nie wchodziły sobie w drogę''.
+Dzieje się tak przede wszystkim ze względu na to, że algorytm nie bierze pod uwagę tego że budujemy dwa rozłączne cykle i ``nie musi żałować'' połowy wierzchołków które sprawdza.
+W tym momencie pojawia się kilka pomysłów na rozwiązanie tego problemu! \\
+Po pierwsze, można by jakoś podzielić zbiór wierzchołków na dwa równe podzbiory i wtedy wywołać na nich osobno algorytm oparty na żalu.
+Można pokusić sie np.\ o wykorzystanie algorytmu k-means, lub dla naszego problemu zmodyfikować go aby tworzył zbalansowane klastry.
+Po drugie, można zmodyfikować algorytm wykorzystujący dwużal o to, aby dla każdego wierzchołka wyliczany był żal dołączenia go do pierwszego cyklu, jak i do drugiego jednocześnie,
+a następnie branie go pod uwagę tylko dla cyklu który ma mniejszy żal dołączenia go.
+To niestety znów powoduje problemy z balansowaniem długości obu cykli i ma tendencję do tworzenia jednego cyklu obejmującego znaczną większośc wierzchołków
+(>90\% oraz drugiego, drobnego na kilka wierzchołków lub czasem obejmującego tylko wierzchołek startowy).
+Próby wymuszenia balansowania cykli niestety prowadziły do wyników bardzo zbliżonych do podstawowych algorytmów wykorzystujących dwużal oraz dwużal ważony.
 
 \section{Link do repozytorium}\label{sec:link-do-repo}
 Kod źródłowy w repozytorium GitHub dostępny pod linkiem: \\

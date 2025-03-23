@@ -69,3 +69,7 @@ def two_regret_global(distances, starting_nodes):
             path2.insert(insert_index2, town2)
             visited[town2] = True
     return path1, path2
+
+"""
+Niestety, ten algorytm buduje okropnie niezbalansowane cykle.
+"""

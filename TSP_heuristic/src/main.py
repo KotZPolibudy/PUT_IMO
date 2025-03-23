@@ -8,6 +8,7 @@ from algo.regret_first import two_regret, weighted_two_regret
 #from algo.regret_global_balanced import two_regret_global_balanced
 #from algo.our_own_genetic import genetic_2tsp
 from algo.regret_new import two_regret_global
+from algo.regret_new_balanced import two_regret_global_balanced
 
 
 def show_paths(data, path1, path2, save_path=None, show=False):
@@ -68,7 +69,8 @@ if __name__ == '__main__':
         # two_regret_global,
         # two_regret_global_balanced,
         # genetic_2tsp,
-        two_regret_global
+        two_regret_global,
+        two_regret_global_balanced
     ]
 
     results = {}
