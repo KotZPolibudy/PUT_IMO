@@ -30,21 +30,23 @@ a celem jest wyznaczenie dwóch rozłącznych zamkniętych ścieżek (cykli), z 
 Jeśli liczba wierzchołków jest nieparzysta, jedna ścieżka zawiera jeden wierzchołek więcej.
 Kryterium optymalizacji jest minimalizacja łącznej długości obu cykli.
 
-Rozważane instancje problemu pochodzą z biblioteki TSPLib, a są to kroa200 oraz krob200.
+Rozważane instancje problemu pochodzą z biblioteki TSPLib, a są to kroA200 oraz kroB200.
 Są to instancje dwuwymiarowe euklidesowe, w których każdemu wierzchołkowi przypisane są współrzędne na płaszczyźnie.
 Odległość między wierzchołkami liczona jest jako odległość euklidesowa, zaokrąglana do najbliższej liczby całkowitej.
-W implementacji algorytmów wykorzystywana będzie wyłącznie macierz odległości, co zapewnia możliwość zastosowania kodu do innych instancji problemu.
+W implementacji algorytmów wykorzystywana będzie wyłącznie macierz odległości, co zapewni możliwość zastosowania kodu do innych instancji problemu.
 
 \section{Zaimplementowane algorytmy}\label{sec:zaimplementowane-algorytmy}
 
 \subsection{Algorytm zachłanny - metoda najbliższego sąsiada}\label{subsec:algorytm-zachanny---metoda-najblizszego-sasiada}
 
-Algorytm ten wykorzystuje funkcję znajdującą najbliższego sąsiada dla danego wierzchołka (miasta)
+Algorytm ten wykorzystuje funkcję znajdującą najbliższego sąsiada dla danego wierzchołka (miasta) \\
 Działa ona w następujący sposób: \\
-dla każdego miasta, sprawdza czy zostało już odwiedzone \\
-jeśli nie, to sprawdza czy dystans jest mniejszy od dystansu z danego miasta do obecnie zapamiętanego jako najbliższe \\
-jeśli jest bliższe niż obecnie pamiętane jako najbliższe, zapamiętuje je jako najbliższe \\
-jeśli nie ma żadnego miasta obecnie pamiętanego jako najbliższe, przypisuje to miasto \\
+\begin{enumerate}
+\item dla każdego miasta, sprawdza czy zostało już odwiedzone \\
+\item jeśli nie, to sprawdza czy dystans jest mniejszy od dystansu z danego miasta do obecnie zapamiętanego jako najbliższe \\
+\item jeśli jest bliższe niż obecnie pamiętane jako najbliższe, zapamiętuje je jako najbliższe \\
+\item jeśli nie ma żadnego miasta obecnie pamiętanego jako najbliższe, przypisuje to miasto \\
+\end{enumerate}
 
 Główny algorytm natomiast, wygląda następująco:
 
@@ -263,7 +265,7 @@ Graficzną reprezentację wyników dla algorytmu dwużalu ważonego przestawiono
 Żal nie działa, chociaż byśmy chcieli, ale żal rozwiązuje zwykły TSP.
 Może w połączeniu z algorytmem klastrującym, jakimś k-means zadziałałby lepiej, ale strasznie krzywdzące dla niego jest też to że ścieżki MUSZĄ być równej długości
 
-\section{Link do repo}\label{sec:link-do-repo}
+\section{Link do repozytorium}\label{sec:link-do-repo}
 Kod źródłowy w repozytorium GitHub dostępny pod linkiem: \\
 \href{https://github.com/KotZPolibudy/PUT_IMO/tree/main/TSP_heuristic}{Repozytorium TSP Heuristics}.
 
