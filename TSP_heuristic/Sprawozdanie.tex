@@ -92,19 +92,6 @@ Algorytm ten korzysta z funkcji znajdywania najlepszego wstawienia, a działa on
         \end{itemize}
     \end{enumerate}
     \item Po przejrzeniu wszystkich możliwości zwraca parę \(\langle\)wierzchołek, miejsce wstawienia\(\rangle\).
-    \item Dwukrotnie przydziela wierzchołki startowe do cykli pierwszego i drugiego jako początek i koniec cyklu.
-    \item Tworzy tablicę indeksów miast, zaznaczając wszystkie poza startowymi jako nieodwiedzone.
-    \item Dopóki istnieją jakieś nieodwiedzone miasta, powtarza następujące kroki:
-    \begin{enumerate}
-        \item Znajduje najtańsze wstawienie, czyli parę \(\langle\)wierzchołek, miejsce w cyklu\(\rangle\) dla cyklu 1.
-        \item Wstawia w odpowiednie miejsce cyklu 1 znaleziony wierzchołek.
-        \item Zapisuje wierzchołek jako już odwiedzony.
-        \item Znajduje najtańsze wstawienie dla cyklu 2.
-        \item Jeśli ono nie istnieje (np. bo ostatni wierzchołek został już wstawiony), to kończy pętlę.
-        \item Wstawia w odpowiednie miejsce cyklu 2 znaleziony wierzchołek.
-        \item Zapisuje wierzchołek jako już odwiedzony.
-    \end{enumerate}
-    \item Kiedy już nie ma żadnych nieodwiedzonych miast, zwraca oba cykle jako znalezione ścieżki.
 \end{enumerate}
 
 Sam algorytm:
