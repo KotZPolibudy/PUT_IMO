@@ -1,4 +1,5 @@
 import time
+from tabulate import tabulate
 from utils import *
 # starters
 from starters.randomstart import randomstart
@@ -83,11 +84,29 @@ if __name__ == '__main__':
                     algorithm, starting_paths, distances)
                 diff = start_best - found_best
 
-                results[(algo_name, starting_algo.__name__, insta)] = (found_best, found_avg, found_worst, bt, avgt, wt, diff)
+                if (algo_name, starting_algo.__name__) not in results:
+                    results[(algo_name, starting_algo.__name__)] = {}
+
+                results[(algo_name, starting_algo.__name__)][insta] = (found_best, found_avg, found_worst, avgt, diff)
 
     # Print results in table format
-    header = "Algorytm | Start Alg. | Instance | Best | Avg | Worst | Time | Diff"
+    """
+    header = "Algorytm | Start Alg. | Best | Avg | Worst | Time | Diff |||| Best | Avg | Worst | Time | Diff"
     print(header)
     print("-" * len(header))
-    for (algo, start_algo, instance), values in results.items():
-        print(f"{algo} | {start_algo} | {instance} | " + " | ".join(map(str, values)))
+
+    for (algo, start_algo), instance_results in results.items():
+        values1 = instance_results.get(instances[0], ("N/A",) * 5)
+        values2 = instance_results.get(instances[1], ("N/A",) * 5)
+        print(f"{algo} | {start_algo} | " + " | ".join(map(str, values1)) + " |||| " + " | ".join(map(str, values2)))
+    """
+
+    table_data = []
+    for (algo, start_algo), instance_results in results.items():
+        values1 = instance_results.get(instances[0], ("N/A",) * 5)
+        values2 = instance_results.get(instances[1], ("N/A",) * 5)
+        table_data.append([algo, start_algo] + list(values1) + list(values2))
+
+    headers = ["Algorytm", "Start Alg.", "Best", "Avg", "Worst", "Time", "Diff", "||", "Best", "Avg", "Worst", "Time",
+               "Diff"]
+    print(tabulate(table_data, headers=headers, tablefmt="grid"))
