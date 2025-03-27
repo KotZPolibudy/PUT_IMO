@@ -6,7 +6,6 @@ from algo.regret_first import two_regret, weighted_two_regret
 #from algo.regret_basic import two_regret_basic
 #from algo.regret_global import two_regret_global
 #from algo.regret_global_balanced import two_regret_global_balanced
-#from algo.our_own_genetic import genetic_2tsp
 #from algo.regret_new import two_regret_global
 #from algo.regret_new_balanced import two_regret_global_balanced
 from algo.split_regret import split_paths_regret_TSP, weighted_split_paths_regret_TSP
