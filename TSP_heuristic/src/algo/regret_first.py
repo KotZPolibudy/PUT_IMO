@@ -14,7 +14,7 @@ def two_regret(distances, starting_nodes, use_weights=False):
             insertion_costs.sort()
             if len(insertion_costs) > 1:
                 if use_weights:
-                    regret = w1 * insertion_costs[1][0] - w2 * insertion_costs[0][0]
+                    regret = w1 * insertion_costs[1][0] + w2 * insertion_costs[0][0]
                 else:
                     regret = insertion_costs[1][0] - insertion_costs[0][0]
             else:

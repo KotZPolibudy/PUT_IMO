@@ -61,8 +61,8 @@ if __name__ == '__main__':
     paths = ['../data/kroA200.tsp', '../data/kroB200.tsp']
     # paths = ['data/kroA200.tsp']
     algorithms = [
-        greedy_nearest_neighbor,
-        greedy_cheapest_insertion,
+        # greedy_nearest_neighbor,
+        # greedy_cheapest_insertion,
         two_regret,
         weighted_two_regret,
         # two_regret_basic,
