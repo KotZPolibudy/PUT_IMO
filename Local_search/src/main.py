@@ -1,6 +1,6 @@
 import time
 from tabulate import tabulate
-from algo.utils import *
+from utils import *
 # starters
 from starters.randomstart import randomstart
 from starters.split_regret import split_paths_regret_TSP
