@@ -7,6 +7,9 @@ from starters.split_regret import split_paths_regret_TSP
 # algorithms
 from algo.random import traverse_random
 from algo.traverse_greedy import traverse_greedy
+from algo.traverse_greedy_2 import traverse_greedy_shuffle
+from algo.traverse_steepest import traverse_steepest
+from algo.traverse_steepest_2 import traverse_steepest_shuffle
 
 
 def use_starting_algo(algorithm, distances, n=1):
@@ -31,7 +34,7 @@ def use_starting_algo(algorithm, distances, n=1):
     return best_paths, best_cost
 
 
-def use_local_algo(algo, start, distances, n=100):
+def use_local_algo(algo, start, distances, random_time_limiter, n=100):
     best_score = float('inf')
     worst_score = float('-inf')
     total_score = 0
@@ -39,10 +42,12 @@ def use_local_algo(algo, start, distances, n=100):
     total_time = 0
     best_time = float('inf')
     worst_time = float('-inf')
+    elapsed_time = 0
 
+    # do parallel here, please ;~;
     for _ in range(n):
         start_time = time.time()
-        solution = algo(start, distances)
+        solution = algo(start, distances, random_time_limiter)
         elapsed_time = time.time() - start_time
         path1, path2 = solution
         score = summary_cost(path1, path2, distances)
@@ -61,8 +66,11 @@ def use_local_algo(algo, start, distances, n=100):
 if __name__ == '__main__':
     instances = ['../data/kroA200.tsp', '../data/kroB200.tsp']
     algorithms = [
-        traverse_random,
-        traverse_greedy
+        traverse_greedy,
+        traverse_greedy_shuffle,
+        traverse_steepest,
+        traverse_steepest_shuffle,
+        traverse_random
     ]
     starting_algorithms = [
         randomstart,
@@ -75,14 +83,16 @@ if __name__ == '__main__':
     for insta in instances:
         data = read_data(insta)
         distances = measure_distances(data)
+        global_wt = 0
         for algorithm in algorithms:
             algo_name = algorithm.__name__
             for starting_algo in starting_algorithms:
                 starting_paths, start_best = use_starting_algo(starting_algo, distances)
 
                 found_best, found_avg, found_worst, found_best_paths, bt, avgt, wt = use_local_algo(
-                    algorithm, starting_paths, distances)
+                    algorithm, starting_paths, distances, global_wt)
                 diff = start_best - found_best
+                global_wt = max(global_wt, wt) # najgorszy czas ever - limit losowego
 
                 if (algo_name, starting_algo.__name__) not in results:
                     results[(algo_name, starting_algo.__name__)] = {}
