@@ -1,4 +1,4 @@
-def traverse_greedy(starting_paths, distances, _):
+def traverse_greedy(starting_paths, distances, score, _):
     path1 = starting_paths[0]
     path2 = starting_paths[1]
     # todo

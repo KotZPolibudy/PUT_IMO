@@ -1,11 +1,11 @@
 import time
 from tabulate import tabulate
-from utils import *
+from algo.utils import *
 # starters
 from starters.randomstart import randomstart
 from starters.split_regret import split_paths_regret_TSP
 # algorithms
-from algo.random import traverse_random
+from algo.traverse_random import traverse_random
 from algo.traverse_greedy import traverse_greedy
 from algo.traverse_greedy_2 import traverse_greedy_shuffle
 from algo.traverse_steepest import traverse_steepest
@@ -34,7 +34,7 @@ def use_starting_algo(algorithm, distances, n=1):
     return best_paths, best_cost
 
 
-def use_local_algo(algo, start, distances, random_time_limiter, n=100):
+def use_local_algo(algo, start, distances, starting_score, random_time_limiter, n=100):
     best_score = float('inf')
     worst_score = float('-inf')
     total_score = 0
@@ -47,7 +47,7 @@ def use_local_algo(algo, start, distances, random_time_limiter, n=100):
     # do parallel here, please ;~;
     for _ in range(n):
         start_time = time.time()
-        solution = algo(start, distances, random_time_limiter)
+        solution = algo(start, distances, starting_score, random_time_limiter)
         elapsed_time = time.time() - start_time
         path1, path2 = solution
         score = summary_cost(path1, path2, distances)
@@ -83,14 +83,15 @@ if __name__ == '__main__':
     for insta in instances:
         data = read_data(insta)
         distances = measure_distances(data)
-        global_wt = 0
+        global_wt = 20
         for algorithm in algorithms:
             algo_name = algorithm.__name__
+            print(algo_name)  # to see progress xD
             for starting_algo in starting_algorithms:
                 starting_paths, start_best = use_starting_algo(starting_algo, distances)
 
                 found_best, found_avg, found_worst, found_best_paths, bt, avgt, wt = use_local_algo(
-                    algorithm, starting_paths, distances, global_wt)
+                    algorithm, starting_paths, distances, start_best, global_wt)
                 diff = start_best - found_best
                 global_wt = max(global_wt, wt) # najgorszy czas ever - limit losowego
 
