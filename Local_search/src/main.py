@@ -67,14 +67,14 @@ if __name__ == '__main__':
     instances = ['../data/kroA200.tsp', '../data/kroB200.tsp']
     algorithms = [
         traverse_greedy,
-        traverse_greedy_shuffle,
-        traverse_steepest,
-        traverse_steepest_shuffle,
-        traverse_random
+        # traverse_greedy_shuffle,
+        # traverse_steepest,
+        # traverse_steepest_shuffle,
+        # traverse_random
     ]
     starting_algorithms = [
         randomstart,
-        split_paths_regret_TSP
+        # split_paths_regret_TSP
     ]
 
     results = {}
