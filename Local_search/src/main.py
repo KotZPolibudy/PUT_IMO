@@ -47,7 +47,7 @@ def use_local_algo(algo, start, distances, starting_score, random_time_limiter, 
     # do parallel here, please ;~;
     for _ in range(n):
         start_time = time.time()
-        solution = algo(start, distances, starting_score, random_time_limiter)
+        solution = algo(start, distances, random_time_limiter)
         elapsed_time = time.time() - start_time
         path1, path2 = solution
         score = summary_cost(path1, path2, distances)

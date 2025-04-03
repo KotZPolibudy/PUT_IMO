@@ -42,15 +42,15 @@ def random_move(path1, path2, distances, curr_score):
     return path1, path2, curr_score
 
 
-def traverse_random(starting_paths, distances, score, time_limit):
+def traverse_random(starting_paths, distances, time_limit):
     time_start = time.time()
     path1, path2 = starting_paths
     best_path1, best_path2 = path1[:], path2[:]
-    best_score = score
+    best_score = 0
 
     while time.time() - time_start < time_limit:
-        path1, path2, score = random_move(path1[:], path2[:], distances, score)
-        if score > best_score:
-            best_path1, best_path2, best_score = path1[:], path2[:], score
+        path1, path2, new_score = random_move(path1[:], path2[:], distances, new_score)
+        if new_score > best_score:
+            best_path1, best_path2, best_score = path1[:], path2[:], new_score
 
     return [best_path1, best_path2]

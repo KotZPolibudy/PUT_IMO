@@ -1,4 +1,4 @@
-def traverse_steepest_shuffle(starting_paths, distances, score, _):
+def traverse_steepest_shuffle(starting_paths, distances, _):
     path1 = starting_paths[0]
     path2 = starting_paths[1]
     # todo
