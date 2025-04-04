@@ -34,7 +34,7 @@ def use_starting_algo(algorithm, distances, n=1):
     return best_paths, best_cost
 
 
-def use_local_algo(algo, distances, random_time_limiter, n=5):
+def use_local_algo(algo, distances, random_time_limiter, n=50):
     best_score = float('inf')
     worst_score = float('-inf')
     total_score = 0
@@ -72,18 +72,18 @@ def use_local_algo(algo, distances, random_time_limiter, n=5):
 if __name__ == '__main__':
     instances = [
         '../data/kroA200.tsp',
-        '../data/kroB200.tsp'
+        # '../data/kroB200.tsp'
         ]
     algorithms = [
-        traverse_greedy,
-        traverse_greedy_shuffle,
-        traverse_steepest,
+        # traverse_greedy,
+        # traverse_greedy_shuffle,
+        # traverse_steepest,
         traverse_steepest_shuffle,
-        # traverse_random
+        traverse_random
     ]
     starting_algorithms = [
         randomstart,
-        split_paths_regret_TSP
+        # split_paths_regret_TSP
     ]
 
     results = []
@@ -92,17 +92,18 @@ if __name__ == '__main__':
     for insta in instances:
         data = read_data(insta)
         distances = measure_distances(data)
-        global_wt = 20
+        global_wt = 0.1
         print(f"=============================={insta}==============================")
         for algorithm in algorithms:
             algo_name = algorithm.__name__
-            print(algo_name)  # to see progress xD
+            print(f"==============={algo_name}===============")
             for starting_algo in starting_algorithms:
+                print(f"====={starting_algo.__name__}=====")
                 found_best, found_avg, found_worst, found_best_paths, bt, avgt, wt, diff_best, diff_avg = use_local_algo(
                     algorithm, distances, global_wt)
                 global_wt = max(global_wt, wt)
 
-                results.append([insta, algo_name, starting_algo.__name__, found_best, found_avg, found_worst, avgt, diff_best, diff_avg])
+                results.append([insta, algo_name, starting_algo.__name__, found_best, found_avg, found_worst, bt, avgt, wt, diff_best, diff_avg])
 
-    headers = ["Instance", "Algorytm", "Start Alg.", "Best", "Avg", "Worst", "Time", "Best Diff", "Avg Diff"]
+    headers = ["Instance", "Algorytm", "Start Alg.", "Best", "Avg", "Worst", "Best Time", "Avg Time", "Worst Time", "Best Diff", "Avg Diff"]
     print(tabulate(results, headers=headers, tablefmt="grid"))

@@ -16,13 +16,24 @@ def compute_score_change(path, distances, i, j):
     return new_dist - old_dist
 
 
+def compute_score_change_shuffle(path1, path2, distances, i, j):
+    a, b = path1[i - 1], path1[i]
+    c, d = path1[i + 1], path2[j - 1]
+    e, f = path2[j], path2[j + 1]
+
+    old_distance = distances[a][b] + distances[b][c] + distances[d][e] + distances[e][f]
+    new_distance = distances[a][e] + distances[e][c] + distances[d][b] + distances[b][f]
+
+    return new_distance - old_distance
+
+
 def random_move(path1, path2, distances, curr_score):
     # todo
     # wybierz losowo,
     # albo zamień wierzchołki między ścieżkami
     # albo zamień kolejność wierzchołków w jakiejś ścieżce
     score_change = 0
-    choice = random.choice([True, False])
+    choice = random.choice([False, False]) # chwilowo deterministycznie ;)
     if choice:
         # zamień wierzchołki wewnątrz jakiejś ścieżki
         path = random.choice([path1, path2])
@@ -47,7 +58,9 @@ def traverse_random(starting_paths, distances, time_limit):
     path1, path2 = starting_paths
     best_path1, best_path2 = path1[:], path2[:]
     best_score = 0
+    new_score = 0
 
+    # print(time_limit)
     while time.time() - time_start < time_limit:
         path1, path2, new_score = random_move(path1[:], path2[:], distances, new_score)
         if new_score > best_score:
