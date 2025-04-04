@@ -54,7 +54,7 @@ def use_local_algo(algo, distances, random_time_limiter, n=5):
         elapsed_time = time.time() - start_time
         path1, path2 = solution
         score = summary_cost(path1, path2, distances)
-        diff = score - starting_score
+        diff = starting_score - score
         total_score += score
         total_time += elapsed_time
         total_diff += diff
@@ -77,42 +77,32 @@ if __name__ == '__main__':
     algorithms = [
         traverse_greedy,
         traverse_greedy_shuffle,
-        # traverse_steepest,
-        # traverse_steepest_shuffle,
+        traverse_steepest,
+        traverse_steepest_shuffle,
         # traverse_random
     ]
     starting_algorithms = [
         randomstart,
-        # split_paths_regret_TSP
+        split_paths_regret_TSP
     ]
 
-    results = {}
+    results = []
     os.makedirs("../best_paths", exist_ok=True)
 
     for insta in instances:
         data = read_data(insta)
         distances = measure_distances(data)
         global_wt = 20
+        print(f"=============================={insta}==============================")
         for algorithm in algorithms:
             algo_name = algorithm.__name__
             print(algo_name)  # to see progress xD
             for starting_algo in starting_algorithms:
-
                 found_best, found_avg, found_worst, found_best_paths, bt, avgt, wt, diff_best, diff_avg = use_local_algo(
                     algorithm, distances, global_wt)
-                global_wt = max(global_wt, wt)  # najgorszy czas ever - limit losowego
+                global_wt = max(global_wt, wt)
 
-                if (algo_name, starting_algo.__name__) not in results:
-                    results[(algo_name, starting_algo.__name__)] = {}
+                results.append([insta, algo_name, starting_algo.__name__, found_best, found_avg, found_worst, avgt, diff_best, diff_avg])
 
-                results[(algo_name, starting_algo.__name__)][insta] = (found_best, found_avg, found_worst, avgt, diff_best, diff_avg)
-
-    table_data = []
-    for (algo, start_algo), instance_results in results.items():
-        values1 = instance_results.get(instances[0], ("N/A",) * 5)
-        values2 = instance_results.get(instances[1], ("N/A",) * 5)
-        table_data.append([algo, start_algo] + list(values1) + list(values2))
-
-    headers = ["Algorytm", "Start Alg.", "Best", "Avg", "Worst", "Time", "Diff", "Best", "Avg", "Worst", "Time",
-               "Diff"]
-    print(tabulate(table_data, headers=headers, tablefmt="grid"))
+    headers = ["Instance", "Algorytm", "Start Alg.", "Best", "Avg", "Worst", "Time", "Best Diff", "Avg Diff"]
+    print(tabulate(results, headers=headers, tablefmt="grid"))
