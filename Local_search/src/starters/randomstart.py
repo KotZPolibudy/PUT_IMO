@@ -8,4 +8,6 @@ def randomstart(distances, starting_nodes):
     random.shuffle(remaining_nodes)
     nodes1 = [start1] + remaining_nodes[:len(remaining_nodes) // 2]
     nodes2 = [start2] + remaining_nodes[len(remaining_nodes) // 2:]
+    nodes1.append(nodes1[0])
+    nodes2.append(nodes2[0])
     return nodes1, nodes2
