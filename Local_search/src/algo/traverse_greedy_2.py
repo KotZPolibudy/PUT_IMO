@@ -16,9 +16,7 @@ def traverse_greedy_shuffle(starting_paths, distances, _):
     path2 = starting_paths[1]
     n = len(path2)
     improved = True
-    count = 0
     while improved:
-        count += 1
         improved = False
         found_improvement = False
         for i in range(1, n-2):
@@ -32,7 +30,4 @@ def traverse_greedy_shuffle(starting_paths, distances, _):
                     break
             if found_improvement:
                 break
-        # print(f"Iteration {count}: {path1} : {path2}")
-        # if count > 5:
-        #     break
     return [path1, path2]
