@@ -34,7 +34,7 @@ def use_starting_algo(algorithm, distances, n=1):
     return best_paths, best_cost
 
 
-def use_local_algo(algo, distances, random_time_limiter, n=50):
+def use_local_algo(algo, distances, starting_algo, random_time_limiter, n=100):
     best_score = float('inf')
     worst_score = float('-inf')
     total_score = 0
@@ -77,9 +77,9 @@ if __name__ == '__main__':
     algorithms = [
         # traverse_greedy,
         # traverse_greedy_shuffle,
-        # traverse_steepest,
+        traverse_steepest,
         traverse_steepest_shuffle,
-        traverse_random
+        # traverse_random
     ]
     starting_algorithms = [
         randomstart,
@@ -100,10 +100,13 @@ if __name__ == '__main__':
             for starting_algo in starting_algorithms:
                 print(f"====={starting_algo.__name__}=====")
                 found_best, found_avg, found_worst, found_best_paths, bt, avgt, wt, diff_best, diff_avg = use_local_algo(
-                    algorithm, distances, global_wt)
+                    algorithm, distances, starting_algo, global_wt
+                )
                 global_wt = max(global_wt, wt)
 
                 results.append([insta, algo_name, starting_algo.__name__, found_best, found_avg, found_worst, bt, avgt, wt, diff_best, diff_avg])
+                save_path = f"../best_paths/{algo_name}_{os.path.basename(insta)}.png"
+                # show_paths(data, *found_best_paths, save_path)
 
     headers = ["Instance", "Algorytm", "Start Alg.", "Best", "Avg", "Worst", "Best Time", "Avg Time", "Worst Time", "Best Diff", "Avg Diff"]
     print(tabulate(results, headers=headers, tablefmt="grid"))

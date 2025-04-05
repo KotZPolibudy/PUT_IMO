@@ -33,7 +33,7 @@ def random_move(path1, path2, distances, curr_score):
     # albo zamień wierzchołki między ścieżkami
     # albo zamień kolejność wierzchołków w jakiejś ścieżce
     score_change = 0
-    choice = random.choice([False, False]) # chwilowo deterministycznie ;)
+    choice = random.choice([True, False])
     if choice:
         # zamień wierzchołki wewnątrz jakiejś ścieżki
         path = random.choice([path1, path2])

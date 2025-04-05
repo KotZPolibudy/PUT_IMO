@@ -10,6 +10,23 @@ def compute_score_change(path1, path2, distances, i, j):
 
     return new_distance - old_distance
 
+# ale z zamianą wewnątrz cyklu
+def compute_score_change2(path, distances, i, j):
+    n = len(path)
+    prev_i, next_i = (i - 1), (i + 1) % n
+    prev_j, next_j = (j - 1), (j + 1) % n
+
+    # old_dist = (distances[path[prev_i]][path[i]] + distances[path[i]][path[next_i]] +
+    #             distances[path[prev_j]][path[j]] + distances[path[j]][path[next_j]])
+
+    # new_dist = (distances[path[prev_i]][path[j]] + distances[path[j]][path[next_i]] +
+    #             distances[path[prev_j]][path[i]] + distances[path[i]][path[next_j]])
+    
+    old_dist = distances[path[prev_i]][path[i]] + distances[path[prev_j]][path[j]]
+    new_dist = distances[path[prev_i]][path[prev_j]] + distances[path[i]][path[j]]
+
+    return new_dist - old_dist
+
 
 def traverse_steepest_shuffle(starting_paths, distances, _):
     path1 = starting_paths[0]
@@ -19,7 +36,7 @@ def traverse_steepest_shuffle(starting_paths, distances, _):
     while improved:
         improved = False
         best_i, best_j = -1, -1
-        best_score_change = 0
+        best_score_change = float('inf') # 0
 
         for i in range(1, n - 2):
             for j in range(i + 1, n - 1):
