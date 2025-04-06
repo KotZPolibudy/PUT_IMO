@@ -34,8 +34,18 @@ def optimize_path(path, distances):
     return path
 
 
+def exchange(path1, path2, distances):
+    # try to exchange between paths!
+    did_exchange = False
+    # todo
+    return path1, path2, did_exchange
+
+
 def traverse_greedy(starting_paths, distances, _):
     path1, path2 = starting_paths
-    path1 = optimize_path(path1, distances)
-    path2 = optimize_path(path2, distances)
+    again = True
+    while again:
+        path1 = optimize_path(path1, distances)
+        path2 = optimize_path(path2, distances)
+        path1, path2, again = exchange(path1, path2, distances)
     return [path1, path2]
