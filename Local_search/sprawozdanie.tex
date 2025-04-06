@@ -47,6 +47,14 @@ Losowo przetasowujemy te możliwe pary, dzięki czemu kolejność przetwarzania 
 Wybieramy pary do wymiany aż nie znajdziemy takiej, dla której zamiana daje poprawę funkcji celu.
 Jeśli taka istnieje, przeprowadzamy zamianę i powtarzamy procedurę, jeśli nie ma takiej pary - kończymy przetwarzanie.
 
+\subsection{Algorytmy startowe}\label{subsec:algorytmy-startowe}
+
+Napisane na potrzebę tego zadania algorytmy wykorzystują dwa różne algorytmy startowe
+(generujące rozwiązanie bazowe, które napisane obecnie algorytmy lokalnego przeszukiwania będą ulepszać).
+Pierwszy z nich, nazwaliśmy randomstart - zwraca on dwa losowe zbiory wierzchołków, tworząc w pełni losowo wygenerowane bazowe rozwiązanie, które będzie relatywnie proste do polepszenia.
+Drugi z nich natomiast, to nasz własny algorytm (nie zaproponowany w zadaniu) który łączył heurystykę żalu z zachłannym podziałem wierzchołków na dwa podzbiory.
+
+
 \section{Opisy algorytmów}\label{sec:opisy-alg}
 
 \subsection{Zachłanny}\label{subsec:zachanny}
@@ -102,54 +110,74 @@ Jeśli taka istnieje, przeprowadzamy zamianę i powtarzamy procedurę, jeśli ni
 
 \subsection{Tabela wynikowa}\label{subsec:tabela-wynikowa}
 
+% Tabela 1: kroA200.tsp z randomstart
 \begin{table}[ht]
 \centering
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{|l|l|l|r|r|r|r|r|r|}
+\begin{tabular}{|l|l|l|r|r|r|r|r|}
 \hline
-\textbf{Instance} & \textbf{Algorytm} & \textbf{Start Alg.} & \textbf{Best} & \textbf{Avg} & \textbf{Worst} & \textbf{Best Time} & \textbf{Avg Time} & \textbf{Worst Time} & \textbf{Best Diff} & \textbf{Avg Diff} \\
+\textbf{Instance} & \textbf{Algorytm} & \textbf{Start Alg.} & \textbf{Best} & \textbf{Avg} & \textbf{Worst} & \textbf{Best Diff} & \textbf{Avg Diff} \\
 \hline
-\texttt{../data/kroA200.tsp} & traverse\_greedy\_edge & split\_paths\_regret\_TSP & 30293 & 32567.1 & 37008 & 0.007801 & 0.0146494 & 0.0518433 & 1159 & 203.38 \\
-\texttt{../data/kroA200.tsp} & traverse\_greedy\_edge & randomstart & 38683 & 43477.2 & 46597 & 0.072104 & 0.0911878 & 0.133262 & 323996 & 297870 \\
-\texttt{../data/kroA200.tsp} & traverse\_greedy\_vertex & split\_paths\_regret\_TSP & 30310 & 32608.6 & 36369 & 0.010838 & 0.022078 & 0.100869 & 2613 & 285.68 \\
-\texttt{../data/kroA200.tsp} & traverse\_greedy\_vertex & randomstart & 65591 & 79580.1 & 89485 & 0.137077 & 0.227998 & 0.336558 & 291579 & 262294 \\
-\texttt{../data/kroA200.tsp} & traverse\_steepest\_edge & split\_paths\_regret\_TSP & 30426 & 32421.1 & 36148 & 0.0060469 & 0.0430189 & 0.133755 & 3109 & 479.23 \\
-\texttt{../data/kroA200.tsp} & traverse\_steepest\_edge & randomstart & 38261 & 42868 & 49455 & 1.25189 & 1.38019 & 1.53017 & 335537 & 298626 \\
-\texttt{../data/kroA200.tsp} & traverse\_steepest\_vertex & split\_paths\_regret\_TSP & 30293 & 32475.8 & 37008 & 0.0086652 & 0.0496467 & 0.159141 & 2552 & 324.68 \\
-\texttt{../data/kroA200.tsp} & traverse\_steepest\_vertex & randomstart & 65990 & 79327.8 & 91208 & 1.953 & 2.42133 & 3.16416 & 300881 & 263108 \\
-\texttt{../data/kroA200.tsp} & traverse\_random & split\_paths\_regret\_TSP & 30293 & 33024.9 & 36098 & 2.4205 & 2.42141 & 2.42224 & 0 & 0 \\
-\texttt{../data/kroA200.tsp} & traverse\_random & randomstart & 301648 & 332569 & 354465 & 2.42121 & 2.42166 & 2.42232 & 38018 & 8544.31 \\
+\texttt{kroA200} & \texttt{traverse\_greedy\_edge} & \texttt{randomstart} & 38683 & 43477.2 & 46597 & 323996 & 297870 \\
+\texttt{kroA200} & \texttt{traverse\_greedy\_vertex} & \texttt{randomstart} & 65591 & 79580.1 & 89485 & 291579 & 262294 \\
+\texttt{kroA200} & \texttt{traverse\_steepest\_edge} & \texttt{randomstart} & 38261 & 42868 & 49455 & 335537 & 298626 \\
+\texttt{kroA200} & \texttt{traverse\_steepest\_vertex} & \texttt{randomstart} & 65990 & 79327.8 & 91208 & 300881 & 263108 \\
+\texttt{kroA200} & \texttt{traverse\_random} & \texttt{randomstart} & 301648 & 332569 & 354465 & 38018 & 8544.31 \\
 \hline
 \end{tabular}
-}
-\caption{Wyniki działania algorytmów dla startu typu \texttt{split\_paths\_regret\_TSP} i \texttt{randomstart}}
-\label{tab:new_randomstart}
+\caption{Wyniki dla \texttt{kroA200} z algorytmem \texttt{randomstart}}\label{tab:table}
 \end{table}
 
-
+% Tabela 2: kroA200.tsp z split_paths_regret_TSP
 \begin{table}[ht]
 \centering
-\resizebox{\textwidth}{!}{%
-\begin{tabular}{|l|l|l|r|r|r|r|r|r|}
+\begin{tabular}{|l|l|l|r|r|r|r|r|}
 \hline
-\textbf{Instance} & \textbf{Algorytm} & \textbf{Start Alg.} & \textbf{Best} & \textbf{Avg} & \textbf{Worst} & \textbf{Best Time} & \textbf{Avg Time} & \textbf{Worst Time} & \textbf{Best Diff} & \textbf{Avg Diff} \\
+\textbf{Instance} & \textbf{Algorytm} & \textbf{Start Alg.} & \textbf{Best} & \textbf{Avg} & \textbf{Worst} & \textbf{Best Diff} & \textbf{Avg Diff} \\
 \hline
-\texttt{../data/kroB200.tsp} & traverse\_greedy\_edge & split\_paths\_regret\_TSP & 31009 & 33192.1 & 36480 & 0.0079513 & 0.0174221 & 0.046363 & 3629 & 501.29 \\
-\texttt{../data/kroB200.tsp} & traverse\_greedy\_edge & randomstart & 38866 & 43465.6 & 46581 & 0.0682051 & 0.0910784 & 0.155147 & 321463 & 291367 \\
-\texttt{../data/kroB200.tsp} & traverse\_greedy\_vertex & split\_paths\_regret\_TSP & 31178 & 33141.9 & 36479 & 0.0109712 & 0.0225539 & 0.0741737 & 2879 & 330.03 \\
-\texttt{../data/kroB200.tsp} & traverse\_greedy\_vertex & randomstart & 70839 & 78826.1 & 88908 & 0.153803 & 0.232368 & 0.406795 & 291703 & 253942 \\
-\texttt{../data/kroB200.tsp} & traverse\_steepest\_edge & split\_paths\_regret\_TSP & 31133 & 32820.3 & 36479 & 0.0060953 & 0.0346969 & 0.134471 & 4046 & 495.55 \\
-\texttt{../data/kroB200.tsp} & traverse\_steepest\_edge & randomstart & 38556 & 43203.3 & 48639 & 1.191 & 1.36221 & 1.48999 & 313027 & 291400 \\
-\texttt{../data/kroB200.tsp} & traverse\_steepest\_vertex & split\_paths\_regret\_TSP & 31368 & 33197.1 & 36010 & 0.0086635 & 0.0385854 & 0.113306 & 2879 & 254.42 \\
-\texttt{../data/kroB200.tsp} & traverse\_steepest\_vertex & randomstart & 67856 & 78534 & 90919 & 1.86388 & 2.35443 & 2.97623 & 280540 & 254883 \\
-\texttt{../data/kroB200.tsp} & traverse\_random & split\_paths\_regret\_TSP & 31526 & 33517.7 & 36555 & 2.35372 & 2.35449 & 2.35531 & 0 & 0 \\
-\texttt{../data/kroB200.tsp} & traverse\_random & randomstart & 295224 & 324648 & 351050 & 2.35437 & 2.35485 & 2.35546 & 38466 & 8461.69 \\
+\texttt{kroA200} & \texttt{traverse\_greedy\_edge} & \texttt{nasz algorytm} & 30293 & 32567.1 & 37008 & 1159 & 203.38 \\
+\texttt{kroA200} & \texttt{traverse\_greedy\_vertex} & \texttt{nasz algorytm} & 30310 & 32608.6 & 36369 & 2613 & 285.68 \\
+\texttt{kroA200} & \texttt{traverse\_steepest\_edge} & \texttt{nasz algorytm} & 30426 & 32421.1 & 36148 & 3109 & 479.23 \\
+\texttt{kroA200} & \texttt{traverse\_steepest\_vertex} & \texttt{nasz algorytm} & 30293 & 32475.8 & 37008 & 2552 & 324.68 \\
+\texttt{kroA200} & \texttt{traverse\_random} & \texttt{nasz algorytm} & 30293 & 33024.9 & 36098 & 0 & 0 \\
 \hline
 \end{tabular}
-}
-\caption{Wyniki działania algorytmów dla startu typu \texttt{split\_paths\_regret\_TSP} i \texttt{randomstart}}
-\label{tab:new_splitpaths}
+\caption{Wyniki dla \texttt{kroA200} z naszym algorytmem}\label{tab:table2}
 \end{table}
+
+% Tabela 3: kroB200.tsp z randomstart
+\begin{table}[ht]
+\centering
+\begin{tabular}{|l|l|l|r|r|r|r|r|}
+\hline
+\textbf{Instance} & \textbf{Algorytm} & \textbf{Start Alg.} & \textbf{Best} & \textbf{Avg} & \textbf{Worst} & \textbf{Best Diff} & \textbf{Avg Diff} \\
+\hline
+\texttt{kroB200} & \texttt{traverse\_greedy\_edge} & \texttt{randomstart} & 38866 & 43465.6 & 46581 & 321463 & 291367 \\
+\texttt{kroB200} & \texttt{traverse\_greedy\_vertex} & \texttt{randomstart} & 70839 & 78826.1 & 88908 & 291703 & 253942 \\
+\texttt{kroB200} & \texttt{traverse\_steepest\_edge} & \texttt{randomstart} & 38556 & 43203.3 & 48639 & 313027 & 291400 \\
+\texttt{kroB200} & \texttt{traverse\_steepest\_vertex} & \texttt{randomstart} & 67856 & 78534 & 90919 & 280540 & 254883 \\
+\texttt{kroB200} & \texttt{traverse\_random} & \texttt{randomstart} & 295224 & 324648 & 351050 & 38466 & 8461.69 \\
+\hline
+\end{tabular}
+\caption{Wyniki dla \texttt{kroB200} z algorytmem \texttt{randomstart}}\label{tab:table3}
+\end{table}
+
+% Tabela 4: kroB200.tsp z split_paths_regret_TSP
+\begin{table}[ht]
+\centering
+\begin{tabular}{|l|l|l|r|r|r|r|r|}
+\hline
+\textbf{Instance} & \textbf{Algorytm} & \textbf{Start Alg.} & \textbf{Best} & \textbf{Avg} & \textbf{Worst} & \textbf{Best Diff} & \textbf{Avg Diff} \\
+\hline
+\texttt{kroB200} & \texttt{traverse\_greedy\_edge} & \texttt{nasz algorytm} & 31009 & 33192.1 & 36480 & 3629 & 501.29 \\
+\texttt{kroB200} & \texttt{traverse\_greedy\_vertex} & \texttt{nasz algorytm} & 31178 & 33141.9 & 36479 & 2879 & 330.03 \\
+\texttt{kroB200} & \texttt{traverse\_steepest\_edge} & \texttt{nasz algorytm} & 31133 & 32820.3 & 36479 & 4046 & 495.55 \\
+\texttt{kroB200} & \texttt{traverse\_steepest\_vertex} & \texttt{nasz algorytm} & 31368 & 33197.1 & 36010 & 2879 & 254.42 \\
+\texttt{kroB200} & \texttt{traverse\_random} & \texttt{nasz algorytm} & 31526 & 33517.7 & 36555 & 0 & 0 \\
+\hline
+\end{tabular}
+\caption{Wyniki dla \texttt{kroB200} z naszym algorytmem}\label{tab:table4}
+\end{table}
+
 
 
 \subsection{Wizualizacja wyników}\label{subsec:wizualizacja-wynikow}
