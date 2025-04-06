@@ -5,12 +5,12 @@ from utils import *
 from starters.randomstart import randomstart
 from starters.split_regret import split_paths_regret_TSP
 # algorithms
-from algo.traverse_random import traverse_random
-from algo.traverse_greedy import traverse_greedy
-from algo.traverse_greedy_2 import traverse_greedy_shuffle
-from algo.traverse_steepest import traverse_steepest
-from algo.traverse_steepest_2 import traverse_steepest_shuffle
-from algo.traverse_steepest_both import traverse_steepest_both
+# from algo.traverse_random import traverse_random
+from algo.traverse_greedy_edge import traverse_greedy_edge
+# from algo.traverse_greedy_2 import traverse_greedy_shuffle
+# from algo.traverse_steepest import traverse_steepest
+# from algo.traverse_steepest_2 import traverse_steepest_shuffle
+# from algo.traverse_steepest_both import traverse_steepest_both
 
 
 def use_starting_algo(algorithm, distances, n=1):
@@ -76,12 +76,12 @@ if __name__ == '__main__':
         '../data/kroB200.tsp'
         ]
     algorithms = [
-        traverse_greedy,
-        traverse_greedy_shuffle,
-        traverse_steepest,
-        traverse_steepest_shuffle,
-        traverse_steepest_both,
-        traverse_random
+        traverse_greedy_edge,
+        # traverse_greedy_shuffle,
+        # traverse_steepest,
+        # traverse_steepest_shuffle,
+        # traverse_steepest_both,
+        # traverse_random
     ]
     starting_algorithms = [
         randomstart,

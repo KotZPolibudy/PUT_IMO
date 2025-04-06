@@ -10,6 +10,17 @@ def compute_score_change(path, distances, i, j):
     return new_dist - old_dist
 
 
+def compute_exchange_score_change(path1, path2, distances, i, j):
+    a, b = path1[i - 1], path1[i]
+    c, d = path1[i + 1], path2[j - 1]
+    e, f = path2[j], path2[j + 1]
+
+    old_distance = distances[a][b] + distances[b][c] + distances[d][e] + distances[e][f]
+    new_distance = distances[a][e] + distances[e][c] + distances[d][b] + distances[b][f]
+
+    return new_distance - old_distance
+
+
 def optimize_path(path, distances):
     n = len(path)
     improved = True
@@ -37,11 +48,25 @@ def optimize_path(path, distances):
 def exchange(path1, path2, distances):
     # try to exchange between paths!
     did_exchange = False
+    n = len(path2)
     # todo
+
+    possible_changes = []
+    for i in range(1, n - 2):
+        for j in range(i + 1, n - 1):
+            possible_changes.append((i, j))
+    random.shuffle(possible_changes)
+
+    for i, j in possible_changes:
+        score_change = compute_score_change(path1, path2, distances, i, j)
+        if score_change < 0:
+            path1[i], path2[j] = path2[j], path1[i]
+            did_exchange = True
+
     return path1, path2, did_exchange
 
 
-def traverse_greedy(starting_paths, distances, _):
+def traverse_greedy_edge(starting_paths, distances, _):
     path1, path2 = starting_paths
     again = True
     while again:
