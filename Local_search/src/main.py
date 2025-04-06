@@ -108,7 +108,7 @@ if __name__ == '__main__':
                 found_best, found_avg, found_worst, found_best_paths, bt, avgt, wt, diff_best, diff_avg = use_local_algo(
                     algorithm, distances, starting_algo, global_wt
                 )
-                global_wt = max(global_wt, wt)
+                global_wt = max(global_wt, avgt)
 
                 results.append([insta, algo_name, starting_algo.__name__, found_best, found_avg, found_worst, bt, avgt, wt, diff_best, diff_avg])
                 save_path = f"../best_paths/{i}/{algo_name}/{os.path.basename(starting_algo.__name__)}.png"
