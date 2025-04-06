@@ -58,7 +58,7 @@ def exchange(path1, path2, distances):
     random.shuffle(possible_changes)
 
     for i, j in possible_changes:
-        score_change = compute_score_change(path1, path2, distances, i, j)
+        score_change = compute_exchange_score_change(path1, path2, distances, i, j)
         if score_change < 0:
             path1[i], path2[j] = path2[j], path1[i]
             did_exchange = True
