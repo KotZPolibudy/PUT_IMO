@@ -24,11 +24,11 @@
 \newpage
 
 \section{Opis zadania}\label{sec:opis-zadania}
-Zadanie polega na implementacji lokalnego przeszukiwania w wersjach stromej (steepest) i zachłannej (greedy), z dwoma różnym rodzajami sąsiedztwa, startując albo z rozwiązań losowych, albo z rozwiązań uzyskanych za pomocą jednej z heurystyk opracowanych w ramach poprzedniego zadania.
+Zadanie polega na implementacji lokalnego przeszukiwania w wersjach stromej (steepest) i zachłannej (greedy), z dwoma różnym rodzajami sąsiedztwa,
+startując albo z rozwiązań losowych, albo z rozwiązań uzyskanych za pomocą jednej z heurystyk opracowanych w ramach poprzedniego zadania.
 W sumie 8 kombinacji --- wersji lokalnego przeszukiwania.
 Jako punkt odniesienia należy zaimplementować algorytm losowego błądzenia, który w każdej iteracji wykonuje losowo wybrany ruch (niezależnie od jego oceny) i zwraca najlepsze znalezione w ten sposób rozwiązanie.
 Algorytm ten powinien działać w takim samym czasie jak średnio najwolniejsza z wersji lokalnego przeszukiwania.
-%% pytanie czy średnio najwolniejsza, czy absolutnie najwolniejsza XD
 
 \subsection{Sąsiedztwa}\label{subsec:sasiedztwa}
 W przypadku rozważanego problemu potrzebne będą dwa typy ruchów:
@@ -49,10 +49,53 @@ Jeśli taka istnieje, przeprowadzamy zamianę i powtarzamy procedurę, jeśli ni
 
 \section{Opisy algorytmów}\label{sec:opisy-alg}
 
-
 \subsection{Zachłanny}\label{subsec:zachanny}
 
+\begin{enumerate}
+    \item Dla każdego z dwóch cykli:
+    \begin{enumerate}
+        \item Dopóki możliwa jest poprawa*:
+        \begin{enumerate}
+            \item Wygeneruj listę możliwych par wierzchołków $(i, j)$ wewnątrz cyklu.
+            \item Permutuj listę i sprawdzaj kolejne pary:
+            \begin{enumerate}
+                \item Oblicz zmianę kosztu po ruchu lokalnym (zamiana wierzchołków lub odwrócenie fragmentu).
+                \item Jeśli koszt się zmniejsza, wykonaj ruch.
+                \item Przerwij sprawdzanie i wróć na początek pętli (*).
+            \end{enumerate}
+        \end{enumerate}
+    \end{enumerate}
+
+    \item Dopóki możliwa jest poprawa międzycyklowa:
+    \begin{enumerate}
+        \item Wygeneruj losową permutację par wierzchołków $(i, j)$ z dwóch cykli.
+        \item Dla każdej pary:
+        \begin{enumerate}
+            \item Oblicz zmianę kosztu po zamianie wierzchołków między cyklami.
+            \item Jeśli koszt się zmniejsza, wykonaj zamianę i zaznacz poprawę.
+        \end{enumerate}
+        \item Jeżeli wykonano jakąkolwiek zamianę, wróć do lokalnej optymalizacji (punkt 1).
+    \end{enumerate}
+
+    \item Zakończ, gdy nie ma już żadnych lokalnych ani międzycyklowych poprawek.
+\end{enumerate}
+
+
 \subsection{Steepest}\label{subsec:steepest}
+
+\begin{enumerate}
+  \item Dopóki możliwa jest poprawa:
+  \begin{enumerate}
+    \item Przeszukaj wszystkie możliwe modyfikacje ścieżek:
+    \begin{itemize}
+      \item zmiany lokalne w jednej ścieżce (zamiana dwóch wierzchołków lub odwrócenie fragmentu),
+      \item wymiany wierzchołków między ścieżkami.
+    \end{itemize}
+    \item Wybierz modyfikację dającą największą poprawę.
+    \item Wprowadź ją do odpowiedniej ścieżki lub ścieżek.
+  \end{enumerate}
+  \item Zwróć ulepszone ścieżki.
+\end{enumerate}
 
 
 \section{Wyniki}\label{sec:wyniki}
@@ -65,16 +108,16 @@ Jeśli taka istnieje, przeprowadzamy zamianę i powtarzamy procedurę, jeśli ni
 \hline
 \textbf{Instance} & \textbf{Algorytm} & \textbf{Best} & \textbf{Avg} & \textbf{Worst} & \textbf{Avg Time} & \textbf{Best Diff} & \textbf{Avg Diff} \\
 \hline
-\texttt{../data/kroA200.tsp} & traverse\_greedy\_edge     & 39458  & 43643.3 & 46577  & 0.0010  & 320561 & 297093 \\
-\texttt{../data/kroA200.tsp} & traverse\_greedy\_vertex   & 69190  & 80372.9 & 94789  & 0.0026  & 286837 & 258182 \\
-\texttt{../data/kroA200.tsp} & traverse\_steepest\_edge   & 39408  & 43325.3 & 50129  & 0.0137  & 325160 & 297835 \\
-\texttt{../data/kroA200.tsp} & traverse\_steepest\_vertex & 65888  & 79686.9 & 91978  & 0.0325  & 287177 & 259582 \\
-\texttt{../data/kroA200.tsp} & traverse\_random           & 302110 & 331199  & 370208 & 0.0325  & 41606  & 9761.55 \\
-\texttt{../data/kroB200.tsp} & traverse\_greedy\_edge     & 38993  & 43099.6 & 45870  & 0.0010  & 317848 & 289345 \\
-\texttt{../data/kroB200.tsp} & traverse\_greedy\_vertex   & 66490  & 79094.8 & 92281  & 0.0017  & 294355 & 252270 \\
-\texttt{../data/kroB200.tsp} & traverse\_steepest\_edge   & 39541  & 42884.2 & 47293  & 0.0146  & 315923 & 289159 \\
-\texttt{../data/kroB200.tsp} & traverse\_steepest\_vertex & 66197  & 78607.4 & 93626  & 0.0286  & 287842 & 254715 \\
-\texttt{../data/kroB200.tsp} & traverse\_random           & 293102 & 323943  & 349289 & 0.0325  & 30386  & 9234.74 \\
+\texttt{kroA200.tsp} & traverse\_greedy\_edge     & 39458  & 43643.3 & 46577  & 0.0010  & 320561 & 297093 \\
+\texttt{kroA200.tsp} & traverse\_greedy\_vertex   & 69190  & 80372.9 & 94789  & 0.0026  & 286837 & 258182 \\
+\texttt{kroA200.tsp} & traverse\_steepest\_edge   & 39408  & 43325.3 & 50129  & 0.0137  & 325160 & 297835 \\
+\texttt{kroA200.tsp} & traverse\_steepest\_vertex & 65888  & 79686.9 & 91978  & 0.0325  & 287177 & 259582 \\
+\texttt{kroA200.tsp} & traverse\_random           & 302110 & 331199  & 370208 & 0.0325  & 41606  & 9761.55 \\
+\texttt{kroB200.tsp} & traverse\_greedy\_edge     & 38993  & 43099.6 & 45870  & 0.0010  & 317848 & 289345 \\
+\texttt{kroB200.tsp} & traverse\_greedy\_vertex   & 66490  & 79094.8 & 92281  & 0.0017  & 294355 & 252270 \\
+\texttt{kroB200.tsp} & traverse\_steepest\_edge   & 39541  & 42884.2 & 47293  & 0.0146  & 315923 & 289159 \\
+\texttt{kroB200.tsp} & traverse\_steepest\_vertex & 66197  & 78607.4 & 93626  & 0.0286  & 287842 & 254715 \\
+\texttt{kroB200.tsp} & traverse\_random           & 293102 & 323943  & 349289 & 0.0325  & 30386  & 9234.74 \\
 \hline
 \end{tabular}
 }
@@ -90,16 +133,16 @@ Jeśli taka istnieje, przeprowadzamy zamianę i powtarzamy procedurę, jeśli ni
 \hline
 \textbf{Instance} & \textbf{Algorytm} & \textbf{Best} & \textbf{Avg} & \textbf{Worst} & \textbf{Avg Time} & \textbf{Best Diff} & \textbf{Avg Diff} \\
 \hline
-\texttt{../data/kroA200.tsp} & traverse\_greedy\_edge     & 30293  & 32806.3 & 37011  & 0.0157  & 2503  & 291.26  \\
-\texttt{../data/kroA200.tsp} & traverse\_greedy\_vertex   & 30426  & 32858.5 & 37011  & 0.0239  & 3061  & 339.52  \\
-\texttt{../data/kroA200.tsp} & traverse\_steepest\_edge   & 30512  & 32486.2 & 36552  & 0.0333  & 3109  & 315.47  \\
-\texttt{../data/kroA200.tsp} & traverse\_steepest\_vertex & 30595  & 32659.5 & 36552  & 0.0466  & 2503  & 222.65  \\
-\texttt{../data/kroA200.tsp} & traverse\_random           & 30435  & 32934.9 & 36432  & 0.1472  & 0     & 0       \\
-\texttt{../data/kroB200.tsp} & traverse\_greedy\_edge     & 30863  & 32967.3 & 36040  & 0.0166  & 3437  & 456.04  \\
-\texttt{../data/kroB200.tsp} & traverse\_greedy\_vertex   & 31175  & 32955   & 36480  & 0.0229  & 2848  & 349.09  \\
-\texttt{../data/kroB200.tsp} & traverse\_steepest\_edge   & 30934  & 32867.7 & 36480  & 0.0351  & 4046  & 591.07  \\
-\texttt{../data/kroB200.tsp} & traverse\_steepest\_vertex & 31175  & 33043.4 & 36480  & 0.0413  & 2878  & 328.22  \\
-\texttt{../data/kroB200.tsp} & traverse\_random           & 31218  & 33461.5 & 36604  & 0.1584  & 0     & 0       \\
+\texttt{kroA200.tsp} & traverse\_greedy\_edge     & 30293  & 32806.3 & 37011  & 0.0157  & 2503  & 291.26  \\
+\texttt{kroA200.tsp} & traverse\_greedy\_vertex   & 30426  & 32858.5 & 37011  & 0.0239  & 3061  & 339.52  \\
+\texttt{kroA200.tsp} & traverse\_steepest\_edge   & 30512  & 32486.2 & 36552  & 0.0333  & 3109  & 315.47  \\
+\texttt{kroA200.tsp} & traverse\_steepest\_vertex & 30595  & 32659.5 & 36552  & 0.0466  & 2503  & 222.65  \\
+\texttt{kroA200.tsp} & traverse\_random           & 30435  & 32934.9 & 36432  & 0.1472  & 0     & 0       \\
+\texttt{kroB200.tsp} & traverse\_greedy\_edge     & 30863  & 32967.3 & 36040  & 0.0166  & 3437  & 456.04  \\
+\texttt{kroB200.tsp} & traverse\_greedy\_vertex   & 31175  & 32955   & 36480  & 0.0229  & 2848  & 349.09  \\
+\texttt{kroB200.tsp} & traverse\_steepest\_edge   & 30934  & 32867.7 & 36480  & 0.0351  & 4046  & 591.07  \\
+\texttt{kroB200.tsp} & traverse\_steepest\_vertex & 31175  & 33043.4 & 36480  & 0.0413  & 2878  & 328.22  \\
+\texttt{kroB200.tsp} & traverse\_random           & 31218  & 33461.5 & 36604  & 0.1584  & 0     & 0       \\
 \hline
 \end{tabular}
 }
