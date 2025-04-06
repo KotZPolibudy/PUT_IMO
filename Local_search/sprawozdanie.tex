@@ -48,70 +48,11 @@ Wybieramy pary do wymiany aż nie znajdziemy takiej, dla której zamiana daje po
 Jeśli taka istnieje, przeprowadzamy zamianę i powtarzamy procedurę, jeśli nie ma takiej pary - kończymy przetwarzanie.
 
 \section{Opisy algorytmów}\label{sec:opisy-alg}
-\subsection{Zmiany wewnątrz cyklu}\label{subsec:zmiany-wewnatrz-cyklu}
-
-\subsubsection{Zachłanny}
 
 
-\begin{enumerate}
-    \item Dla każdego z dwóch cykli startowych wykonaj następujące kroki optymalizacji:
-    \begin{enumerate}
-        \item Oznacz zmienną \textit{czy\_poprawiono} jako prawda.
-        \item Dopóki \textit{czy\_poprawiono}:
-        \begin{enumerate}
-            \item Ustaw \textit{czy\_poprawiono} na fałsz.
-            \item Losowo permutuj listę par indeksów miast z wyłączeniem indeksów pierwszego i ostatniego.
-            \item Dla każdej pary indeksów $(i, j)$, gdzie $i < j$:
-            \begin{enumerate}
-                \item Oblicz zmianę długości cyklu po hipotetycznej wymianie fragmentu między $i$ a $j$.
-                \item Jeśli zmiana długości jest ujemna (czyli cykl się skraca):
-                \begin{enumerate}
-                    \item odwróć fragment ścieżki od $i$ do $j$.
-                    \item Ustaw \textit{czy\_poprawiono} na prawda i przerwij wewnętrzne pętle.
-                \end{enumerate}
-            \end{enumerate}
-        \end{enumerate}
-    \end{enumerate}
-    \item item Zwróć oba zoptymalizowane cykle jako wynik działania algorytmu.
-\end{enumerate}
+\subsection{Zachłanny}\label{subsec:zachanny}
 
-
-\subsubsection{Steepest}
-
-\begin{enumerate}
-    \item Dla każdego z dwóch cykli startowych wykonaj następujące kroki optymalizacji:
-    \begin{enumerate}
-        \item Ustaw zmienną \textit{czy\_poprawiono} jako prawda.
-        \item Dopóki \textit{czy\_poprawiono}:
-        \begin{enumerate}
-            \item Ustaw \textit{czy\_poprawiono} na fałsz.
-            \item Zainicjalizuj zmienne \textit{najlepsza\_para} i \textit{najlepsza\_zmiana} jako zero.
-            \item Dla każdej pary indeksów $(i, j)$ takich, że $i < j$, pomijając pierwszy i ostatni wierzchołek:
-            \begin{enumerate}
-                \item Oblicz zmianę długości cyklu po hipotetycznej zamianie fragmentu pomiędzy $i$ i $j$.
-                \item Jeśli zmiana jest lepsza niż dotychczas najlepsza:
-                \begin{enumerate}
-                    \item Zapisz tę parę jako \textit{najlepsza\_para}.
-                    \item Zapisz wartość zmiany.
-                \end{enumerate}
-            \end{enumerate}
-            \item Jeżeli odnaleziono jakąkolwiek poprawę:
-            \begin{enumerate}
-                \item Odwróć fragment ścieżki między znalezioną parą.
-                \item Ustaw \textit{czy\_poprawiono} na prawda.
-            \end{enumerate}
-        \end{enumerate}
-    \end{enumerate}
-    \item Zwróć oba zoptymalizowane cykle jako wynik działania algorytmu.
-\end{enumerate}
-
-
-\subsection{Zmiany pomiędzy cyklami}\label{subsec:zmiany-pomiedzy-cyklami}
-
-\subsubsection{Zachłanny}
-
-
-\subsubsection{Steepest}
+\subsection{Steepest}\label{subsec:steepest}
 
 
 \section{Wyniki}\label{sec:wyniki}
