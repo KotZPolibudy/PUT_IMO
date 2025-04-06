@@ -25,36 +25,99 @@
 \newpage
 
 \section{Opis zadania}\label{sec:opis-zadania}
-Zadanie polega na implementacji lokalnego przeszukiwania w wersjach stromej (steepest) i zachłannej (greedy), z dwoma różnym rodzajami sąsiedztwa, startując albo z rozwiązań losowych, albo z rozwiązań uzyskanych za pomocą jednej z heurystyk opracowanych w ramach poprzedniego zadania. W sumie 8 kombinacji --- wersji lokalnego przeszukiwania. Jako punkt odniesienia należy zaimplementować algorytm losowego błądzenia, który w każdej iteracji wykonuje losowo wybrany ruch (niezależnie od jego oceny) i zwraca najlepsze znalezione w ten sposób rozwiązanie. Algorytm ten powinien działać w takim samym czasie jak średnio najwolniejsza z wersji lokalnego przeszukiwania.
+Zadanie polega na implementacji lokalnego przeszukiwania w wersjach stromej (steepest) i zachłannej (greedy), z dwoma różnym rodzajami sąsiedztwa, startując albo z rozwiązań losowych, albo z rozwiązań uzyskanych za pomocą jednej z heurystyk opracowanych w ramach poprzedniego zadania.
+W sumie 8 kombinacji --- wersji lokalnego przeszukiwania.
+Jako punkt odniesienia należy zaimplementować algorytm losowego błądzenia, który w każdej iteracji wykonuje losowo wybrany ruch (niezależnie od jego oceny) i zwraca najlepsze znalezione w ten sposób rozwiązanie.
+Algorytm ten powinien działać w takim samym czasie jak średnio najwolniejsza z wersji lokalnego przeszukiwania.
+%% pytanie czy średnio najwolniejsza, czy absolutnie najwolniejsza XD
 
-\subsection{Sąsiedztwa}
+\subsection{Sąsiedztwa}\label{subsec:sasiedztwa}
 W przypadku rozważanego problemu potrzebne będą dwa typy ruchów:
 \begin{itemize}
 \item ruchy zmieniające zbiory wierzchołków tworzące dwa cykle,
 \item ruchy wewnątrztrasowe, które jedynie zmieniają kolejność wierzchołków na trasie.
 \end{itemize}
-Stosujemy dwa rodzaje ruchów wewnątrztrasowych (jeden albo drugi, stąd dwa rodzaje sąsiedztwa). jeden to wymiana dwóch wierzchołków wchodzących w skład trasy, drugi to wymiana dwóch krawędzi.
+Stosujemy dwa rodzaje ruchów wewnątrztrasowych (jeden albo drugi, stąd dwa rodzaje sąsiedztwa).
+Jeden to wymiana dwóch wierzchołków wchodzących w skład trasy, drugi to wymiana dwóch krawędzi.
+Dla ruchów wewnątrz cykli wykonujemy lokalne zamiany elementów w obrębie jednej ścieżki.
 
-\subsection{Randomizacja kolejności przeglądania dla algorytmów zachłannych}
-W obu wersjach algorytmów zachłannych stosujemy randomizację wyboru. Dla ruchów wewnątrz cykli wykonujemy lokalne zamiany elementów w obrębie jednej ścieżki. Randomizacja polega na losowym przetasowaniu indeksów w obrębie dostępnych miast, co zmienia kolejność, w jakiej będą przetwarzane. W przypadku algorytmu wykorzystującego zmiany pomiędzy ścieżkami zmiana odbywa się pomiędzy dwoma cyklami. Tworzymy listę możliwych par punktów do zamiany między dwoma cyklami. Losowo przetasowujemy te możliwe pary, dzięki czemu kolejność przetwarzania nie jest deterministyczna. Losowo wybieramy jedną parę do wymiany (w której obliczenie zmiany w funkcji celu daje poprawę) i przeprowadzamy zamianę.
+\subsection{Randomizacja kolejności przeglądania dla algorytmów zachłannych}\label{subsec:randomizacja-kolejnosci-przegladania-dla-algorytmow-zachannych}
+W obu wersjach algorytmów zachłannych stosujemy randomizację wyboru.
+Tworzymy listę możliwych par punktów do zamiany wewnątrz cyklu lub między dwoma cyklami.
+Losowo przetasowujemy te możliwe pary, dzięki czemu kolejność przetwarzania nie jest deterministyczna.
+Wybieramy pary do wymiany aż nie znajdziemy takiej, dla której zamiana daje poprawę funkcji celu.
+Jeśli taka istnieje, przeprowadzamy zamianę i powtarzamy procedurę, jeśli nie ma takiej pary - kończymy przetwarzanie.
 
 \section{Opisy algorytmów}\label{sec:opisy-alg}
-\subsection{Zmiany wewnątrz cyklu}
+\subsection{Zmiany wewnątrz cyklu}\label{subsec:zmiany-wewnatrz-cyklu}
+
+\subsubsection{Zachłanny}
+
+
+\begin{enumerate}
+    \item Dla każdego z dwóch cykli startowych wykonaj następujące kroki optymalizacji:
+    \begin{enumerate}
+        \item Oznacz zmienną \textit{czy\_poprawiono} jako prawda.
+        \item Dopóki \textit{czy\_poprawiono}:
+        \begin{enumerate}
+            \item Ustaw \textit{czy\_poprawiono} na fałsz.
+            \item Losowo permutuj listę par indeksów miast z wyłączeniem indeksów pierwszego i ostatniego.
+            \item Dla każdej pary indeksów $(i, j)$, gdzie $i < j$:
+            \begin{enumerate}
+                \item Oblicz zmianę długości cyklu po hipotetycznej wymianie fragmentu między $i$ a $j$.
+                \item Jeśli zmiana długości jest ujemna (czyli cykl się skraca):
+                \begin{enumerate}
+                    \item odwróć fragment ścieżki od $i$ do $j$.
+                    \item Ustaw \textit{czy\_poprawiono} na prawda i przerwij wewnętrzne pętle.
+                \end{enumerate}
+            \end{enumerate}
+        \end{enumerate}
+    \end{enumerate}
+    \item item Zwróć oba zoptymalizowane cykle jako wynik działania algorytmu.
+\end{enumerate}
+
+
+\subsubsection{Steepest}
+
+\begin{enumerate}
+    \item Dla każdego z dwóch cykli startowych wykonaj następujące kroki optymalizacji:
+    \begin{enumerate}
+        \item Ustaw zmienną \textit{czy\_poprawiono} jako prawda.
+        \item Dopóki \textit{czy\_poprawiono}:
+        \begin{enumerate}
+            \item Ustaw \textit{czy\_poprawiono} na fałsz.
+            \item Zainicjalizuj zmienne \textit{najlepsza\_para} i \textit{najlepsza\_zmiana} jako zero.
+            \item Dla każdej pary indeksów $(i, j)$ takich, że $i < j$, pomijając pierwszy i ostatni wierzchołek:
+            \begin{enumerate}
+                \item Oblicz zmianę długości cyklu po hipotetycznej zamianie fragmentu pomiędzy $i$ i $j$.
+                \item Jeśli zmiana jest lepsza niż dotychczas najlepsza:
+                \begin{enumerate}
+                    \item Zapisz tę parę jako \textit{najlepsza\_para}.
+                    \item Zapisz wartość zmiany.
+                \end{enumerate}
+            \end{enumerate}
+            \item Jeżeli odnaleziono jakąkolwiek poprawę:
+            \begin{enumerate}
+                \item Odwróć fragment ścieżki między znalezioną parą.
+                \item Ustaw \textit{czy\_poprawiono} na prawda.
+            \end{enumerate}
+        \end{enumerate}
+    \end{enumerate}
+    \item Zwróć oba zoptymalizowane cykle jako wynik działania algorytmu.
+\end{enumerate}
+
+
+\subsection{Zmiany pomiędzy cyklami}\label{subsec:zmiany-pomiedzy-cyklami}
+
 \subsubsection{Zachłanny}
 
 
 \subsubsection{Steepest}
 
 
-\subsection{Zmiany pomiędzy cyklami}
-\subsubsection{Zachłanny}
+\section{Wyniki}\label{sec:wyniki}
 
-
-\subsubsection{Steepest}
-
-
-\section{Wyniki}
-\subsection{Tabela wynikowa}
+\subsection{Tabela wynikowa}\label{subsec:tabela-wynikowa}
 \begin{table}[ht]
 \centering
 \begin{tabular}{|c|c|c||c|c|c||c|c|c||c|c|}
@@ -90,7 +153,6 @@ W obu wersjach algorytmów zachłannych stosujemy randomizację wyboru. Dla ruch
 
 
 \subsection{Wizualizacja wyników}
-\subsubsection{Algorytm wymiany krawędzi wewnątrz cykli (zachłanny)}
 \begin{figure}[H]
     \centering
     % --- Pierwszy rząd ---
