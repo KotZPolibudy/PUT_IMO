@@ -12,7 +12,6 @@
 \usepackage{hyperref}
 \usepackage{cleveref}
 \usepackage{subfigure}
-\usepackage{graphicx}
 
 \title{Zadanie 2. Lokalne przeszukiwanie}
 \author{Oskar Kiliańczyk 151863 \& Wojciech Kot 151876}
@@ -148,23 +147,23 @@ Jeśli taka istnieje, przeprowadzamy zamianę i powtarzamy procedurę, jeśli ni
 \texttt{kroB200} & random & random & 298060 | 324327 | 346475 & 3.000 | 0.030 | 3.028 & 32259 | 8276.57 \\ \hline
 \texttt{kroB200} & random & własny & 31466 | 33448.2 | 36604 & 3.028 | 0.030 | 3.059 & 0 | 0 \\ \hline
 \end{tabular}
-\caption{Wyniki dla różnych instancji i algorytmów}
+\caption{Wyniki dla różnych instancji i algorytmów}\label{tab:table}
 \end{table}
 
 
-\subsection{Wizualizacja wyników}
+\subsection{Wizualizacja wyników}\label{subsec:wizualizacja-wynikow}
 \begin{figure}[H]
     \centering
     % --- Pierwszy rząd ---
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_greedy/randomstart.png}
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_greedy/randomstart}
         \caption{kroA200, losowy start}
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_greedy/randomstart.png}
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_greedy/randomstart}
         \caption{kroB200, losowy start}
     \end{minipage}
 
@@ -173,13 +172,13 @@ Jeśli taka istnieje, przeprowadzamy zamianę i powtarzamy procedurę, jeśli ni
     % --- Drugi rząd ---
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_greedy/split_paths_regret_TSP.png}
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_greedy/split_paths_regret_TSP}
         \caption{kroA200, własny algorytm startowy}
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_greedy/split_paths_regret_TSP.png}
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_greedy/split_paths_regret_TSP}
         \caption{kroB200, własny algorytm startowy}
     \end{minipage}
     \label{fig:minipage-greedy-edge}
@@ -191,13 +190,13 @@ Jeśli taka istnieje, przeprowadzamy zamianę i powtarzamy procedurę, jeśli ni
     % --- Pierwszy rząd ---
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_greedy_shuffle/randomstart.png}
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_greedy_shuffle/randomstart}
         \caption{kroA200, losowy start}
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_greedy_shuffle/randomstart.png}
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_greedy_shuffle/randomstart}
         \caption{kroB200, losowy start}
     \end{minipage}
 
@@ -206,13 +205,13 @@ Jeśli taka istnieje, przeprowadzamy zamianę i powtarzamy procedurę, jeśli ni
     % --- Drugi rząd ---
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_greedy_shuffle/split_paths_regret_TSP.png}
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_greedy_shuffle/split_paths_regret_TSP}
         \caption{kroA200, własny algorytm startowy}
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_greedy_shuffle/split_paths_regret_TSP.png}
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_greedy_shuffle/split_paths_regret_TSP}
         \caption{kroB200, własny algorytm startowy}
     \end{minipage}
     \label{fig:minipage-greedy-vertex}
@@ -224,13 +223,13 @@ Jeśli taka istnieje, przeprowadzamy zamianę i powtarzamy procedurę, jeśli ni
     % --- Pierwszy rząd ---
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_steepest/randomstart.png}
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_steepest/randomstart}
         \caption{kroA200, losowy start}
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_steepest/randomstart.png}
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_steepest/randomstart}
         \caption{kroB200, losowy start}
     \end{minipage}
 
@@ -239,13 +238,13 @@ Jeśli taka istnieje, przeprowadzamy zamianę i powtarzamy procedurę, jeśli ni
     % --- Drugi rząd ---
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_steepest/split_paths_regret_TSP.png}
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_steepest/split_paths_regret_TSP}
         \caption{kroA200, własny algorytm startowy}
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_steepest/split_paths_regret_TSP.png}
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_steepest/split_paths_regret_TSP}
         \caption{kroB200, własny algorytm startowy}
     \end{minipage}
     \label{fig:minipage-steepest-edge}
@@ -258,13 +257,13 @@ Jeśli taka istnieje, przeprowadzamy zamianę i powtarzamy procedurę, jeśli ni
     % --- Pierwszy rząd ---
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_steepest_shuffle/randomstart.png}
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_steepest_shuffle/randomstart}
         \caption{kroA200, losowy start}
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_steepest_shuffle/randomstart.png}
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_steepest_shuffle/randomstart}
         \caption{kroB200, losowy start}
     \end{minipage}
 
@@ -273,13 +272,13 @@ Jeśli taka istnieje, przeprowadzamy zamianę i powtarzamy procedurę, jeśli ni
     % --- Drugi rząd ---
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_steepest_shuffle/split_paths_regret_TSP.png}
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_steepest_shuffle/split_paths_regret_TSP}
         \caption{kroA200, własny algorytm startowy}
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_steepest_shuffle/split_paths_regret_TSP.png}
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_steepest_shuffle/split_paths_regret_TSP}
         \caption{kroB200, własny algorytm startowy}
     \end{minipage}
     \label{fig:minipage-steepest-vertex}
@@ -291,13 +290,13 @@ Jeśli taka istnieje, przeprowadzamy zamianę i powtarzamy procedurę, jeśli ni
     % --- Pierwszy rząd ---
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_steepest_both/randomstart.png}
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_steepest_both/randomstart}
         \caption{kroA200, losowy start}
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_steepest_both/randomstart.png}
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_steepest_both/randomstart}
         \caption{kroB200, losowy start}
     \end{minipage}
 
@@ -306,13 +305,13 @@ Jeśli taka istnieje, przeprowadzamy zamianę i powtarzamy procedurę, jeśli ni
     % --- Drugi rząd ---
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_steepest_both/split_paths_regret_TSP.png}
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_steepest_both/split_paths_regret_TSP}
         \caption{kroA200, własny algorytm startowy}
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_steepest_both/split_paths_regret_TSP.png}
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_steepest_both/split_paths_regret_TSP}
         \caption{kroB200, własny algorytm startowy}
     \end{minipage}
     \label{fig:minipage-steepest-both}
@@ -324,13 +323,13 @@ Jeśli taka istnieje, przeprowadzamy zamianę i powtarzamy procedurę, jeśli ni
     % --- Pierwszy rząd ---
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_random/randomstart.png}
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_random/randomstart}
         \caption{kroA200, losowy start}
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_random/randomstart.png}
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_random/randomstart}
         \caption{kroB200, losowy start}
     \end{minipage}
 
@@ -339,13 +338,13 @@ Jeśli taka istnieje, przeprowadzamy zamianę i powtarzamy procedurę, jeśli ni
     % --- Drugi rząd ---
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_random/split_paths_regret_TSP.png}
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_random/split_paths_regret_TSP}
         \caption{kroA200, własny algorytm startowy}
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_random/split_paths_regret_TSP.png}
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_random/split_paths_regret_TSP}
         \caption{kroB200, własny algorytm startowy}
     \end{minipage}
     \label{fig:minipage-random}
