@@ -46,10 +46,8 @@ def optimize_path(path, distances):
 
 
 def exchange(path1, path2, distances):
-    # try to exchange between paths!
     did_exchange = False
     n = len(path2)
-    # todo
 
     possible_changes = []
     for i in range(1, n - 2):
