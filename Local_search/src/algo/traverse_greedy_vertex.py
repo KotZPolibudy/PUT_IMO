@@ -33,7 +33,9 @@ def optimize_path(path, distances):
             for j in range(i + 1, n):
                 score_change = compute_score_change(path, distances, i, j)
                 if score_change < 0:
+                    print("ij score:", i, j, score_change)
                     path[i], path[j] = path[j], path[i]
+                    print(path)
                     improved = True
                     found_improvement = True
                     break
