@@ -119,36 +119,54 @@ Jeśli taka istnieje, przeprowadzamy zamianę i powtarzamy procedurę, jeśli ni
 \subsection{Tabela wynikowa}\label{subsec:tabela-wynikowa}
 \begin{table}[ht]
 \centering
-\begin{tabular}{|c|c|c||c|c|c||c|c|c||c|c|}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|r|r|r|r|r|r|r|}
 \hline
-\textbf{Instance} & \textbf{Algorithm} & \textbf{Start Alg.} & \textbf{Best | Avg | Worst} & \textbf{BestT | AvgT | WorstT} & \textbf{BestD | AvgD} \\ \hline
-\texttt{kroA200} & greedy E & random & 44904 | 47506.6 | 49675 & 0.047 | 0.001 | 0.127 & 325030 | 292617 \\ \hline
-\texttt{kroA200} & greedy E & własny & 30310 | 33201.2 | 37119 & 0.004 | 0.000 | 0.021 & 322 | 96.77 \\ \hline
-\texttt{kroA200} & greedy V & random & 96986 | 120985 | 165848 & 0.018 | 0.000 | 0.100 & 250459 | 219127 \\ \hline
-\texttt{kroA200} & greedy V & własny & 30435 | 32934.3 | 36065 & 0.004 | 0.000 | 0.062 & 2099 | 149.55 \\ \hline
-\texttt{kroA200} & steepest E & random & 45216 | 49743.6 | 54231 & 0.401 | 0.006 | 0.990 & 321512 | 289999 \\ \hline
-\texttt{kroA200} & steepest E & własny & 30293 | 32925.6 | 36894 & 0.004 | 0.000 | 0.039 & 1028 | 94.99 \\ \hline
-\texttt{kroA200} & steepest V & random & 101839 | 122314 | 144402 & 0.274 | 0.004 | 1.593 & 247067 | 215586 \\ \hline
-\texttt{kroA200} & steepest V & własny & 30590 | 32628.5 | 36593 & 0.002 | 0.000 | 0.033 & 1912 | 150.34 \\ \hline
-\texttt{kroA200} & steepest E+V & random & 38834 | 43060 | 47763 & 1.476 | 0.017 | 2.796 & 334276 | 297054 \\ \hline
-\texttt{kroA200} & steepest E+V & własny & 30310 | 32554.1 | 36373 & 0.007 | 0.001 | 0.158 & 3050 | 363.02 \\ \hline
-\texttt{kroA200} & random & random & 306319 | 335290 | 376971 & 2.796 | 0.028 | 2.797 & 37983 | 7827.03 \\ \hline
-\texttt{kroA200} & random & własny & 30426 | 32936.3 | 37192 & 2.797 | 0.028 | 2.855 & 0 | 0 \\ \hline
-\texttt{kroB200} & greedy E & random & 44426 | 47039.6 | 49813 & 0.053 | 0.001 | 0.116 & 315327 | 285202 \\ \hline
-\texttt{kroB200} & greedy E & własny & 30863 | 33215.9 | 35995 & 0.005 | 0.000 | 0.018 & 1247 | 213.43 \\ \hline
-\texttt{kroB200} & greedy V & random & 99971 | 118645 | 150580 & 0.032 | 0.001 | 0.143 & 244988 | 213139 \\ \hline
-\texttt{kroB200} & greedy V & własny & 31218 | 33223.5 | 36519 & 0.004 | 0.000 | 0.027 & 1339 | 122.56 \\ \hline
-\texttt{kroB200} & steepest E & random & 45648 | 49405.5 | 53560 & 0.427 | 0.005 | 0.898 & 304743 | 283819 \\ \hline
-\texttt{kroB200} & steepest E & własny & 30934 | 33242 | 36790 & 0.004 | 0.000 | 0.036 & 1189 | 246.88 \\ \hline
-\texttt{kroB200} & steepest V & random & 96970 | 118903 | 142320 & 0.297 | 0.005 | 0.863 & 252946 | 212667 \\ \hline
-\texttt{kroB200} & steepest V & własny & 31341 | 33171.5 | 36555 & 0.002 | 0.000 | 0.038 & 1339 | 214.25 \\ \hline
-\texttt{kroB200} & steepest E+V & random & 38739 | 43252.6 | 47376 & 1.633 | 0.024 | 3.000 & 312702 | 289492 \\ \hline
-\texttt{kroB200} & steepest E+V & własny & 31156 | 33014.7 | 36479 & 0.007 | 0.000 | 0.194 & 4046 | 496.52 \\ \hline
-\texttt{kroB200} & random & random & 298060 | 324327 | 346475 & 3.000 | 0.030 | 3.028 & 32259 | 8276.57 \\ \hline
-\texttt{kroB200} & random & własny & 31466 | 33448.2 | 36604 & 3.028 | 0.030 | 3.059 & 0 | 0 \\ \hline
+\textbf{Instance} & \textbf{Algorytm} & \textbf{Best} & \textbf{Avg} & \textbf{Worst} & \textbf{Avg Time} & \textbf{Best Diff} & \textbf{Avg Diff} \\
+\hline
+\texttt{../data/kroA200.tsp} & traverse\_greedy\_edge     & 39458  & 43643.3 & 46577  & 0.0010  & 320561 & 297093 \\
+\texttt{../data/kroA200.tsp} & traverse\_greedy\_vertex   & 69190  & 80372.9 & 94789  & 0.0026  & 286837 & 258182 \\
+\texttt{../data/kroA200.tsp} & traverse\_steepest\_edge   & 39408  & 43325.3 & 50129  & 0.0137  & 325160 & 297835 \\
+\texttt{../data/kroA200.tsp} & traverse\_steepest\_vertex & 65888  & 79686.9 & 91978  & 0.0325  & 287177 & 259582 \\
+\texttt{../data/kroA200.tsp} & traverse\_random           & 302110 & 331199  & 370208 & 0.0325  & 41606  & 9761.55 \\
+\texttt{../data/kroB200.tsp} & traverse\_greedy\_edge     & 38993  & 43099.6 & 45870  & 0.0010  & 317848 & 289345 \\
+\texttt{../data/kroB200.tsp} & traverse\_greedy\_vertex   & 66490  & 79094.8 & 92281  & 0.0017  & 294355 & 252270 \\
+\texttt{../data/kroB200.tsp} & traverse\_steepest\_edge   & 39541  & 42884.2 & 47293  & 0.0146  & 315923 & 289159 \\
+\texttt{../data/kroB200.tsp} & traverse\_steepest\_vertex & 66197  & 78607.4 & 93626  & 0.0286  & 287842 & 254715 \\
+\texttt{../data/kroB200.tsp} & traverse\_random           & 293102 & 323943  & 349289 & 0.0325  & 30386  & 9234.74 \\
+\hline
 \end{tabular}
-\caption{Wyniki dla różnych instancji i algorytmów}\label{tab:table}
+}
+\caption{Wyniki działania algorytmów dla startu typu \texttt{randomstart}}
+\label{tab:randomstart}
 \end{table}
+
+
+\begin{table}[ht]
+\centering
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{|l|l|r|r|r|r|r|r|r|}
+\hline
+\textbf{Instance} & \textbf{Algorytm} & \textbf{Best} & \textbf{Avg} & \textbf{Worst} & \textbf{Avg Time} & \textbf{Best Diff} & \textbf{Avg Diff} \\
+\hline
+\texttt{../data/kroA200.tsp} & traverse\_greedy\_edge     & 30293  & 32806.3 & 37011  & 0.0157  & 2503  & 291.26  \\
+\texttt{../data/kroA200.tsp} & traverse\_greedy\_vertex   & 30426  & 32858.5 & 37011  & 0.0239  & 3061  & 339.52  \\
+\texttt{../data/kroA200.tsp} & traverse\_steepest\_edge   & 30512  & 32486.2 & 36552  & 0.0333  & 3109  & 315.47  \\
+\texttt{../data/kroA200.tsp} & traverse\_steepest\_vertex & 30595  & 32659.5 & 36552  & 0.0466  & 2503  & 222.65  \\
+\texttt{../data/kroA200.tsp} & traverse\_random           & 30435  & 32934.9 & 36432  & 0.1472  & 0     & 0       \\
+\texttt{../data/kroB200.tsp} & traverse\_greedy\_edge     & 30863  & 32967.3 & 36040  & 0.0166  & 3437  & 456.04  \\
+\texttt{../data/kroB200.tsp} & traverse\_greedy\_vertex   & 31175  & 32955   & 36480  & 0.0229  & 2848  & 349.09  \\
+\texttt{../data/kroB200.tsp} & traverse\_steepest\_edge   & 30934  & 32867.7 & 36480  & 0.0351  & 4046  & 591.07  \\
+\texttt{../data/kroB200.tsp} & traverse\_steepest\_vertex & 31175  & 33043.4 & 36480  & 0.0413  & 2878  & 328.22  \\
+\texttt{../data/kroB200.tsp} & traverse\_random           & 31218  & 33461.5 & 36604  & 0.1584  & 0     & 0       \\
+\hline
+\end{tabular}
+}
+\caption{Wyniki działania algorytmów dla startu typu \texttt{split\_paths\_regret\_TSP}}
+\label{tab:splitpaths}
+\end{table}
+
+
 
 
 \subsection{Wizualizacja wyników}\label{subsec:wizualizacja-wynikow}
