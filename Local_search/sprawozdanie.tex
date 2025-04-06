@@ -11,6 +11,8 @@
 \usepackage{float}
 \usepackage{hyperref}
 \usepackage{cleveref}
+\usepackage{subfigure}
+\usepackage{graphicx}
 
 \title{Zadanie 2. Lokalne przeszukiwanie}
 \author{Oskar Kiliańczyk 151863 \& Wojciech Kot 151876}
@@ -53,67 +55,242 @@ W obu wersjach algorytmów zachłannych stosujemy randomizację wyboru. Dla ruch
 
 \section{Wyniki}
 \subsection{Tabela wynikowa}
+\begin{table}[ht]
+\centering
+\begin{tabular}{|c|c|c||c|c|c||c|c|c||c|c|}
+\hline
+\textbf{Instance} & \textbf{Algorithm} & \textbf{Start Alg.} & \textbf{Best | Avg | Worst} & \textbf{BestT | AvgT | WorstT} & \textbf{BestD | AvgD} \\ \hline
+\texttt{kroA200} & greedy E & random & 44904 | 47506.6 | 49675 & 0.047 | 0.001 | 0.127 & 325030 | 292617 \\ \hline
+\texttt{kroA200} & greedy E & własny & 30310 | 33201.2 | 37119 & 0.004 | 0.000 | 0.021 & 322 | 96.77 \\ \hline
+\texttt{kroA200} & greedy V & random & 96986 | 120985 | 165848 & 0.018 | 0.000 | 0.100 & 250459 | 219127 \\ \hline
+\texttt{kroA200} & greedy V & własny & 30435 | 32934.3 | 36065 & 0.004 | 0.000 | 0.062 & 2099 | 149.55 \\ \hline
+\texttt{kroA200} & steepest E & random & 45216 | 49743.6 | 54231 & 0.401 | 0.006 | 0.990 & 321512 | 289999 \\ \hline
+\texttt{kroA200} & steepest E & własny & 30293 | 32925.6 | 36894 & 0.004 | 0.000 | 0.039 & 1028 | 94.99 \\ \hline
+\texttt{kroA200} & steepest V & random & 101839 | 122314 | 144402 & 0.274 | 0.004 | 1.593 & 247067 | 215586 \\ \hline
+\texttt{kroA200} & steepest V & własny & 30590 | 32628.5 | 36593 & 0.002 | 0.000 | 0.033 & 1912 | 150.34 \\ \hline
+\texttt{kroA200} & steepest E+V & random & 38834 | 43060 | 47763 & 1.476 | 0.017 | 2.796 & 334276 | 297054 \\ \hline
+\texttt{kroA200} & steepest E+V & własny & 30310 | 32554.1 | 36373 & 0.007 | 0.001 | 0.158 & 3050 | 363.02 \\ \hline
+\texttt{kroA200} & random & random & 306319 | 335290 | 376971 & 2.796 | 0.028 | 2.797 & 37983 | 7827.03 \\ \hline
+\texttt{kroA200} & random & własny & 30426 | 32936.3 | 37192 & 2.797 | 0.028 | 2.855 & 0 | 0 \\ \hline
+\texttt{kroB200} & greedy E & random & 44426 | 47039.6 | 49813 & 0.053 | 0.001 | 0.116 & 315327 | 285202 \\ \hline
+\texttt{kroB200} & greedy E & własny & 30863 | 33215.9 | 35995 & 0.005 | 0.000 | 0.018 & 1247 | 213.43 \\ \hline
+\texttt{kroB200} & greedy V & random & 99971 | 118645 | 150580 & 0.032 | 0.001 | 0.143 & 244988 | 213139 \\ \hline
+\texttt{kroB200} & greedy V & własny & 31218 | 33223.5 | 36519 & 0.004 | 0.000 | 0.027 & 1339 | 122.56 \\ \hline
+\texttt{kroB200} & steepest E & random & 45648 | 49405.5 | 53560 & 0.427 | 0.005 | 0.898 & 304743 | 283819 \\ \hline
+\texttt{kroB200} & steepest E & własny & 30934 | 33242 | 36790 & 0.004 | 0.000 | 0.036 & 1189 | 246.88 \\ \hline
+\texttt{kroB200} & steepest V & random & 96970 | 118903 | 142320 & 0.297 | 0.005 | 0.863 & 252946 | 212667 \\ \hline
+\texttt{kroB200} & steepest V & własny & 31341 | 33171.5 | 36555 & 0.002 | 0.000 | 0.038 & 1339 | 214.25 \\ \hline
+\texttt{kroB200} & steepest E+V & random & 38739 | 43252.6 | 47376 & 1.633 | 0.024 | 3.000 & 312702 | 289492 \\ \hline
+\texttt{kroB200} & steepest E+V & własny & 31156 | 33014.7 | 36479 & 0.007 | 0.000 | 0.194 & 4046 | 496.52 \\ \hline
+\texttt{kroB200} & random & random & 298060 | 324327 | 346475 & 3.000 | 0.030 | 3.028 & 32259 | 8276.57 \\ \hline
+\texttt{kroB200} & random & własny & 31466 | 33448.2 | 36604 & 3.028 | 0.030 | 3.059 & 0 | 0 \\ \hline
+\end{tabular}
+\caption{Wyniki dla różnych instancji i algorytmów}
+\end{table}
+
 
 \subsection{Wizualizacja wyników}
+\subsubsection{Algorytm wymiany krawędzi wewnątrz cykli (zachłanny)}
 \begin{figure}[H]
     \centering
-    %\includegraphics{best_paths/greedy_nearest_neighbor_kroA200_intra_cycle_greedy_random.png}
-    \caption{Instancja kroA200 - zmiany wewnątrz cyklu - zachłanny, start losowy}
-    \label{fig:Greedy-cycle-changes-kroA-random}
+    % --- Pierwszy rząd ---
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_greedy/randomstart.png}
+        \caption{kroA200, losowy start}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_greedy/randomstart.png}
+        \caption{kroB200, losowy start}
+    \end{minipage}
+
+    \vspace{0.5cm}
+
+    % --- Drugi rząd ---
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_greedy/split_paths_regret_TSP.png}
+        \caption{kroA200, własny algorytm startowy}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_greedy/split_paths_regret_TSP.png}
+        \caption{kroB200, własny algorytm startowy}
+    \end{minipage}
+    \label{fig:minipage-greedy-edge}
 \end{figure}
 
+\subsubsection{Algorytm wymiany wierzchołków między cyklami (zachłanny)}
 \begin{figure}[H]
     \centering
-    %\includegraphics{best_paths/steepest_nearest_neighbor_kroA200_intra_cycle_heuristic.png}
-    \caption{Instancja kroA200 - zmiany wewnątrz cyklu - steepest, start heurystyczny}
-    \label{fig:Steepest-cycle-changes-kroA-heuristic}
+    % --- Pierwszy rząd ---
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_greedy_shuffle/randomstart.png}
+        \caption{kroA200, losowy start}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_greedy_shuffle/randomstart.png}
+        \caption{kroB200, losowy start}
+    \end{minipage}
+
+    \vspace{0.5cm}
+
+    % --- Drugi rząd ---
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_greedy_shuffle/split_paths_regret_TSP.png}
+        \caption{kroA200, własny algorytm startowy}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_greedy_shuffle/split_paths_regret_TSP.png}
+        \caption{kroB200, własny algorytm startowy}
+    \end{minipage}
+    \label{fig:minipage-greedy-vertex}
 \end{figure}
 
+\subsubsection{Algorytm wymiany krawędzi wewnątrz cykli (steepest)}
 \begin{figure}[H]
     \centering
-    %\includegraphics{best_paths/greedy_nearest_neighbor_kroA200_inter_cycle_greedy_random.png}
-    \caption{Instancja kroA200 - zmiany pomiędzy cyklami - zachłanny, start losowy}
-    \label{fig:Greedy-cycle-changes-kroA-intercycle-random}
+    % --- Pierwszy rząd ---
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_steepest/randomstart.png}
+        \caption{kroA200, losowy start}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_steepest/randomstart.png}
+        \caption{kroB200, losowy start}
+    \end{minipage}
+
+    \vspace{0.5cm}
+
+    % --- Drugi rząd ---
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_steepest/split_paths_regret_TSP.png}
+        \caption{kroA200, własny algorytm startowy}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_steepest/split_paths_regret_TSP.png}
+        \caption{kroB200, własny algorytm startowy}
+    \end{minipage}
+    \label{fig:minipage-steepest-edge}
 \end{figure}
 
+
+\subsubsection{Algorytm wymiany wierzchołków między cyklami (steepest)}
 \begin{figure}[H]
     \centering
-    %\includegraphics{best_paths/steepest_nearest_neighbor_kroA200_inter_cycle_heuristic.png}
-    \caption{Instancja kroA200 - zmiany pomiędzy cyklami - steepest, start heurystyczny}
-    \label{fig:Steepest-cycle-changes-kroA-intercycle-heuristic}
+    % --- Pierwszy rząd ---
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_steepest_shuffle/randomstart.png}
+        \caption{kroA200, losowy start}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_steepest_shuffle/randomstart.png}
+        \caption{kroB200, losowy start}
+    \end{minipage}
+
+    \vspace{0.5cm}
+
+    % --- Drugi rząd ---
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_steepest_shuffle/split_paths_regret_TSP.png}
+        \caption{kroA200, własny algorytm startowy}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_steepest_shuffle/split_paths_regret_TSP.png}
+        \caption{kroB200, własny algorytm startowy}
+    \end{minipage}
+    \label{fig:minipage-steepest-vertex}
 \end{figure}
 
+\subsubsection{Algorytm steepest dla obu typów sąsiedztwa}
 \begin{figure}[H]
     \centering
-    %\includegraphics{best_paths/random_path_kroA200.png}
-    \caption{Instancja kroA200 - losowa zmiana}
-    \label{fig:Random-path-kroA}
+    % --- Pierwszy rząd ---
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_steepest_both/randomstart.png}
+        \caption{kroA200, losowy start}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_steepest_both/randomstart.png}
+        \caption{kroB200, losowy start}
+    \end{minipage}
+
+    \vspace{0.5cm}
+
+    % --- Drugi rząd ---
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_steepest_both/split_paths_regret_TSP.png}
+        \caption{kroA200, własny algorytm startowy}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_steepest_both/split_paths_regret_TSP.png}
+        \caption{kroB200, własny algorytm startowy}
+    \end{minipage}
+    \label{fig:minipage-steepest-both}
 \end{figure}
 
+\subsubsection{Algorytm losowych ruchów w obu typach sąsiedztwa (random)}
 \begin{figure}[H]
     \centering
-    %\includegraphics{best_paths/greedy_nearest_neighbor_kroA200_intra_cycle_greedy_heuristic.png}
-    \caption{Instancja kroA200 - zmiany wewnątrz cyklu - zachłanny, start heurystyczny}
-    \label{fig:Greedy-cycle-changes-kroA-heuristic}
-\end{figure}
+    % --- Pierwszy rząd ---
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_random/randomstart.png}
+        \caption{kroA200, losowy start}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_random/randomstart.png}
+        \caption{kroB200, losowy start}
+    \end{minipage}
 
-\begin{figure}[H]
-    \centering
-    %\includegraphics{best_paths/steepest_nearest_neighbor_kroA200_intra_cycle_random.png}
-    \caption{Instancja kroA200 - zmiany wewnątrz cyklu - steepest, start losowy}
-    \label{fig:Steepest-cycle-changes-kroA-random}
-\end{figure}
+    \vspace{0.5cm}
 
-\begin{figure}[H]
-    \centering
-    %\includegraphics{best_paths/greedy_nearest_neighbor_kroA200_inter_cycle_greedy_heuristic.png}
-    \caption{Instancja kroA200 - zmiany pomiędzy cyklami - zachłanny, start heurystyczny}
-    \label{fig:Greedy-cycle-changes-kroA-intercycle-heuristic}
+    % --- Drugi rząd ---
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_random/split_paths_regret_TSP.png}
+        \caption{kroA200, własny algorytm startowy}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_random/split_paths_regret_TSP.png}
+        \caption{kroB200, własny algorytm startowy}
+    \end{minipage}
+    \label{fig:minipage-random}
 \end{figure}
-
 
 \section{Link do repozytorium}\label{sec:link-do-repo}
 Kod źródłowy w repozytorium GitHub dostępny pod linkiem: \\
-\href{https://github.com/KotZPolibudy/PUT_IMO/tree/main/Local_search}{Repozytorium TSP Heuristics}.
+\href{https://github.com/KotZPolibudy/PUT_IMO/tree/main/Local_search}{Repozytorium Local Search}.
 
 \end{document}

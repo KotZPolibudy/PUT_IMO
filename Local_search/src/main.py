@@ -73,15 +73,15 @@ def use_local_algo(algo, distances, starting_algo, random_time_limiter, n=100):
 if __name__ == '__main__':
     instances = [
         '../data/kroA200.tsp',
-        # '../data/kroB200.tsp'
+        '../data/kroB200.tsp'
         ]
     algorithms = [
-        # traverse_greedy,
-        # traverse_greedy_shuffle,
-        # traverse_steepest,
-        # traverse_steepest_shuffle,
+        traverse_greedy,
+        traverse_greedy_shuffle,
+        traverse_steepest,
+        traverse_steepest_shuffle,
         traverse_steepest_both,
-        # traverse_random
+        traverse_random
     ]
     starting_algorithms = [
         randomstart,
@@ -90,11 +90,17 @@ if __name__ == '__main__':
 
     results = []
     os.makedirs("../best_paths", exist_ok=True)
+    for insta in instances:
+        i = insta.split('/')[-1].split('.')[0]
+        os.makedirs(f"../best_paths/{i}", exist_ok=True)
+        for algo in algorithms:
+            os.makedirs(f"../best_paths/{i}/{algo.__name__}", exist_ok=True)
 
     for insta in instances:
         data = read_data(insta)
         distances = measure_distances(data)
         global_wt = 0.1
+        i = insta.split('/')[-1].split('.')[0]
         print(f"=============================={insta}==============================")
         for algorithm in algorithms:
             algo_name = algorithm.__name__
@@ -107,7 +113,7 @@ if __name__ == '__main__':
                 global_wt = max(global_wt, wt)
 
                 results.append([insta, algo_name, starting_algo.__name__, found_best, found_avg, found_worst, bt, avgt, wt, diff_best, diff_avg])
-                save_path = f"../best_paths/{algo_name}_{starting_algo.__name__}_{os.path.basename(insta)}.png"
+                save_path = f"../best_paths/{i}/{algo_name}/{os.path.basename(starting_algo.__name__)}.png"
                 show_paths(data, *found_best_paths, save_path)
 
     headers = ["Instance", "Algorytm", "Start Alg.", "Best", "Avg", "Worst", "Best Time", "Avg Time", "Worst Time", "Best Diff", "Avg Diff"]
