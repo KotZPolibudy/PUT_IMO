@@ -152,18 +152,20 @@ Jeśli taka istnieje, przeprowadzamy zamianę i powtarzamy procedurę, jeśli ni
 
 
 \subsection{Wizualizacja wyników}\label{subsec:wizualizacja-wynikow}
+
+\subsubsection{Algorytm wymiany krawędzi (zachłanny)}
 \begin{figure}[H]
     \centering
     % --- Pierwszy rząd ---
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_greedy/randomstart}
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_greedy_edge/randomstart}
         \caption{kroA200, losowy start}
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_greedy/randomstart}
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_greedy_edge/randomstart}
         \caption{kroB200, losowy start}
     \end{minipage}
 
@@ -172,31 +174,31 @@ Jeśli taka istnieje, przeprowadzamy zamianę i powtarzamy procedurę, jeśli ni
     % --- Drugi rząd ---
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_greedy/split_paths_regret_TSP}
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_greedy_edge/split_paths_regret_TSP}
         \caption{kroA200, własny algorytm startowy}
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_greedy/split_paths_regret_TSP}
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_greedy_edge/split_paths_regret_TSP}
         \caption{kroB200, własny algorytm startowy}
     \end{minipage}
     \label{fig:minipage-greedy-edge}
 \end{figure}
 
-\subsubsection{Algorytm wymiany wierzchołków między cyklami (zachłanny)}
+\subsubsection{Algorytm wymiany wierzchołków (zachłanny)}
 \begin{figure}[H]
     \centering
     % --- Pierwszy rząd ---
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_greedy_shuffle/randomstart}
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_greedy_vertex/randomstart}
         \caption{kroA200, losowy start}
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_greedy_shuffle/randomstart}
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_greedy_vertex/randomstart}
         \caption{kroB200, losowy start}
     \end{minipage}
 
@@ -205,31 +207,31 @@ Jeśli taka istnieje, przeprowadzamy zamianę i powtarzamy procedurę, jeśli ni
     % --- Drugi rząd ---
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_greedy_shuffle/split_paths_regret_TSP}
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_greedy_vertex/split_paths_regret_TSP}
         \caption{kroA200, własny algorytm startowy}
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_greedy_shuffle/split_paths_regret_TSP}
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_greedy_vertex/split_paths_regret_TSP}
         \caption{kroB200, własny algorytm startowy}
     \end{minipage}
     \label{fig:minipage-greedy-vertex}
 \end{figure}
 
-\subsubsection{Algorytm wymiany krawędzi wewnątrz cykli (steepest)}
+\subsubsection{Algorytm wymiany krawędzi (steepest)}
 \begin{figure}[H]
     \centering
     % --- Pierwszy rząd ---
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_steepest/randomstart}
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_steepest_edge/randomstart}
         \caption{kroA200, losowy start}
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_steepest/randomstart}
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_steepest_edge/randomstart}
         \caption{kroB200, losowy start}
     \end{minipage}
 
@@ -238,32 +240,32 @@ Jeśli taka istnieje, przeprowadzamy zamianę i powtarzamy procedurę, jeśli ni
     % --- Drugi rząd ---
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_steepest/split_paths_regret_TSP}
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_steepest_edge/split_paths_regret_TSP}
         \caption{kroA200, własny algorytm startowy}
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_steepest/split_paths_regret_TSP}
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_steepest_edge/split_paths_regret_TSP}
         \caption{kroB200, własny algorytm startowy}
     \end{minipage}
     \label{fig:minipage-steepest-edge}
 \end{figure}
 
 
-\subsubsection{Algorytm wymiany wierzchołków między cyklami (steepest)}
+\subsubsection{Algorytm wymiany wierzchołków (steepest)}
 \begin{figure}[H]
     \centering
     % --- Pierwszy rząd ---
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_steepest_shuffle/randomstart}
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_steepest_vertex/randomstart}
         \caption{kroA200, losowy start}
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_steepest_shuffle/randomstart}
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_steepest_vertex/randomstart}
         \caption{kroB200, losowy start}
     \end{minipage}
 
@@ -272,52 +274,20 @@ Jeśli taka istnieje, przeprowadzamy zamianę i powtarzamy procedurę, jeśli ni
     % --- Drugi rząd ---
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_steepest_shuffle/split_paths_regret_TSP}
+        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_steepest_vertex/split_paths_regret_TSP}
         \caption{kroA200, własny algorytm startowy}
     \end{minipage}
     \hfill
     \begin{minipage}[t]{0.45\textwidth}
         \centering
-        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_steepest_shuffle/split_paths_regret_TSP}
+        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_steepest_vertex/split_paths_regret_TSP}
         \caption{kroB200, własny algorytm startowy}
     \end{minipage}
     \label{fig:minipage-steepest-vertex}
 \end{figure}
 
-\subsubsection{Algorytm steepest dla obu typów sąsiedztwa}
-\begin{figure}[H]
-    \centering
-    % --- Pierwszy rząd ---
-    \begin{minipage}[t]{0.45\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_steepest_both/randomstart}
-        \caption{kroA200, losowy start}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[t]{0.45\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_steepest_both/randomstart}
-        \caption{kroB200, losowy start}
-    \end{minipage}
 
-    \vspace{0.5cm}
-
-    % --- Drugi rząd ---
-    \begin{minipage}[t]{0.45\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{best_paths/kroA200/traverse_steepest_both/split_paths_regret_TSP}
-        \caption{kroA200, własny algorytm startowy}
-    \end{minipage}
-    \hfill
-    \begin{minipage}[t]{0.45\textwidth}
-        \centering
-        \includegraphics[width=\linewidth]{best_paths/kroB200/traverse_steepest_both/split_paths_regret_TSP}
-        \caption{kroB200, własny algorytm startowy}
-    \end{minipage}
-    \label{fig:minipage-steepest-both}
-\end{figure}
-
-\subsubsection{Algorytm losowych ruchów w obu typach sąsiedztwa (random)}
+\subsubsection{Algorytm losowego błądzenia w  obu typach sąsiedztwa (random)}
 \begin{figure}[H]
     \centering
     % --- Pierwszy rząd ---
