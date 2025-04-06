@@ -15,17 +15,6 @@ def compute_score_change(path, distances, i, j):
 
     return new_dist - old_dist
 
-# ale z zamianą pomiędzy cyklami zamiast wewnątrz cyklu
-def compute_score_change2(path1, path2, distances, i, j):
-    a, b = path1[i - 1], path1[i]
-    c, d = path1[i + 1], path2[j - 1]
-    e, f = path2[j], path2[j + 1]
-
-    old_distance = distances[a][b] + distances[b][c] + distances[d][e] + distances[e][f]
-    new_distance = distances[a][e] + distances[e][c] + distances[d][b] + distances[b][f]
-
-    return new_distance - old_distance
-
 
 def optimize_path(path, distances):
     n = len(path)
@@ -33,7 +22,7 @@ def optimize_path(path, distances):
     while improved:
         improved = False
         best_i, best_j = -1, -1
-        best_score_change = float('inf') # 0
+        best_score_change = 0
         for i in range(1, n - 2):
             for j in range(i + 1, n - 1):
                 score_change = compute_score_change(path, distances, i, j)
@@ -42,9 +31,10 @@ def optimize_path(path, distances):
                     best_i, best_j = i, j
 
         if best_i != -1 and best_j != -1:
-            # print("best ij: ", best_i, best_j)
-            path[best_i:best_j] = path[best_i:best_j][::-1]
-            # path[best_i], path[best_j] = path[best_j], path[best_i]
+            if abs(best_i - best_j) == 1:
+                path[best_i], path[best_j] = path[best_j], path[best_i]
+            else:
+                path[best_i:best_j] = path[best_i:best_j][::-1]
             improved = True
 
     return path

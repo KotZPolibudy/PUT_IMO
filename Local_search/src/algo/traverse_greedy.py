@@ -8,16 +8,10 @@ def compute_score_change(path, distances, i, j):
         return float('inf')
     prev_i, next_i = (i - 1), (i + 1) % n
     prev_j, next_j = (j - 1), (j + 1) % n
-
-    # old_dist = (distances[path[prev_i]][path[i]] + distances[path[i]][path[next_i]] +
-    #             distances[path[prev_j]][path[j]] + distances[path[j]][path[next_j]])
-
-    # new_dist = (distances[path[prev_i]][path[j]] + distances[path[j]][path[next_i]] +
-    #             distances[path[prev_j]][path[i]] + distances[path[i]][path[next_j]])
+    
     old_dist = distances[path[prev_i]][path[i]] + distances[path[prev_j]][path[j]]
     new_dist = distances[path[prev_i]][path[prev_j]] + distances[path[i]][path[j]]
     
-    # print("ij dist: ", i, j, old_dist, new_dist)
     return new_dist - old_dist
 
 
@@ -35,7 +29,10 @@ def optimize_path(path, distances):
             for j in range(i + 1, n):
                 score_change = compute_score_change(path, distances, i, j)
                 if score_change < 0:
-                    path[i:j] = path[i:j][::-1]
+                    if abs(i - j) == 1:
+                        path[i], path[j] = path[j], path[i]
+                    else:
+                        path[i:j] = path[i:j][::-1]
                     improved = True
                     found_improvement = True
                     break

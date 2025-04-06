@@ -20,16 +20,15 @@ def traverse_greedy_shuffle(starting_paths, distances, _):
     while improved:
         improved = False
         possible_changes = []
-        
         for i in range(1, n-2):
             for j in range(i+1, n-1):
-                score_change = compute_score_change(path1, path2, distances, i, j)
-                if score_change < 0:
-                    possible_changes.append((i, j, score_change))
-
-        if possible_changes:
-            best_i, best_j, best_score_change = random.choice(possible_changes)
-            path1[best_i], path2[best_j] = path2[best_j], path1[best_i]
-            improved = True
+                possible_changes.append((i, j))
+        random.shuffle(possible_changes)
+        
+        for i, j in possible_changes:
+            score_change = compute_score_change(path1, path2, distances, i, j)
+            if score_change < 0:
+                path1[i], path2[j] = path2[j], path1[i]
+                improved = True
 
     return [path1, path2]

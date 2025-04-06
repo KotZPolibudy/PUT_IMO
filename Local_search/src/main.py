@@ -10,6 +10,7 @@ from algo.traverse_greedy import traverse_greedy
 from algo.traverse_greedy_2 import traverse_greedy_shuffle
 from algo.traverse_steepest import traverse_steepest
 from algo.traverse_steepest_2 import traverse_steepest_shuffle
+from algo.traverse_steepest_both import traverse_steepest_both
 
 
 def use_starting_algo(algorithm, distances, n=1):
@@ -77,13 +78,14 @@ if __name__ == '__main__':
     algorithms = [
         # traverse_greedy,
         # traverse_greedy_shuffle,
-        traverse_steepest,
-        traverse_steepest_shuffle,
+        # traverse_steepest,
+        # traverse_steepest_shuffle,
+        traverse_steepest_both,
         # traverse_random
     ]
     starting_algorithms = [
         randomstart,
-        # split_paths_regret_TSP
+        split_paths_regret_TSP
     ]
 
     results = []
@@ -105,8 +107,8 @@ if __name__ == '__main__':
                 global_wt = max(global_wt, wt)
 
                 results.append([insta, algo_name, starting_algo.__name__, found_best, found_avg, found_worst, bt, avgt, wt, diff_best, diff_avg])
-                save_path = f"../best_paths/{algo_name}_{os.path.basename(insta)}.png"
-                # show_paths(data, *found_best_paths, save_path)
+                save_path = f"../best_paths/{algo_name}_{starting_algo.__name__}_{os.path.basename(insta)}.png"
+                show_paths(data, *found_best_paths, save_path)
 
     headers = ["Instance", "Algorytm", "Start Alg.", "Best", "Avg", "Worst", "Best Time", "Avg Time", "Worst Time", "Best Diff", "Avg Diff"]
     print(tabulate(results, headers=headers, tablefmt="grid"))
