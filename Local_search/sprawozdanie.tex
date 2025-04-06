@@ -113,7 +113,8 @@ Drugi z nich natomiast, to nasz własny algorytm (nie zaproponowany w zadaniu) k
 % Tabela 1: kroA200.tsp z randomstart
 \begin{table}[ht]
 \centering
-\begin{tabular}{|l|l|r|r|r|r|r|}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|l|l|r|r|r|r|r|r|}
 \hline
 \textbf{Instance} & \textbf{Algorytm} & \textbf{Best} & \textbf{Avg} & \textbf{Worst} & \textbf{Avg Time} & \textbf{Best Diff} & \textbf{Avg Diff} \\
 \hline
@@ -124,13 +125,15 @@ Drugi z nich natomiast, to nasz własny algorytm (nie zaproponowany w zadaniu) k
 \texttt{kroA200} & \texttt{random} & 301648 & 332569 & 354465 & 2.42166 & 38018 & 8544.31 \\
 \hline
 \end{tabular}
+}
 \caption{Wyniki dla \texttt{kroA200} z algorytmem \texttt{randomstart}}
 \end{table}
 
 % Tabela 2: kroA200.tsp z split_paths_regret_TSP
 \begin{table}[ht]
 \centering
-\begin{tabular}{|l|l|r|r|r|r|r|}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|l|l|r|r|r|r|r|r|}
 \hline
 \textbf{Instance} & \textbf{Algorytm} & \textbf{Best} & \textbf{Avg} & \textbf{Worst} & \textbf{Avg Time} & \textbf{Best Diff} & \textbf{Avg Diff} \\
 \hline
@@ -141,13 +144,15 @@ Drugi z nich natomiast, to nasz własny algorytm (nie zaproponowany w zadaniu) k
 \texttt{kroA200} & \texttt{random} & 30293 & 33024.9 & 36098 & 2.42141 & 0 & 0 \\
 \hline
 \end{tabular}
+}
 \caption{Wyniki dla \texttt{kroA200} z naszym algorytmem}
 \end{table}
 
 % Tabela 3: kroB200.tsp z randomstart
 \begin{table}[ht]
 \centering
-\begin{tabular}{|l|l|r|r|r|r|r|}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|l|l|r|r|r|r|r|r|r|}
 \hline
 \textbf{Instance} & \textbf{Algorytm} & \textbf{Best} & \textbf{Avg} & \textbf{Worst} & \textbf{Avg Time} & \textbf{Best Diff} & \textbf{Avg Diff} \\
 \hline
@@ -158,13 +163,15 @@ Drugi z nich natomiast, to nasz własny algorytm (nie zaproponowany w zadaniu) k
 \texttt{kroB200} & \texttt{random} & 295224 & 324648 & 351050 & 2.35485 & 38466 & 8461.69 \\
 \hline
 \end{tabular}
+}
 \caption{Wyniki dla \texttt{kroB200} z algorytmem \texttt{randomstart}}
 \end{table}
 
 % Tabela 4: kroB200.tsp z split_paths_regret_TSP
 \begin{table}[ht]
 \centering
-\begin{tabular}{|l|l|r|r|r|r|r|}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|l|l|r|r|r|r|r|r|}
 \hline
 \textbf{Instance} & \textbf{Algorytm} & \textbf{Best} & \textbf{Avg} & \textbf{Worst} & \textbf{Avg Time} & \textbf{Best Diff} & \textbf{Avg Diff} \\
 \hline
@@ -175,6 +182,7 @@ Drugi z nich natomiast, to nasz własny algorytm (nie zaproponowany w zadaniu) k
 \texttt{kroB200} & \texttt{random} & 31526 & 33517.7 & 36555 & 2.35449 & 0 & 0 \\
 \hline
 \end{tabular}
+}
 \caption{Wyniki dla \texttt{kroB200} z naszym algorytmem}
 \end{table}
 
@@ -350,6 +358,16 @@ Drugi z nich natomiast, to nasz własny algorytm (nie zaproponowany w zadaniu) k
     \end{minipage}
     \label{fig:minipage-random}
 \end{figure}
+
+\section{Wnioski i analiza wyników}\label{sec:wnioski}
+
+\begin{enumerate}
+\item Algorytmy oparte na sąsiedztwie z zamianą krawędzi osiągnęły znacznie lepsze wyniki niż te oparte na zamianie wierzchołków.
+\item Algorytmy steepest osiągały znacznie dłuższe czasy wykonywania, przynosząc jedynie niewielką poprawę co do jakości.
+\item Pomimo świetnych wyników 2 tygodnie temu, okazuje się że nasz algorytm nadal da się poprawić, choć nie umiał zrobić tego algorytm losowego błądzenia.
+Mimo to, wszystkie algorytmy osiągnęły jedynie niewielkie poprawy na startowym rozwiązaniu pozyskanym z naszego algorytmu.
+\end{enumerate}
+
 
 \section{Link do repozytorium}\label{sec:link-do-repo}
 Kod źródłowy w repozytorium GitHub dostępny pod linkiem: \\
