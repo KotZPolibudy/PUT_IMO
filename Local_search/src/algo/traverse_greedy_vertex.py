@@ -3,10 +3,18 @@ import random
 
 def compute_score_change(path, distances, i, j):
     n = len(path)
-    prev_i, next_i = (i - 1), (i + 1) % n
-    prev_j, next_j = (j - 1), (j + 1) % n
-    old_dist = distances[path[prev_i]][path[i]] + distances[path[prev_j]][path[j]] + distances[path[i]][path[next_i]] + distances[path[j]][path[next_j]]
-    new_dist = distances[path[prev_i]][path[j]] + distances[path[j]][path[next_i]] + distances[path[prev_j]][path[i]] + distances[path[i]][path[next_j]]
+    if abs(i - j) == 1:
+        # return float('inf')
+        b, c = min(i, j), max(i, j)
+        a = b - 1
+        d = (c + 1) % n
+        old_dist = distances[path[a]][path[b]] + distances[path[c]][path[d]]
+        new_dist = distances[path[a]][path[c]] + distances[path[b]][path[d]]
+    else:
+        prev_i, next_i = (i - 1), (i + 1) % n
+        prev_j, next_j = (j - 1), (j + 1) % n
+        old_dist = distances[path[prev_i]][path[i]] + distances[path[prev_j]][path[j]] + distances[path[i]][path[next_i]] + distances[path[j]][path[next_j]]
+        new_dist = distances[path[prev_i]][path[j]] + distances[path[j]][path[next_i]] + distances[path[prev_j]][path[i]] + distances[path[i]][path[next_j]]
     return new_dist - old_dist
 
 
@@ -33,9 +41,9 @@ def optimize_path(path, distances):
             for j in range(i + 1, n):
                 score_change = compute_score_change(path, distances, i, j)
                 if score_change < 0:
-                    print("ij score:", i, j, score_change)
+                    # print("ij score:", i, j, score_change)
                     path[i], path[j] = path[j], path[i]
-                    print(path)
+                    # print(path)
                     improved = True
                     found_improvement = True
                     break
