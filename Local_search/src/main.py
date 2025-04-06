@@ -5,12 +5,11 @@ from utils import *
 from starters.randomstart import randomstart
 from starters.split_regret import split_paths_regret_TSP
 # algorithms
-# from algo.traverse_random import traverse_random
 from algo.traverse_greedy_edge import traverse_greedy_edge
-# from algo.traverse_greedy_2 import traverse_greedy_shuffle
-# from algo.traverse_steepest import traverse_steepest
-# from algo.traverse_steepest_2 import traverse_steepest_shuffle
-# from algo.traverse_steepest_both import traverse_steepest_both
+from algo.traverse_greedy_vertex import traverse_greedy_vertex
+from algo.traverse_steepest_edge import traverse_steepest_edge
+from algo.traverse_steepest_vertex import traverse_steepest_vertex
+from algo.traverse_random import traverse_random
 
 
 def use_starting_algo(algorithm, distances, n=1):
@@ -50,9 +49,9 @@ def use_local_algo(algo, distances, starting_algo, random_time_limiter, n=100):
     # do parallel here, please ;~;
     for _ in range(n):
         start, starting_score = use_starting_algo(starting_algo, distances)
-        start_time = time.time()
+        start_time = time.perf_counter()
         solution = algo(start, distances, random_time_limiter)
-        elapsed_time = time.time() - start_time
+        elapsed_time = time.perf_counter() - start_time
         path1, path2 = solution
         score = summary_cost(path1, path2, distances)
         diff = starting_score - score
@@ -77,15 +76,14 @@ if __name__ == '__main__':
         ]
     algorithms = [
         traverse_greedy_edge,
-        # traverse_greedy_shuffle,
-        # traverse_steepest,
-        # traverse_steepest_shuffle,
-        # traverse_steepest_both,
-        # traverse_random
+        traverse_greedy_vertex,
+        traverse_steepest_edge,
+        traverse_steepest_vertex,
+        traverse_random
     ]
     starting_algorithms = [
+        split_paths_regret_TSP,
         randomstart,
-        split_paths_regret_TSP
     ]
 
     results = []
