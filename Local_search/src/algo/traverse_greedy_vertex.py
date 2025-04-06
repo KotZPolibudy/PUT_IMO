@@ -3,8 +3,9 @@ import random
 
 def compute_score_change(path, distances, i, j):
     n = len(path)
-    if abs(i - j) == 1:
-        # return float('inf')
+    if i == 0 or j == 0 or i == n - 1 or j == n - 1:
+        return float('inf') # zapobiega przesuwaniu ostatniego elementu
+    elif abs(i - j) == 1:
         b, c = min(i, j), max(i, j)
         a = b - 1
         d = (c + 1) % n
