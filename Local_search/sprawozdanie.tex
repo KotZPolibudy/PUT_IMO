@@ -113,70 +113,72 @@ Drugi z nich natomiast, to nasz własny algorytm (nie zaproponowany w zadaniu) k
 % Tabela 1: kroA200.tsp z randomstart
 \begin{table}[ht]
 \centering
-\begin{tabular}{|l|l|l|r|r|r|r|r|}
+\begin{tabular}{|l|l|r|r|r|r|r|}
 \hline
-\textbf{Instance} & \textbf{Algorytm} & \textbf{Start Alg.} & \textbf{Best} & \textbf{Avg} & \textbf{Worst} & \textbf{Best Diff} & \textbf{Avg Diff} \\
+\textbf{Instance} & \textbf{Algorytm} & \textbf{Best} & \textbf{Avg} & \textbf{Worst} & \textbf{Avg Time} & \textbf{Best Diff} & \textbf{Avg Diff} \\
 \hline
-\texttt{kroA200} & \texttt{traverse\_greedy\_edge} & \texttt{randomstart} & 38683 & 43477.2 & 46597 & 323996 & 297870 \\
-\texttt{kroA200} & \texttt{traverse\_greedy\_vertex} & \texttt{randomstart} & 65591 & 79580.1 & 89485 & 291579 & 262294 \\
-\texttt{kroA200} & \texttt{traverse\_steepest\_edge} & \texttt{randomstart} & 38261 & 42868 & 49455 & 335537 & 298626 \\
-\texttt{kroA200} & \texttt{traverse\_steepest\_vertex} & \texttt{randomstart} & 65990 & 79327.8 & 91208 & 300881 & 263108 \\
-\texttt{kroA200} & \texttt{traverse\_random} & \texttt{randomstart} & 301648 & 332569 & 354465 & 38018 & 8544.31 \\
+\texttt{kroA200} & \texttt{greedy\_edge} & 38683 & 43477.2 & 46597 & 0.0911878 & 323996 & 297870 \\
+\texttt{kroA200} & \texttt{greedy\_vertex} & 65591 & 79580.1 & 89485 & 0.227998 & 291579 & 262294 \\
+\texttt{kroA200} & \texttt{steepest\_edge} & 38261 & 42868 & 49455 & 1.38019 & 335537 & 298626 \\
+\texttt{kroA200} & \texttt{steepest\_vertex} & 65990 & 79327.8 & 91208 & 2.42133 & 300881 & 263108 \\
+\texttt{kroA200} & \texttt{random} & 301648 & 332569 & 354465 & 2.42166 & 38018 & 8544.31 \\
 \hline
 \end{tabular}
-\caption{Wyniki dla \texttt{kroA200} z algorytmem \texttt{randomstart}}\label{tab:table}
+\caption{Wyniki dla \texttt{kroA200} z algorytmem \texttt{randomstart}}
 \end{table}
 
 % Tabela 2: kroA200.tsp z split_paths_regret_TSP
 \begin{table}[ht]
 \centering
-\begin{tabular}{|l|l|l|r|r|r|r|r|}
+\begin{tabular}{|l|l|r|r|r|r|r|}
 \hline
-\textbf{Instance} & \textbf{Algorytm} & \textbf{Start Alg.} & \textbf{Best} & \textbf{Avg} & \textbf{Worst} & \textbf{Best Diff} & \textbf{Avg Diff} \\
+\textbf{Instance} & \textbf{Algorytm} & \textbf{Best} & \textbf{Avg} & \textbf{Worst} & \textbf{Avg Time} & \textbf{Best Diff} & \textbf{Avg Diff} \\
 \hline
-\texttt{kroA200} & \texttt{traverse\_greedy\_edge} & \texttt{nasz algorytm} & 30293 & 32567.1 & 37008 & 1159 & 203.38 \\
-\texttt{kroA200} & \texttt{traverse\_greedy\_vertex} & \texttt{nasz algorytm} & 30310 & 32608.6 & 36369 & 2613 & 285.68 \\
-\texttt{kroA200} & \texttt{traverse\_steepest\_edge} & \texttt{nasz algorytm} & 30426 & 32421.1 & 36148 & 3109 & 479.23 \\
-\texttt{kroA200} & \texttt{traverse\_steepest\_vertex} & \texttt{nasz algorytm} & 30293 & 32475.8 & 37008 & 2552 & 324.68 \\
-\texttt{kroA200} & \texttt{traverse\_random} & \texttt{nasz algorytm} & 30293 & 33024.9 & 36098 & 0 & 0 \\
+\texttt{kroA200} & \texttt{greedy\_edge} & 30293 & 32567.1 & 37008 & 0.0146494 & 1159 & 203.38 \\
+\texttt{kroA200} & \texttt{greedy\_vertex} & 30310 & 32608.6 & 36369 & 0.022078 & 2613 & 285.68 \\
+\texttt{kroA200} & \texttt{steepest\_edge} & 30426 & 32421.1 & 36148 & 0.0430189 & 3109 & 479.23 \\
+\texttt{kroA200} & \texttt{steepest\_vertex} & 30293 & 32475.8 & 37008 & 0.0496467 & 2552 & 324.68 \\
+\texttt{kroA200} & \texttt{random} & 30293 & 33024.9 & 36098 & 2.42141 & 0 & 0 \\
 \hline
 \end{tabular}
-\caption{Wyniki dla \texttt{kroA200} z naszym algorytmem}\label{tab:table2}
+\caption{Wyniki dla \texttt{kroA200} z naszym algorytmem}
 \end{table}
 
 % Tabela 3: kroB200.tsp z randomstart
 \begin{table}[ht]
 \centering
-\begin{tabular}{|l|l|l|r|r|r|r|r|}
+\begin{tabular}{|l|l|r|r|r|r|r|}
 \hline
-\textbf{Instance} & \textbf{Algorytm} & \textbf{Start Alg.} & \textbf{Best} & \textbf{Avg} & \textbf{Worst} & \textbf{Best Diff} & \textbf{Avg Diff} \\
+\textbf{Instance} & \textbf{Algorytm} & \textbf{Best} & \textbf{Avg} & \textbf{Worst} & \textbf{Avg Time} & \textbf{Best Diff} & \textbf{Avg Diff} \\
 \hline
-\texttt{kroB200} & \texttt{traverse\_greedy\_edge} & \texttt{randomstart} & 38866 & 43465.6 & 46581 & 321463 & 291367 \\
-\texttt{kroB200} & \texttt{traverse\_greedy\_vertex} & \texttt{randomstart} & 70839 & 78826.1 & 88908 & 291703 & 253942 \\
-\texttt{kroB200} & \texttt{traverse\_steepest\_edge} & \texttt{randomstart} & 38556 & 43203.3 & 48639 & 313027 & 291400 \\
-\texttt{kroB200} & \texttt{traverse\_steepest\_vertex} & \texttt{randomstart} & 67856 & 78534 & 90919 & 280540 & 254883 \\
-\texttt{kroB200} & \texttt{traverse\_random} & \texttt{randomstart} & 295224 & 324648 & 351050 & 38466 & 8461.69 \\
+\texttt{kroB200} & \texttt{greedy\_edge} & 38866 & 43465.6 & 46581 & 0.0910784 & 321463 & 291367 \\
+\texttt{kroB200} & \texttt{greedy\_vertex} & 70839 & 78826.1 & 88908 & 0.232368 & 291703 & 253942 \\
+\texttt{kroB200} & \texttt{steepest\_edge} & 38556 & 43203.3 & 48639 & 1.36221 & 313027 & 291400 \\
+\texttt{kroB200} & \texttt{steepest\_vertex} & 67856 & 78534 & 90919 & 2.35443 & 280540 & 254883 \\
+\texttt{kroB200} & \texttt{random} & 295224 & 324648 & 351050 & 2.35485 & 38466 & 8461.69 \\
 \hline
 \end{tabular}
-\caption{Wyniki dla \texttt{kroB200} z algorytmem \texttt{randomstart}}\label{tab:table3}
+\caption{Wyniki dla \texttt{kroB200} z algorytmem \texttt{randomstart}}
 \end{table}
 
 % Tabela 4: kroB200.tsp z split_paths_regret_TSP
 \begin{table}[ht]
 \centering
-\begin{tabular}{|l|l|l|r|r|r|r|r|}
+\begin{tabular}{|l|l|r|r|r|r|r|}
 \hline
-\textbf{Instance} & \textbf{Algorytm} & \textbf{Start Alg.} & \textbf{Best} & \textbf{Avg} & \textbf{Worst} & \textbf{Best Diff} & \textbf{Avg Diff} \\
+\textbf{Instance} & \textbf{Algorytm} & \textbf{Best} & \textbf{Avg} & \textbf{Worst} & \textbf{Avg Time} & \textbf{Best Diff} & \textbf{Avg Diff} \\
 \hline
-\texttt{kroB200} & \texttt{traverse\_greedy\_edge} & \texttt{nasz algorytm} & 31009 & 33192.1 & 36480 & 3629 & 501.29 \\
-\texttt{kroB200} & \texttt{traverse\_greedy\_vertex} & \texttt{nasz algorytm} & 31178 & 33141.9 & 36479 & 2879 & 330.03 \\
-\texttt{kroB200} & \texttt{traverse\_steepest\_edge} & \texttt{nasz algorytm} & 31133 & 32820.3 & 36479 & 4046 & 495.55 \\
-\texttt{kroB200} & \texttt{traverse\_steepest\_vertex} & \texttt{nasz algorytm} & 31368 & 33197.1 & 36010 & 2879 & 254.42 \\
-\texttt{kroB200} & \texttt{traverse\_random} & \texttt{nasz algorytm} & 31526 & 33517.7 & 36555 & 0 & 0 \\
+\texttt{kroB200} & \texttt{greedy\_edge} & 31009 & 33192.1 & 36480 & 0.0174221 & 3629 & 501.29 \\
+\texttt{kroB200} & \texttt{greedy\_vertex} & 31178 & 33141.9 & 36479 & 0.0225539 & 2879 & 330.03 \\
+\texttt{kroB200} & \texttt{steepest\_edge} & 31133 & 32820.3 & 36479 & 0.0346969 & 4046 & 495.55 \\
+\texttt{kroB200} & \texttt{steepest\_vertex} & 31368 & 33197.1 & 36010 & 0.0385854 & 2879 & 254.42 \\
+\texttt{kroB200} & \texttt{random} & 31526 & 33517.7 & 36555 & 2.35449 & 0 & 0 \\
 \hline
 \end{tabular}
-\caption{Wyniki dla \texttt{kroB200} z naszym algorytmem}\label{tab:table4}
+\caption{Wyniki dla \texttt{kroB200} z naszym algorytmem}
 \end{table}
+
+
 
 
 
