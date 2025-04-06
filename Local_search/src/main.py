@@ -66,7 +66,7 @@ def use_local_algo(algo, distances, starting_algo, random_time_limiter, n=100):
         worst_time = max(worst_time, elapsed_time)
         best_diff = max(best_diff, diff)
 
-    return best_score, total_score / n, worst_score, best_solution, best_time, elapsed_time / n, worst_time, best_diff, total_diff / n
+    return best_score, total_score / n, worst_score, best_solution, best_time, total_time / n, worst_time, best_diff, total_diff / n
 
 
 if __name__ == '__main__':
