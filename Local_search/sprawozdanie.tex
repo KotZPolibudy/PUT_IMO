@@ -57,7 +57,46 @@ Drugi z nich natomiast, to nasz własny algorytm (nie zaproponowany w zadaniu) k
 
 \section{Opisy algorytmów}\label{sec:opisy-alg}
 
-\subsection{Zachłanny}\label{subsec:zachanny}
+\subsection{Opisy dostępnych ruchów}
+
+\subsubsection{Obliczanie zmiany kosztu przy zamianie wierzchołków}
+
+Dla dwóch pozycji $i$ i $j$ w cyklu:
+\begin{enumerate}
+    \item Jeśli $i$ i $j$ są sąsiadami:
+    \begin{enumerate}
+        \item Wyznacz wierzchołki poprzedzające i następujące po parze $(i, j)$.
+        \item Oblicz sumę długości krawędzi przed i po zamianie miejscami $i$ i $j$.
+    \end{enumerate}
+    \item W przeciwnym wypadku:
+    \begin{enumerate}
+        \item Wyznacz wierzchołki poprzedzające i następujące po $i$ i po $j$.
+        \item Oblicz sumę długości czterech krawędzi: przed i po zamianie $i$ i $j$.
+    \end{enumerate}
+    \item Zwróć różnicę: \textit{nowy koszt} $-$ \textit{stary koszt}.
+\end{enumerate}
+
+\subsubsection{Obliczanie zmiany kosztu przy zamianie krawędzi}
+
+Dla dwóch pozycji $i$ i $j$ w cyklu:
+\begin{enumerate}
+    \begin{enumerate}
+        \item Wyznacz wierzchołki poprzedzające i następujące po $i$ i po $j$.
+        \item Oblicz sumę długości krawędzi: przed zamianą $i$ i $j$.
+        \begin{enumerate}
+            \item długość $i-1 -> i$ + długość $j -> j+1$
+        \end{enumerate}
+        \item Oblicz sumę długości po zamianie krawędzi:
+        \begin{enumerate}
+            \item długość $i-1 -> j-1$ + długość $i -> j$
+        \end{enumerate}
+    \end{enumerate}
+    \item Zwróć różnicę: \textit{nowy koszt} $-$ \textit{stary koszt}.
+\end{enumerate}
+
+\subsecion{Algorytmy}
+
+\subsubsection{Zachłanny}\label{subsec:zachanny}
 
 \begin{enumerate}
     \item Dla każdego z dwóch cykli:
@@ -89,7 +128,7 @@ Drugi z nich natomiast, to nasz własny algorytm (nie zaproponowany w zadaniu) k
 \end{enumerate}
 
 
-\subsection{Steepest}\label{subsec:steepest}
+\subsubsection{Steepest}\label{subsec:steepest}
 
 \begin{enumerate}
   \item Dopóki możliwa jest poprawa:
@@ -103,6 +142,23 @@ Drugi z nich natomiast, to nasz własny algorytm (nie zaproponowany w zadaniu) k
     \item Wprowadź ją do odpowiedniej ścieżki lub ścieżek.
   \end{enumerate}
   \item Zwróć ulepszone ścieżki.
+\end{enumerate}
+
+\subsubsection{Random Traverse}
+
+\begin{enumerate}
+    \item Zainicjuj wartość rozwiązania jako 0.
+    \item Dopóki czas przetwarzania jest mniejszy niż limit:
+    \begin{enumerate}
+        \item Wybierz losowy ruch z całej puli dostępnych ruchów.
+        \item Oblicz zmianę funkcji celu dla tego ruchu.
+        \item Wykonaj ruch i dodaj zmianę do ogólnej wartości rozwiązania.
+        \item Jeśli wartość rozwiązania jest obecnie najlepsza:
+        \begin{enumerate}
+            \item Zapisz rozwiązanie jako najlepszego
+        \end{enumerate}
+    \end{enumerate}
+    \item Po upływie czasu zwróć najlepsze znalezione rozwiązanie.
 \end{enumerate}
 
 
