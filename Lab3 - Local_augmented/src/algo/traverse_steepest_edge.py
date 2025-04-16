@@ -16,7 +16,7 @@ def compute_score_change_shuffle(path1, path2, distances, i, j):
     return new_distance - old_distance
 
 
-def traverse_steepest_edge(starting_paths, distances, _):
+def traverse_steepest_edge(starting_paths, distances):
     path1 = starting_paths[0]
     path2 = starting_paths[1]
     n = len(path2)

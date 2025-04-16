@@ -107,7 +107,7 @@ if __name__ == '__main__':
 
             results.append(
                 [insta, algo_name, found_best, found_avg, found_worst, bt, avgt, wt, None, None])
-            save_path = f"../best_paths/{i}/{os.path.basename(algo_name.__name__)}.png"
+            save_path = f"../best_paths/{i}/{os.path.basename(algo_name)}.png"
             show_paths(data, *found_best_paths, save_path)
 
         for algorithm in local_algorithms:
@@ -118,7 +118,7 @@ if __name__ == '__main__':
 
             results.append(
                 [insta, algo_name, found_best, found_avg, found_worst, bt, avgt, wt, diff_best, diff_avg])
-            save_path = f"../best_paths/{i}/{os.path.basename(algo_name.__name__)}.png"
+            save_path = f"../best_paths/{i}/{os.path.basename(algo_name)}.png"
             show_paths(data, *found_best_paths, save_path)
 
     headers = ["Instance", "Algorytm", "Best", "Avg", "Worst", "Best Time", "Avg Time", "Worst Time", "Best Diff", "Avg Diff"]
