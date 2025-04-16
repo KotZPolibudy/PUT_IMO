@@ -6,6 +6,8 @@ from starters.randomstart import randomstart
 # algorithms
 from algo.split_regret import split_paths_regret_TSP
 from algo.traverse_steepest_edge import traverse_steepest_edge
+from algo.steepest_LM import steepest_LM
+from algo.steepest_kandydackie import steepest_kandydackie
 
 
 def use_randomstart(distances):
@@ -83,9 +85,12 @@ if __name__ == '__main__':
         ]
     construction_algorithms = [
         split_paths_regret_TSP,
+        # tu można dodać np. greedy cycle też z pierwszego, ale nasz był ofc lepszy
     ]
     local_algorithms = [
         traverse_steepest_edge,
+        steepest_LM,
+        steepest_kandydackie,
     ]
 
     results = []
@@ -120,6 +125,12 @@ if __name__ == '__main__':
                 [insta, algo_name, found_best, found_avg, found_worst, bt, avgt, wt, diff_best, diff_avg])
             save_path = f"../best_paths/{i}/{os.path.basename(algo_name)}.png"
             show_paths(data, *found_best_paths, save_path)
+
+        # for algorithm in other_algorithms:
+            # algo_name = algorithm.__name__
+            # print(f"==============={algo_name}===============")
+            # ... po prostu nasz algo z lokalnym przeszukiwaniem na sobie? - można dodać for fun, dla lepszego sprawka
+            # bo on mam wrażenie docenia takie własne eksperymenty
 
     headers = ["Instance", "Algorytm", "Best", "Avg", "Worst", "Best Time", "Avg Time", "Worst Time", "Best Diff", "Avg Diff"]
     print(tabulate(results, headers=headers, tablefmt="grid"))
