@@ -86,7 +86,7 @@ Używając takiej funkcji osobno na obu zbiorach wierzchołków uzyskujemy dwie 
 
 \begin{enumerate}
   \item Wygeneruj wszystkie możliwe modyfikacje ścieżek
-  \item Zainicjuj listę ruchów przynoszących poprawę
+  \item Zainicjuj listę ruchów przynoszących poprawę i posortuj ją względem poprawy.
   \item Dopóki są ruchy przynoszące poprawę na liście:
   \begin{enumerate}
       \item Sprawdź czy ruch jest aplikowalny:
@@ -119,13 +119,14 @@ Zaktualizowanie listy LM:
 \subsubsection{Steepest wykorzystujący ruchy kandydackie}
 
 \begin{enumerate}
+  \item Stwórz listy k najbliższych wierzchołków, dla każdego wierzchołka (k=parametr)
   \item Dopóki możliwa jest poprawa:
   \begin{enumerate}
     \item Przeszukaj możliwe modyfikacje ścieżek:
     \begin{itemize}
       \item wszystkie wymiany wierzchołków między ścieżkami.
       \item zmiany lokalne w jednej ścieżce(zamiana dwóch wierzchołków lub odwrócenie fragmentu),
-      \item tylko z listy ruchów kandydackich (10 najbliższychwierzchołków, dla każdego wierzchołka)
+      \item tylko z listy ruchów kandydackich (k najbliższych wierzchołków, dla każdego wierzchołka)
     \end{itemize}
     \item Wybierz modyfikację dającą największą poprawę.
     \item Wprowadź ją do odpowiedniej ścieżki lub ścieżek.
