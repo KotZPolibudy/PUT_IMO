@@ -10,6 +10,7 @@
 \usepackage{hyperref}
 \usepackage{cleveref}
 \usepackage{subfigure}
+\usepackage{multirow}
 
 \title{Zadanie 3. Wykorzystanie ocen ruchów z poprzednich iteracji i ruchów
 kandydackich w lokalnym przeszukiwaniu}
@@ -30,14 +31,54 @@ Dla porównania uwzględniamy również najlepszą heurystykę konstrukcyjną z 
 
 \section{Opisy algorytmów}\label{sec:opisy-alg}
 
-# todo opisy
-# todo pseudokody
+% todo opisy
+% todo pseudokody
 
 \section{Wyniki}\label{sec:wyniki}
 
 \subsection{Tabela wynikowa}\label{subsec:tabela-wynikowa}
 
-# todo tabelki
+\begin{table}[ht]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|c||c|c|c||c|c|c||c|c|}
+\hline
+\textbf{Algorytm} & \textbf{Best} & \textbf{Avg} & \textbf{Worst} & \textbf{Best Time} & \textbf{Avg Time} & \textbf{Worst Time} & \textbf{Best Diff} & \textbf{Avg Diff} \\
+\hline
+\texttt{split\_paths\_regret\_TSP} & 30426 & 32893 & 36854 & 0.0943059 & 0.105313 & 0.206992 & & \\
+\hline
+\texttt{traverse\_steepest\_edge} & 35949 & 38818.8 & 41812 & 3.70818 & 4.1397 & 4.53379 & 325405 & 301537 \\
+\hline
+\texttt{steepest\_LM} & 34643 & 38673 & 41570 & 1.02937 & 1.30407 & 1.92433 & 327271 & 301518 \\
+\hline
+\texttt{steepest\_kandydackie} & 36656 & 39723.4 & 43659 & 0.889616 & 1.04703 & 1.90562 & 323577 & 298848 \\
+\hline
+\end{tabular}
+}
+\caption{Wyniki dla \texttt{kroA200} z naszym algorytmem}
+\end{table}
+
+\begin{table}[ht]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|c||c|c|c||c|c|c||c|c|}
+\hline
+\textbf{Algorytm} & \textbf{Best} & \textbf{Avg} & \textbf{Worst} & \textbf{Best Time} & \textbf{Avg Time} & \textbf{Worst Time} & \textbf{Best Diff} & \textbf{Avg Diff} \\
+\hline
+\texttt{split\_paths\_regret\_TSP} & 31218 & 33102.7 & 36913 & 0.0939048 & 0.0999451 & 0.131889 & & \\
+\hline
+\texttt{traverse\_steepest\_edge} & 36556 & 38791.3 & 41839 & 3.94789 & 4.60979 & 6.5536 & 329070 & 293891 \\
+\hline
+\texttt{steepest\_LM} & 36309 & 38794.7 & 41938 & 0.97498 & 1.25639 & 1.55901 & 322191 & 293913 \\
+\hline
+\texttt{steepest\_kandydackie} & 37372 & 39808.4 & 41720 & 0.861845 & 0.965179 & 1.08236 & 325756 & 292558 \\
+\hline
+\end{tabular}
+}
+\caption{Wyniki dla \texttt{kroB200} z naszym algorytmem}
+\end{table}
+
+
 
 \subsection{Wizualizacja wyników}\label{subsec:wizualizacja-wynikow}
 
