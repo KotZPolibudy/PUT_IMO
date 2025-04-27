@@ -31,6 +31,55 @@ Dla porównania uwzględniamy również najlepszą heurystykę konstrukcyjną z 
 
 \section{Opisy algorytmów}\label{sec:opisy-alg}
 
+\subsection{Te same co w poprzednich sprawozdaniach}\label{subsec:te-same-co-w-poprzednich-sprawozdaniach}
+
+\subsubsection{Steepest}\label{subsec:steepest}
+
+\begin{enumerate}
+  \item Dopóki możliwa jest poprawa:
+  \begin{enumerate}
+    \item Przeszukaj wszystkie możliwe modyfikacje ścieżek:
+    \begin{itemize}
+      \item zmiany lokalne w jednej ścieżce (zamiana dwóch wierzchołków lub odwrócenie fragmentu),
+      \item wymiany wierzchołków między ścieżkami.
+    \end{itemize}
+    \item Wybierz modyfikację dającą największą poprawę.
+    \item Wprowadź ją do odpowiedniej ścieżki lub ścieżek.
+  \end{enumerate}
+  \item Zwróć ulepszone ścieżki.
+\end{enumerate}
+
+
+\subsubsection{Nasz własny algorytm}\label{subsec:nasz-wasny-algorytm}
+
+Nasza heurystyka konstrukcyjna cechuje się podejściem zachłannym, ale wykorzystuje pewną wiedzę dziedzinową,
+a mianowicie to, że znacznie lepsze wyniki da się uzyskać kiedy wpierw dobierze się mądry podział wierzchołków startowych.
+
+\begin{enumerate}
+    \item Utworzenie listy pozostałych wierzchołków (wszystkie możliwe, poza startowymi)
+    \item Utworzenie dwóch list zawierających odpowiednio dystanse każdego wierzchołka do pierwszego i do drugiego wierzchołka startowego
+    \item Sortowanie utworzonych uprzednio list dystansów wierzchołków
+    \item Aż do przydzielenia wszystkich wierzchołków z listy pozostałych wierzchołków wykonuje:
+    \item Zmianę decyzji do którego zestawu wierzchołków obecnie będzie przydzielać wierzchołek (aby robić to naprzemiennie)
+    \item Wyszukuje pierwszy wierzchołek na liście dystansów który nie został jeszcze przydzielony do żadnego zestawu i przydziela go tam
+\end{enumerate}
+
+W skutek zastosowania takiego przydziału uzyskujemy dwa równo-liczne zbiory, oraz zapewniamy że gdyby ilość badanych wierzchołków była nieparzysta, to zbiory będą różnić się długością najwyżej o 1.
+
+Następnie wykorzystujemy tradycyjny algorytm rozbudowy cyklu w oparciu o dwużal, osobno na obu listach.
+Wygląda on następująco:
+
+\begin{enumerate}
+    \item Algorytm zaczyna od ścieżki zawierającej wierzchołek startowy podwójnie
+    \item Dopóki w ścieżce nie znajdują sie wszystkie wierzchołki z zadanego mu zestawu powtarza:
+    \item Dla każdego nieodwiedzonego wierzchołka oblicza koszty jego wstawienia
+    \item Następnie oblicza żal (dwużal) dla danego wierzchołka
+    \item Rozbudowuje cykl o wierzchołek z największym obliczonym żalem i zaznacza go jako odwiedzonego
+    \item Zwraca ścieżkę
+\end{enumerate}
+
+Używając takiej funkcji osobno na obu zbiorach wierzchołków uzyskujemy dwie ścieżki i zwracamy do programu głównego.
+
 % todo opisy
 % todo pseudokody
 
@@ -55,7 +104,7 @@ Dla porównania uwzględniamy również najlepszą heurystykę konstrukcyjną z 
 \hline
 \end{tabular}
 }
-\caption{Wyniki dla \texttt{kroA200} z naszym algorytmem}
+\caption{Wyniki dla \texttt{kroA200}}
 \end{table}
 
 \begin{table}[ht]
@@ -75,7 +124,7 @@ Dla porównania uwzględniamy również najlepszą heurystykę konstrukcyjną z 
 \hline
 \end{tabular}
 }
-\caption{Wyniki dla \texttt{kroB200} z naszym algorytmem}
+\caption{Wyniki dla \texttt{kroB200}}
 \end{table}
 
 
