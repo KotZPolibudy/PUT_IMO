@@ -11,6 +11,7 @@
 \usepackage{cleveref}
 \usepackage{subfigure}
 \usepackage{multirow}
+\usepackage{memoir}
 
 \title{Zadanie 3. Wykorzystanie ocen ruchów z poprzednich iteracji i ruchów
 kandydackich w lokalnym przeszukiwaniu}
@@ -50,7 +51,7 @@ Dla porównania uwzględniamy również najlepszą heurystykę konstrukcyjną z 
 \end{enumerate}
 
 
-\subsubsection{Nasz własny algorytm}\label{subsec:nasz-wasny-algorytm}
+\subsubsection{Nasz własny algorytm}\label{subsubsec:nasz-wasny-algorytm}
 
 Nasza heurystyka konstrukcyjna cechuje się podejściem zachłannym, ale wykorzystuje pewną wiedzę dziedzinową,
 a mianowicie to, że znacznie lepsze wyniki da się uzyskać kiedy wpierw dobierze się mądry podział wierzchołków startowych.
@@ -80,8 +81,52 @@ Wygląda on następująco:
 
 Używając takiej funkcji osobno na obu zbiorach wierzchołków uzyskujemy dwie ścieżki i zwracamy do programu głównego.
 
-% todo opisy
-% todo pseudokody
+\subsection{Nowe pseudokody}\label{subsec:nowe-pseudokody}
+
+\subsubsection{Steepest wykorzystujący listę ruchów z poprzednich iteracji}
+
+# TODO # TODO # TODO
+
+
+\subsubsection{Steepest wykorzystujący ruchy kandydackie}
+
+%% Tu zostało promptowane perplexity, tyle wypluło
+\begin{enumerate}
+\item Dopóki możliwa jest poprawa:
+\begin{enumerate}
+\item Przeszukaj wszystkie możliwe modyfikacje:
+\begin{itemize}
+    \item \textbf{Zamiana między ścieżkami}:
+    \begin{itemize}
+        \item Dla każdej pary wierzchołków z różnych ścieżek
+        \item Rozważ tylko wierzchołki będące kandydatami (z listy \textit{candidate_edges})
+        \item Oblicz zmianę kosztu po zamianie wierzchołków
+    \end{itemize}
+
+  \item \textbf{Modyfikacje wewnątrz ścieżki}:
+      \begin{itemize}
+        \item Dla każdej pary wierzchołków w ścieżce:
+        \begin{enumerate}
+          \item Sprawdź możliwość odwrócenia fragmentu między wierzchołkami
+          \item Oblicz zmianę kosztu dla każdej operacji
+        \end{enumerate}
+      \end{itemize}
+    \end{itemize}
+
+\item Wybierz modyfikację dającą największą poprawę (najmniejszy koszt)
+
+\item Wprowadź zmianę:
+\begin{itemize}
+  \item Jeśli zamiana między ścieżkami - zamień odpowiednie wierzchołki
+  \item Jeśli modyfikacja wewnętrzna - odwróć odpowiedni fragment ścieżki
+\end{itemize}
+
+\item Zaktualizuj całkowity koszt rozwiązania
+\end{enumerate}
+
+\item Zwróć ulepszone ścieżki
+\end{enumerate}
+
 
 \section{Wyniki}\label{sec:wyniki}
 
