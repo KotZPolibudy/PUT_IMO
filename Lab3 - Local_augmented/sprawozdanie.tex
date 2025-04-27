@@ -84,48 +84,54 @@ Używając takiej funkcji osobno na obu zbiorach wierzchołków uzyskujemy dwie 
 
 \subsubsection{Steepest wykorzystujący listę ruchów z poprzednich iteracji}
 
-% # TODO # TODO # TODO
+\begin{enumerate}
+  \item Wygeneruj wszystkie możliwe modyfikacje ścieżek
+  \item Zainicjuj listę ruchów przynoszących poprawę
+  \item Dopóki są ruchy przynoszące poprawę na liście:
+  \begin{enumerate}
+      \item Sprawdź czy ruch jest aplikowalny:
+      \item jeśli krawędzie potrzebne do wykonania ruchu nie istnieją, usuń go z listy
+      \item jeśli krawędzie istnieją, ale są w przeciwnym kierunku, pomiń ten ruch
+      \item jeśli ruch jest aplikowalny, wykonaj go
+      \item Zaktualizuj listę LM (pseudokod poniżej)
+  \end{enumerate}
+  \item Zwróć ulepszone ścieżki.
+\end{enumerate}
+
+
+Zaktualizowanie listy LM:
+\begin{enumerate}
+  \item Określ zbiory wierzchołków i krawędzi na które miał wpływ ostatni ruch
+  \item Dla każdego ruchu w liście LM:
+  \begin{enumerate}
+      \item Sprawdź czy ruch operuje na wierzchołkach lub krawędziach zmienionych ostatnim ruchem:
+      \item jeśli tak, usuń ten ruch z listy
+      \item jeśli nie, pozostaw na liście
+  \end{enumerate}
+  \item Wygeneruj nowo dostępne ruchy na podstawie zbiorów zmienionych wierzchołków oraz nowych krawędzi
+    \item dodaj nowe ruchy(polepszające rozwiązanie) wraz z ich poprawami do listy LM
+    \item posortuj LM względem ich wartości poprawy rozwiązania
+    \item Zwróć posortowaną listę
+
+\end{enumerate}
 
 
 \subsubsection{Steepest wykorzystujący ruchy kandydackie}
 
-%% Tu zostało promptowane perplexity, tyle wypluło
 \begin{enumerate}
-\item Dopóki możliwa jest poprawa:
-\begin{enumerate}
-\item Przeszukaj wszystkie możliwe modyfikacje:
-\begin{itemize}
-    \item \textbf{Zamiana między ścieżkami}:
+  \item Dopóki możliwa jest poprawa:
+  \begin{enumerate}
+    \item Przeszukaj możliwe modyfikacje ścieżek:
     \begin{itemize}
-        \item Dla każdej pary wierzchołków z różnych ścieżek
-        \item Rozważ tylko wierzchołki będące kandydatami (z listy \textit{candidate\_edges})
-        \item Oblicz zmianę kosztu po zamianie wierzchołków
+      \item wszystkie wymiany wierzchołków między ścieżkami.
+      \item zmiany lokalne w jednej ścieżce(zamiana dwóch wierzchołków lub odwrócenie fragmentu),
+      \item tylko z listy ruchów kandydackich (10 najbliższychwierzchołków, dla każdego wierzchołka)
     \end{itemize}
-
-  \item \textbf{Modyfikacje wewnątrz ścieżki}:
-      \begin{itemize}
-        \item Dla każdej pary wierzchołków w ścieżce:
-        \begin{enumerate}
-          \item Sprawdź możliwość odwrócenia fragmentu między wierzchołkami
-          \item Oblicz zmianę kosztu dla każdej operacji
-        \end{enumerate}
-      \end{itemize}
-    \end{itemize}
-
-\item Wybierz modyfikację dającą największą poprawę (najmniejszy koszt)
-
-\item Wprowadź zmianę:
-\begin{itemize}
-  \item Jeśli zamiana między ścieżkami - zamień odpowiednie wierzchołki
-  \item Jeśli modyfikacja wewnętrzna - odwróć odpowiedni fragment ścieżki
-\end{itemize}
-
-\item Zaktualizuj całkowity koszt rozwiązania
+    \item Wybierz modyfikację dającą największą poprawę.
+    \item Wprowadź ją do odpowiedniej ścieżki lub ścieżek.
+  \end{enumerate}
+  \item Zwróć ulepszone ścieżki.
 \end{enumerate}
-
-\item Zwróć ulepszone ścieżki
-\end{enumerate}
-
 
 \section{Wyniki}\label{sec:wyniki}
 
