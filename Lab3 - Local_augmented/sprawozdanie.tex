@@ -85,7 +85,7 @@ Używając takiej funkcji osobno na obu zbiorach wierzchołków uzyskujemy dwie 
 \subsubsection{Steepest wykorzystujący listę ruchów z poprzednich iteracji}
 
 \begin{enumerate}
-  \item Wygeneruj wszystkie możliwe modyfikacje ścieżek
+  \item Wygeneruj wszystkie możliwe modyfikacje ścieżek.
   \item Zainicjuj listę ruchów przynoszących poprawę i posortuj ją względem poprawy.
   \item Dopóki są ruchy przynoszące poprawę na liście:
   \begin{enumerate}
@@ -105,13 +105,13 @@ Zaktualizowanie listy LM:
   \item Dla każdego ruchu w liście LM:
   \begin{enumerate}
       \item Sprawdź czy ruch operuje na wierzchołkach lub krawędziach zmienionych ostatnim ruchem:
-      \item jeśli tak, usuń ten ruch z listy
-      \item jeśli nie, pozostaw na liście
+      \item jeśli tak, usuń ten ruch z listy.
+      \item jeśli nie, pozostaw na liście.
   \end{enumerate}
   \item Wygeneruj nowo dostępne ruchy na podstawie zbiorów zmienionych wierzchołków oraz nowych krawędzi
-    \item dodaj nowe ruchy(polepszające rozwiązanie) wraz z ich poprawami do listy LM
-    \item posortuj LM względem ich wartości poprawy rozwiązania
-    \item Zwróć posortowaną listę
+    \item Dodaj nowe ruchy(polepszające rozwiązanie) wraz z ich poprawami do listy LM
+    \item Posortuj LM względem ich wartości poprawy rozwiązania
+    \item Zwróć posortowaną listę.
 
 \end{enumerate}
 
