@@ -7,6 +7,7 @@ from starters.randomstart import randomstart
 from algo.MSLS import MSLS
 from algo.ILS import ILS
 from algo.LNS import LNS
+from algo.LNS_no_LS import LNS_no_LS
 
 
 def use_randomstart(distances):
@@ -58,7 +59,6 @@ def use_local_algo(algo, distances, time_limiter=None, n=10):
 
     return best_score, total_score / n, worst_score, best_solution, best_time, total_time / n, worst_time, best_diff, total_diff / n, all_num_perturbations / n
 
-
 if __name__ == '__main__':
     instances = [
         '../data/kroA200.tsp',
@@ -68,6 +68,7 @@ if __name__ == '__main__':
         MSLS,
         ILS,
         LNS,
+        LNS_no_LS,
     ]
 
     time_limiter = None
@@ -88,7 +89,8 @@ if __name__ == '__main__':
             print(f"==============={algo_name}===============")
             found_best, found_avg, found_worst, found_best_paths, bt, avgt, wt, diff_best, diff_avg, pert_avg = use_local_algo(
                 algorithm, distances, time_limiter)
-            time_limiter = avgt
+            if algo_name == "MSLS":
+                time_limiter = avgt
 
             results.append(
                 [insta, algo_name, found_best, found_avg, found_worst, bt, avgt, wt, diff_best, diff_avg, "-" if pert_avg == 0 else pert_avg])
