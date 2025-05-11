@@ -120,3 +120,32 @@ def LNS(starting_paths, distances, time_limit, if_LS=True):
         num_perturbations += 1
 
     return [best_path1, best_path2, num_perturbations]
+
+
+def LNS_bez(starting_paths, distances, time_limit, if_LS=False):
+    path1, path2 = local_LM(starting_paths, distances)
+    cost = summary_cost(path1, path2, distances)
+
+    best_path1 = path1.copy()
+    best_path2 = path2.copy()
+    best_cost = cost
+
+    num_perturbations = 0
+    start_time = time.time()
+
+    while time.time() - start_time < time_limit:
+        y_path1, y_path2 = best_path1.copy(), best_path2.copy()
+        y_path1, y_path2 = destroy_repair(y_path1, y_path2, distances)
+        if if_LS:
+            new_starting_paths = [y_path1, y_path2]
+            y_path1, y_path2 = local_LM(new_starting_paths, distances)
+        y_cost = summary_cost(y_path1, y_path2, distances)
+
+        if y_cost < best_cost:
+            best_path1 = y_path1
+            best_path2 = y_path2
+            best_cost = y_cost
+
+        num_perturbations += 1
+
+    return [best_path1, best_path2, num_perturbations]

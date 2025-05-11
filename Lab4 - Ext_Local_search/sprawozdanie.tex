@@ -134,7 +134,7 @@ Porównujemy wersję bazową, znaną z poprzedniego eksperymentu z tymi trzema r
     \item Wykonaj analogiczną procedurę, jak kroki 3--5, ale dla krawędzi z cykl2
     \item Utwórz region3, jako losowo wybrany węzeł i jego sąsiedztwo
     \item Utwórz listę do\_usuniecia jako sumę zbiorów region1, region2 i region3
-    \item oblicz maksymalną ilość elementów do usunięcia jako $$\left\lfloor \text{destroy\_frac} \cdot n\right\rfloor$$
+    \item oblicz maksymalną ilość elementów do usunięcia jako \[\left\lfloor \text{destroy\_frac} \cdot n\right\rfloor\]
     \item Jeśli lista do\_usuniecia zawiera więcej elementów niż obliczona ilość, losowo usuń nadmiarowe wierzchołki
     \item Usuń wierzchołki obecne na liście do\_usuniecia z cykl1 oraz cykl2
     \item Dla każdego wierzchołka na liście do\_usuniecia:
@@ -163,6 +163,8 @@ Porównujemy wersję bazową, znaną z poprzedniego eksperymentu z tymi trzema r
 \hline
 \texttt{LNS} & 29690 & 30559.4 & 32006 & 272.054 & 272.242 & 272.595 & 5714.6 \\
 \hline
+\texttt{LNS bez LS} & 30980 & 31801.6 & 33356 & 272.005 & 272.142 & 272.295 & 35672.0 \\
+\hline
 \end{tabular}
 }
 \caption{Wyniki dla \texttt{kroA200}}\label{tab:table}
@@ -182,6 +184,8 @@ Porównujemy wersję bazową, znaną z poprzedniego eksperymentu z tymi trzema r
 \hline
 \texttt{LNS} & 30092 & 30770.9 & 31762 & 282.524 & 282.865 & 283.275 & 5768.0 \\
 \hline
+\texttt{LNS bez LS} & 30980 & 31801.6 & 33356 & 272.005 & 272.142 & 272.295 & 35672.0 \\
+\hline
 \end{tabular}
 }
 \caption{Wyniki dla \texttt{kroB200}}\label{tab:table2}
@@ -189,15 +193,81 @@ Porównujemy wersję bazową, znaną z poprzedniego eksperymentu z tymi trzema r
 
 \subsection{Wizualizacja wyników}\label{subsec:wizualizacja-wynikow}
 
-TODO
+\subsubsection{ILS}
+
+\begin{figure}[H]
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroA200/ILS}
+        \caption{kroA200, losowy start}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroB200/ILS}
+        \caption{kroB200, losowy start}
+    \end{minipage}\label{fig:figure1}
+\end{figure}
+
+\subsubsection{MSLS}
+
+\begin{figure}[H]
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroA200/MSLS}
+        \caption{kroA200, losowy start}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroB200/MSLS}
+        \caption{kroB200, losowy start}
+    \end{minipage}\label{fig:figure3}
+\end{figure}
+
+
+\subsubsection{LNS}
+
+\begin{figure}[H]
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroA200/LNS}
+        \caption{kroA200, losowy start}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroB200/LNS}
+        \caption{kroB200, losowy start}
+    \end{minipage}\label{fig:figure2}
+\end{figure}
+
+
+\subsubsection{LNS bez LS}
+
+\begin{figure}[H]
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroA200/LNS_bez}
+        \caption{kroA200, losowy start}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroB200/LNS_bez}
+        \caption{kroB200, losowy start}
+    \end{minipage}\label{fig:figure4}
+\end{figure}
 
 
 \section{Wnioski i analiza wyników}\label{sec:wnioski}
 
-TODO
+Najlepsze wyniki końcowe jakościowo osiągnęła metoda wykorzystująca Large Neighborhood Search (LNS) z lokalnym przeszukiwaniem (LS).
+Najgorsze natomiast wyniki były dla Multiple Start Local Search (MSLS), co było do przewidzenia, patrząc na wyniki zwykłego LS z poprzednich eksperymentów i to że jest to jedynie wielokrotne powtórzenie LS.
+LNS nie korzystajce z LS osiagnelo znacznie gorsze rezultaty pomimo znacznie wiekszej ilosci iteracji.
 
 \section{Link do repozytorium}\label{sec:link-do-repo}
 Kod źródłowy w repozytorium GitHub dostępny pod linkiem: \\
-\href{https://github.com/KotZPolibudy/PUT_IMO/tree/main/Lab3%20-%20Local_augmented}{Repozytorium}.
+\href{https://github.com/KotZPolibudy/PUT_IMO/tree/main/Lab4%20-%20Ext_Local_search}{Repozytorium}.
 
 \end{document}
