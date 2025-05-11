@@ -50,9 +50,71 @@ Porównujemy wersję bazową, znaną z poprzedniego eksperymentu z tymi trzema r
 
 \subsection{Iterated Local Search (ILS)}\label{subsec:ils}
 
+Główny algorytm:
+\begin{enumerate}
+    \item Wygeneruj losowe rozwiązanie początkowe
+    \item Wykonaj lokalne przeszukiwanie
+    \item zapisz obecnie znalezione rozwiazanie jako najlepsze
+    \item zapisz koszt tego rozwiazania jako obecnie najlepszy
+    \item Dopóki czas wykonywania < limit\_czasu:
+        \begin{enumerate}
+            \item Wykonaj funkcję Perturbacji* na obecnie najlepszym cyklu
+            \item Jeśli obecnie znalezione rozwiązanie ma mniejszy koszt niż obecnie najlepszy
+                \begin{enumerate}
+                    \item zapisz obecnie znalezione rozwiazanie jako najlepsze
+                    \item zapisz koszt tego rozwiazania jako obecnie najlepszy
+                \end{enumerate}
+        \end{enumerate}
+\end{enumerate}
+
+Funkcja Perturbacji:
+\begin{enumerate}
+    \item Parametry: cykl1, cykl2, ile\_zmian\_wierzcholkow, ile\_zmian\_krawedzi
+    \item dla i=1,2,\...,ile\_zmian\_wierzcholkow:
+        \begin{enumerate}
+            \item Zamień losowe wierzchołki między cyklami
+        \end{enumerate}
+
+    \item dla i=1,2,\...,ile\_zmian\_krawedzi:
+        \begin{enumerate}
+            \item Zamień losowo wybrane krawędzi w pierwszym cyklu
+            \item Zamień losowo wybrane krawędzi w drugim cyklu
+        \end{enumerate}
+    \item Zwróć cykl1, cykl2
+\end{enumerate}
 
 
 \subsection{Large neighborhood Search (LNS)}\label{subsec:lns}
+
+
+Główny algorytm:
+\begin{enumerate}
+    \item Wygeneruj losowe rozwiązanie początkowe
+    \item Wykonaj lokalne przeszukiwanie
+    \item zapisz obecnie znalezione rozwiazanie jako najlepsze
+    \item zapisz koszt tego rozwiazania jako obecnie najlepszy
+    \item Dopóki czas wykonywania < limit\_czasu:
+        \begin{enumerate}
+            \item Wykonaj funkcję destroy\_repair na obecnie najlepszym cyklu
+            \item Jeśli ustawiona jest flaga wykonaj\_LS:
+            \begin{enumerate}
+                \item Wykonaj lokalne przeszukiwanie na obecnym rozwiązaniu
+            \end{enumerate}
+            \item Oblicz koszt obecnego rozwiązania
+            \item Jeśli obecnie znalezione rozwiązanie ma mniejszy koszt niż obecnie najlepszy
+                \begin{enumerate}
+                    \item zapisz obecnie znalezione rozwiazanie jako najlepsze
+                    \item zapisz koszt tego rozwiazania jako obecnie najlepszy
+                \end{enumerate}
+        \end{enumerate}
+    \item Zwróć najlepsze rozwiązanie
+\end{enumerate}
+
+
+Funkcja destroy\_repair:
+\begin{enumerate}
+
+\end{enumerate}
 
 
 \section{Wyniki}\label{sec:wyniki}
