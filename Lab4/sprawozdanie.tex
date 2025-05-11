@@ -40,8 +40,8 @@ Porównujemy wersję bazową, znaną z poprzedniego eksperymentu z tymi trzema r
         \item Wykonaj lokalne przeszukiwanie
         \item Jeśli obecnie znalezione rozwiązanie ma mniejszy koszt niż obecnie najlepszy
         \begin{enumerate}
-            \item zapisz obecnie znalezione rozwiazanie jako najlepsze
-            \item zapisz koszt tego rozwiazania jako obecnie najlepszy
+            \item zapisz obecnie znalezione rozwiązanie jako najlepsze
+            \item zapisz koszt tego rozwiązania jako obecnie najlepszy
         \end{enumerate}
     \end{enumerate}
     \item Zwróć obecnie najlepsze rozwiązanie
@@ -50,32 +50,32 @@ Porównujemy wersję bazową, znaną z poprzedniego eksperymentu z tymi trzema r
 
 \subsection{Iterated Local Search (ILS)}\label{subsec:ils}
 
-Główny algorytm:
+\subsubsection{Główny algorytm}
 \begin{enumerate}
     \item Wygeneruj losowe rozwiązanie początkowe
     \item Wykonaj lokalne przeszukiwanie
-    \item zapisz obecnie znalezione rozwiazanie jako najlepsze
-    \item zapisz koszt tego rozwiazania jako obecnie najlepszy
+    \item zapisz obecnie znalezione rozwiązanie jako najlepsze
+    \item zapisz koszt tego rozwiązania jako obecnie najlepszy
     \item Dopóki czas wykonywania < limit\_czasu:
         \begin{enumerate}
-            \item Wykonaj funkcję Perturbacji* na obecnie najlepszym cyklu
+            \item Wykonaj funkcję Perturbacji* na obecnie najlepszym rozwiązaniu
             \item Jeśli obecnie znalezione rozwiązanie ma mniejszy koszt niż obecnie najlepszy
                 \begin{enumerate}
-                    \item zapisz obecnie znalezione rozwiazanie jako najlepsze
-                    \item zapisz koszt tego rozwiazania jako obecnie najlepszy
+                    \item zapisz obecnie znalezione rozwiązanie jako najlepsze
+                    \item zapisz koszt tego rozwiązania jako obecnie najlepszy
                 \end{enumerate}
         \end{enumerate}
 \end{enumerate}
 
-Funkcja Perturbacji:
+\subsubsection{Funkcja Perturbacji}
 \begin{enumerate}
-    \item Parametry: cykl1, cykl2, ile\_zmian\_wierzcholkow, ile\_zmian\_krawedzi
+    \item Parametry: cykl1, cykl2, ile\_zmian\_wierzcholkow, ile\_zmian\_krawędzi
     \item dla i=1,2,\...,ile\_zmian\_wierzcholkow:
         \begin{enumerate}
             \item Zamień losowe wierzchołki między cyklami
         \end{enumerate}
 
-    \item dla i=1,2,\...,ile\_zmian\_krawedzi:
+    \item dla i=1,2,\...,ile\_zmian\_krawędzi:
         \begin{enumerate}
             \item Zamień losowo wybrane krawędzi w pierwszym cyklu
             \item Zamień losowo wybrane krawędzi w drugim cyklu
@@ -87,12 +87,12 @@ Funkcja Perturbacji:
 \subsection{Large neighborhood Search (LNS)}\label{subsec:lns}
 
 
-Główny algorytm:
+\subsubsection{Główny algorytm}
 \begin{enumerate}
     \item Wygeneruj losowe rozwiązanie początkowe
     \item Wykonaj lokalne przeszukiwanie
-    \item zapisz obecnie znalezione rozwiazanie jako najlepsze
-    \item zapisz koszt tego rozwiazania jako obecnie najlepszy
+    \item zapisz obecnie znalezione rozwiązanie jako najlepsze
+    \item zapisz koszt tego rozwiązania jako obecnie najlepszy
     \item Dopóki czas wykonywania < limit\_czasu:
         \begin{enumerate}
             \item Wykonaj funkcję destroy\_repair na obecnie najlepszym cyklu
@@ -103,16 +103,45 @@ Główny algorytm:
             \item Oblicz koszt obecnego rozwiązania
             \item Jeśli obecnie znalezione rozwiązanie ma mniejszy koszt niż obecnie najlepszy
                 \begin{enumerate}
-                    \item zapisz obecnie znalezione rozwiazanie jako najlepsze
-                    \item zapisz koszt tego rozwiazania jako obecnie najlepszy
+                    \item zapisz obecnie znalezione rozwiązanie jako najlepsze
+                    \item zapisz koszt tego rozwiązania jako obecnie najlepszy
                 \end{enumerate}
         \end{enumerate}
     \item Zwróć najlepsze rozwiązanie
 \end{enumerate}
 
 
-Funkcja destroy\_repair:
+\subsubsection{Funkcja destroy-repair}
 \begin{enumerate}
+    \item Parametry: cykl1, cykl2, destroy\_frac, n (ilość wierzchołków)
+    \item Liczba wierzchołków na region oraz promień regionu:
+    \begin{gather*}
+        \text{nodes\_per\_region = }  \left\lfloor \text{destroy\_frac} \cdot (|cycle_1| + |cycle_2|) \div 3 \right\rfloor\\
+        \text{region\_size = } \max\left(1, \frac{\text{nodes per region} - 1}{2} \right)\\
+    \end{gather*}
+
+    \item
+
+    \item  Wybierz najdłuższą krawędź z cykl1, która jest blisko cykl2
+    \item jeśli znaleziono taką krawędź:
+    \begin{enumerate}
+        \item region1 = sąsiedztwo tej krawędzi o promieniu region\_size
+    \end{enumerate}
+    \item w przeciwnym wypadku:
+    \begin{enumerate}
+        \item region1 = sąsiedztwo tej krawędzi o promieniu region\_size
+    \end{enumerate}
+    \item Wykonaj analogiczną procedurę, jak kroki 3--5, ale dla krawędzi z cykl2
+    \item Utwórz region3, jako losowo wybrany węzeł i jego sąsiedztwo
+    \item Utwórz listę do\_usuniecia jako sumę zbiorów region1, region2 i region3
+    \item oblicz maksymalną ilość elementów do usunięcia jako $$\left\lfloor \text{destroy\_frac} \cdot n\right\rfloor$$
+    \item Jeśli lista do\_usuniecia zawiera więcej elementów niż obliczona ilość, losowo usuń nadmiarowe wierzchołki
+    \item Usuń wierzchołki obecne na liście do\_usuniecia z cykl1 oraz cykl2
+    \item Dla każdego wierzchołka na liście do\_usuniecia:
+    \begin{enumerate}
+        \item Znajdź najlepsze miejsce wstawienia w cykl1 lub cykl2, minimalizując wzrost kosztu
+        \item Wstaw wierzchołek w znalezione miejsce
+    \end{enumerate}
 
 \end{enumerate}
 
@@ -121,7 +150,42 @@ Funkcja destroy\_repair:
 
 \subsection{Tabela wynikowa}\label{subsec:tabela-wynikowa}
 
-TODO
+\begin{table}[ht]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|c||c|c|c||c|c|c||c|}
+\hline
+\textbf{Algorytm} & \textbf{Best} & \textbf{Avg} & \textbf{Worst} & \textbf{Best Time} & \textbf{Avg Time} & \textbf{Worst Time} & \textbf{Avg Perturbations} \\
+\hline
+\texttt{MSLS} & 34630 & 35375.7 & 35862 & 235.639 & 269.287 & 327.604 & - \\
+\hline
+\texttt{ILS} & 31016 & 31919.8 & 33193 & 270.753 & 270.851 & 270.946 & 4977.8 \\
+\hline
+\texttt{LNS} & 29690 & 30559.4 & 32006 & 272.054 & 272.242 & 272.595 & 5714.6 \\
+\hline
+\end{tabular}
+}
+\caption{Wyniki dla \texttt{kroA200}}\label{tab:table}
+\end{table}
+
+
+\begin{table}[ht]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|c||c|c|c||c|c|c||c|}
+\hline
+\textbf{Algorytm} & \textbf{Best} & \textbf{Avg} & \textbf{Worst} & \textbf{Best Time} & \textbf{Avg Time} & \textbf{Worst Time} & \textbf{Avg Perturbations} \\
+\hline
+\texttt{MSLS} & 34819 & 35501.6 & 36081 & 256.952 & 279.947 & 380.768 & - \\
+\hline
+\texttt{ILS} & 31475 & 32454.2 & 33343 & 281.034 & 281.280 & 281.655 & 6057.1 \\
+\hline
+\texttt{LNS} & 30092 & 30770.9 & 31762 & 282.524 & 282.865 & 283.275 & 5768.0 \\
+\hline
+\end{tabular}
+}
+\caption{Wyniki dla \texttt{kroB200}}\label{tab:table2}
+\end{table}
 
 \subsection{Wizualizacja wyników}\label{subsec:wizualizacja-wynikow}
 
