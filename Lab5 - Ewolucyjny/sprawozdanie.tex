@@ -25,6 +25,8 @@
 Celem zadania jest porównanie hybrydowego algorytmu z  i porównanie go z metodami
 MSLS, ILS i LNS z poprzedniego zadania.
 Opisy tych metod znajdują się w poprzednim sprawozdaniu.
+Dla porównania, w zestawieniach znajduje się też metoda heurystyczna z pierwszego sprawozdania, a mianowicie zachłanna rozbudowa cyklu,
+której to heurystyka jest wykorzystywana w rekonstrukcji zarówno w LNS jak i HAE.
 
 \section{Opisy algorytmów}\label{sec:opisy-alg}
 
@@ -110,6 +112,8 @@ Opisy tych metod znajdują się w poprzednim sprawozdaniu.
 \hline
 \texttt{LNS bez LS} & 30980 & 31801.6 & 33356 & 272.005 & 272.142 & 272.295 & 35672.0 \\
 \hline
+\texttt{Cycle Extension Greedy} & 35396 & 38319.41 & 39990 & - & - & - & -  \\
+\hline
 \texttt{HAE} &  31418 & 33897.3 & 36636 & 269.287 & 269.287 & 269.288 & 692612 \\
 \hline
 \texttt{HAE +M} & 30765 & 32818.3 & 34391 & 269.287 & 269.287 & 269.288 & 773693 \\
@@ -138,6 +142,8 @@ Opisy tych metod znajdują się w poprzednim sprawozdaniu.
 \texttt{LNS} & 30092 & 30770.9 & 31762 & 282.524 & 282.865 & 283.275 & 5768.0 \\
 \hline
 \texttt{LNS bez LS} & 30980 & 31801.6 & 33356 & 272.005 & 272.142 & 272.295 & 35672.0 \\
+\hline
+\texttt{Cycle Extension Greedy} & 35295 & 38455.17 & 40028 & - & - & - & -  \\
 \hline
 \texttt{HAE} & 32389 & 34070.3 & 34951 & 279.947 & 279.948 & 279.948 & 699911  \\
 \hline
@@ -219,6 +225,22 @@ Opisy tych metod znajdują się w poprzednim sprawozdaniu.
         \includegraphics[width=\linewidth]{best_paths/kroB200/LNS_no_LS}
         \caption{kroB200, losowy start}
     \end{minipage}\label{fig:figure4}
+\end{figure}
+
+\subsubsection{Zachłanna rozbudowa cyklu}
+
+\begin{figure}[H]
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroA200/Greedy_cycle}
+        \caption{kroA200, losowy start}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroB200/Greedy_cycle}
+        \caption{kroB200, losowy start}
+    \end{minipage}\label{fig:figure21}
 \end{figure}
 
 \subsubsection{HAE - bazowy}
