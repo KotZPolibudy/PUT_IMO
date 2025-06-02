@@ -1,0 +1,78 @@
+\documentclass[11pt]{article}
+
+\usepackage{amsmath}
+\usepackage[a4paper, margin=0.5in]{geometry}
+\usepackage{graphicx} % daj an 1in jak chcesz normalniejszy margines, ale kod mi się w linii nie mieści :P
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[polish]{babel}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{subfigure}
+
+\title{Zadanie 5. Hybrydowy Algorytm Ewolucyjny}
+\author{Oskar Kiliańczyk 151863 \& Wojciech Kot 151879}
+\date{}
+
+\begin{document}
+
+\maketitle
+\newpage
+
+\section{Opis zadania}\label{sec:opis-zadania}
+Zadanie polega na wygenerowaniu losowo 1000 optimów lokalnych, za pomocą zachłannej wersji przeszukiwania lokalnego,
+oraz bardzo dobrego rozwiązania za pomocą najlepszej do tej pory metody.
+Tą metodą powinna być własna metoda, której opracowanie również jest częścią tego zadania.
+Następnie dla każdego z lokalnych optimów należy obliczyć podobieństwo do rozwiązania referencyjnego oraz średnie podobieństwo do poozstałych optimów lokalnych ze zbioru, oraz współczynnik korelacji.
+Stosowane miary podobieństwa to:
+\begin{enumerate}
+    \item Liczba par wierzchołków przydzielonych w obu rozwiązaniach razem do jednego cyklu
+    \item Liczba wspólnych par krawędzi
+\end{enumerate}
+
+
+\section{Własna Metoda}\label{sec:wasna-metoda}
+
+\subsection{Pierwsza Heurystyka konstrukcyjna}\label{subsec:pierwsza-heurystyka-konstukcyjna}
+
+Już w ramach pierwszego sprawozdania zaimplementowaliśmy własną metodę, dlatego wykorzystamy ją tutaj w porównaniach.
+Dla przypomnienia oto jej pseudokod:
+
+\begin{enumerate}
+    \item Utworzenie listy pozostałych wierzchołków (wszystkie możliwe, poza startowymi)
+    \item Utworzenie dwóch list zawierających odpowiednio dystanse każdego wierzchołka do pierwszego i do drugiego wierzchołka startowego
+    \item Sortowanie utworzonych uprzednio list dystansów wierzchołków
+    \item Aż do przydzielenia wszystkich wierzchołków z listy pozostałych wierzchołków wykonuje:
+    \item Zmianę decyzji, do którego zestawu wierzchołków obecnie będzie przydzielać wierzchołek (aby robić to naprzemiennie)
+    \item Wyszukuje pierwszy wierzchołek na liście dystansów, który nie został jeszcze przydzielony do żadnego zestawu i przydziela go tam
+\end{enumerate}
+
+W skutek zastosowania takiego przydziału uzyskujemy dwa równo-liczne zbiory, oraz zapewniamy, że gdyby ilość badanych wierzchołków była nieparzysta, to zbiory będą różnić się długością najwyżej o 1.
+
+Następnie wykorzystujemy tradycyjny algorytm rozbudowy cyklu na podstawie dwużalu, osobno na obu listach.
+Wygląda on następująco:
+
+\begin{enumerate}
+    \item Algorytm zaczyna od ścieżki zawierającej wierzchołek startowy podwójnie
+    \item Dopóki w ścieżce nie znajdują sie wszystkie wierzchołki z zadanego mu zestawu powtarza:
+    \item Dla każdego nieodwiedzonego wierzchołka oblicza koszty jego wstawienia
+    \item Następnie oblicza żal (dwużal) dla danego wierzchołka
+    \item Rozbudowuje cykl o wierzchołek z największym obliczonym żalem i zaznacza go jako odwiedzonego
+    \item Zwraca ścieżkę
+\end{enumerate}
+
+\section{Testy globalnej wypukłości}\label{sec:testy-globalnej-wypukosci}
+
+
+\section{Wnioski i analiza wyników}\label{sec:wnioski}
+
+TODO
+Wnioski wnioseczki wnioskunie
+
+
+\section{Link do repozytorium}\label{sec:link-do-repo}
+Kod źródłowy w repozytorium GitHub dostępny pod linkiem: \\
+\href{https://github.com/KotZPolibudy/PUT_IMO}{Repozytorium}.
+
+\end{document}
