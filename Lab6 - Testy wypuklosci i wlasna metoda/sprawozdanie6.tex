@@ -34,7 +34,7 @@ Stosowane miary podobieństwa to:
 
 \section{Własna Metoda}\label{sec:wasna-metoda}
 
-\subsection{Pierwsza Heurystyka konstrukcyjna}\label{subsec:pierwsza-heurystyka-konstukcyjna}
+\subsection{Pierwsza heurystyka konstrukcyjna}\label{subsec:pierwsza-heurystyka-konstukcyjna}
 
 Już w ramach pierwszego sprawozdania zaimplementowaliśmy własną metodę, dlatego wykorzystamy ją tutaj w porównaniach.
 Dla przypomnienia oto jej pseudokod:
@@ -62,7 +62,27 @@ Wygląda on następująco:
     \item Zwraca ścieżkę
 \end{enumerate}
 
+\subsection{Ulepszenie naszej heurystyki konstrukcyjnej}\label{subsec:ulepszenie-naszej-heurystyki-konstrukcyjnej}
+
+TODO
+Ulepszenie poprzez lepszy podział
+(Trzeba wypróbować kilka, Kmeans, DBSCAN, etc.)
+
+\subsection{Finalna własna metoda}\label{subsec:finalna-wasna-metoda}
+
+TODO
+Finalnie zdecydowaliśmy się zastosować Large Neighbourhood Search
+
+
 \section{Testy globalnej wypukłości}\label{sec:testy-globalnej-wypukosci}
+
+Wygenerowaliśmy 1000 lokalnych optimów dla każdej z analizowanych instancji problemu, za pomocą lokalnego przeszukiwania w wersji zachłannej z losowych rozwiązań początkowych.
+Obliczyliśmy podobieństwa każdego lokalnego optimum do rozwiązania referencyjnego (bardzo dobrego) oraz średnie podobieństwo do pozostałych lokalnych optimów.
+Korzystamy z dwóch miar podobieństwa: Liczby par wierzchołków przydzielonych do tego samego cyklu w obu rozwiązaniach oraz z liczby wspólnych krawędzi w rozwiązaniach.
+
+\subsection{Wyniki dla instancji kroA200}\label{subsec:wyniki-dla-instancji-kroa200}
+
+\subsection{Wyniki dla instancji kroB200}\label{subsec:wyniki-dla-instancji-krob200}
 
 
 \section{Wnioski i analiza wyników}\label{sec:wnioski}

@@ -1,61 +1,78 @@
-import numpy as np
-from algo.HAE import run_single_instance
-import os
-from utils import read_data, measure_distances, summary_cost, show_paths
+import time
 from tabulate import tabulate
-
-def main_repeated_runs(distances, time_limiter=60, pop_size=20, use_local_search=True, use_mutation=False, mutation_rate=0.1, runs=10):
-    costs = []
-    times = []
-    iterations_list = []
-    best_overall = None
-    best_cost = float('inf')
-
-    for i in range(runs):
-        print(f"\nRun {i + 1}/{runs}")
-        best_solution, elapsed, iterations = run_single_instance(
-            distances, time_limiter, pop_size,
-            use_local_search, use_mutation, mutation_rate
-        )
-        cost = summary_cost(best_solution[0], best_solution[1], distances)
-        costs.append(cost)
-        times.append(elapsed)
-        iterations_list.append(iterations)
-
-        print(f"Cost: {cost:.2f} | Time: {elapsed:.2f}s | Iterations num: {iterations}")
-
-        if best_overall is None or cost < best_cost:
-            best_overall = best_solution
-            best_cost = cost
-
-    # # Statystyki
-    # print("\n   Statystyki po 10 uruchomieniach:")
-    # print(f"   ➤ Średni koszt:      {np.mean(costs):.2f}")
-    # print(f"   ➤ Min koszt:         {np.min(costs):.2f}")
-    # print(f"   ➤ Max koszt:         {np.max(costs):.2f}")
-    # print(f"   ➤ Średni czas:       {np.mean(times):.2f}s")
-    # print(f"   ➤ Min czas:          {np.min(times):.2f}s")
-    # print(f"   ➤ Max czas:          {np.max(times):.2f}s")
-    # print(f"   ➤ Średnia liczba iteracji HEA: {np.mean(iterations_list):.1f}")
-    # print(f"   ➤ Min iteracji:      {np.min(iterations_list)}")
-    # print(f"   ➤ Max iteracji:      {np.max(iterations_list)}")
-
-    return np.min(costs), np.mean(costs), np.max(costs), best_overall, np.min(times), np.mean(times), np.max(times), np.mean(iterations_list)
+from utils import *
+# starters
+from algo.randomstart import randomstart
+# algorithms
+from algo.MSLS import MSLS
+from algo.ILS import ILS
+from algo.LNS import LNS
+from algo.LNS_no_LS import LNS_no_LS
 
 
-if __name__ == "__main__":
+def use_randomstart(distances):
+    paths = randomstart(distances, choose_starting_nodes(data, distances))
+    cost = summary_cost(*paths, distances)
+    return paths, cost
+
+def use_local_algo(algo, distances, time_limiter=None, n=10):
+    best_score = float('inf')
+    worst_score = float('-inf')
+    total_score = 0
+    best_solution = None
+    total_time = 0
+    best_time = float('inf')
+    worst_time = float('-inf')
+    total_diff = 0
+    best_diff = 0
+    all_num_perturbations = 0
+
+    # do parallel here, please ;~;
+    for i in range(n):
+        print(f"Algo: {algo.__name__}, iteration: {i+1}")
+        start_time = time.time() #time.perf_counter()
+        start, starting_score = use_randomstart(distances)
+        if time_limiter is None:
+            solution = algo(start, distances)
+        else:
+            solution = algo(start, distances, time_limiter)
+        #elapsed_time = time.perf_counter() - start_time
+        elapsed_time = time.time() - start_time
+        if time_limiter is None:
+            path1, path2 = solution
+            num_perturbations = 0
+        else:
+            path1, path2, num_perturbations = solution
+        score = summary_cost(path1, path2, distances)
+        diff = starting_score - score
+        total_score += score
+        total_time += elapsed_time
+        total_diff += diff
+        all_num_perturbations += num_perturbations
+        if score < best_score:
+            best_score = score
+            best_solution = [path1, path2]
+        worst_score = max(worst_score, score)
+        best_time = min(best_time, elapsed_time)
+        worst_time = max(worst_time, elapsed_time)
+        best_diff = max(best_diff, diff)
+
+    return best_score, total_score / n, worst_score, best_solution, best_time, total_time / n, worst_time, best_diff, total_diff / n, all_num_perturbations / n
+
+if __name__ == '__main__':
     instances = [
         '../data/kroA200.tsp',
         '../data/kroB200.tsp'
     ]
+    local_algorithms = [
+        MSLS,
+        ILS,
+        LNS,
+        LNS_no_LS,
+    ]
+
     time_limiter = None
     results = []
-    flags = [
-        { "mutation": False, "local_search": False },
-        { "mutation": False, "local_search": True },
-        { "mutation": True, "local_search": False },
-        { "mutation": True, "local_search": True }
-    ]
     os.makedirs("../best_paths", exist_ok=True)
     for insta in instances:
         i = insta.split('/')[-1].split('.')[0]
@@ -66,23 +83,19 @@ if __name__ == "__main__":
         distances = measure_distances(data)
         i = insta.split('/')[-1].split('.')[0]
         print(f"=============================={insta}==============================")
-        time_limiter = 269.287 if i == 'kroA200' else 279.947 # wyniki dla poprzedniego sprawozdania, avg. czas MSLS
-        for flag in flags:
-            found_best, found_avg, found_worst, found_best_paths, bt, avgt, wt, iter_avg = main_repeated_runs(
-                distances=distances,
-                time_limiter=time_limiter,
-                pop_size=20,
-                use_local_search=flag["local_search"],
-                use_mutation=flag["mutation"],
-                mutation_rate=0.1,
-                runs=10
-            )
-            algo_name = "HAE" + ("+Mutation" if flag["mutation"] else "") + ("+LS" if flag["local_search"] else "")
+        time_limiter = None
+        for algorithm in local_algorithms:
+            algo_name = algorithm.__name__
+            print(f"==============={algo_name}===============")
+            found_best, found_avg, found_worst, found_best_paths, bt, avgt, wt, diff_best, diff_avg, pert_avg = use_local_algo(
+                algorithm, distances, time_limiter)
+            if algo_name == "MSLS":
+                time_limiter = avgt
+
             results.append(
-                [insta, algo_name, found_best, found_avg, found_worst, bt, avgt, wt, iter_avg]
-            )
+                [insta, algo_name, found_best, found_avg, found_worst, bt, avgt, wt, diff_best, diff_avg, "-" if pert_avg == 0 else pert_avg])
             save_path = f"../best_paths/{i}/{os.path.basename(algo_name)}.png"
             show_paths(data, *found_best_paths, save_path)
-    
-    headers = ["Instance", "Algorytm", "Best", "Avg", "Worst", "Best Time", "Avg Time", "Worst Time", "Avg Iterations Number"]
+
+    headers = ["Instance", "Algorytm", "Best", "Avg", "Worst", "Best Time", "Avg Time", "Worst Time", "Best Diff", "Avg Diff", "Avg Perturbations"]
     print(tabulate(results, headers=headers, tablefmt="grid"))
