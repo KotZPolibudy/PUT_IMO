@@ -3,6 +3,7 @@ from tabulate import tabulate
 from utils import *
 # starters
 from algo.randomstart import randomstart
+from algo.split_regret_starter import split_paths_regret_TSP
 # algorithms
 from algo.MSLS import MSLS
 from algo.ILS import ILS
@@ -14,6 +15,13 @@ def use_randomstart(distances):
     paths = randomstart(distances, choose_starting_nodes(data, distances))
     cost = summary_cost(*paths, distances)
     return paths, cost
+
+
+def use_split_starter(distances):
+    paths = split_paths_regret_TSP(distances, choose_starting_nodes(data, distances))
+    cost = summary_cost(*paths, distances)
+    return paths, cost
+
 
 def use_local_algo(algo, distances, time_limiter=None, n=10):
     best_score = float('inf')
@@ -30,13 +38,13 @@ def use_local_algo(algo, distances, time_limiter=None, n=10):
     # do parallel here, please ;~;
     for i in range(n):
         print(f"Algo: {algo.__name__}, iteration: {i+1}")
-        start_time = time.time() #time.perf_counter()
+        start_time = time.time()  # time.perf_counter()
         start, starting_score = use_randomstart(distances)
         if time_limiter is None:
             solution = algo(start, distances)
         else:
             solution = algo(start, distances, time_limiter)
-        #elapsed_time = time.perf_counter() - start_time
+        # elapsed_time = time.perf_counter() - start_time
         elapsed_time = time.time() - start_time
         if time_limiter is None:
             path1, path2 = solution
@@ -59,6 +67,7 @@ def use_local_algo(algo, distances, time_limiter=None, n=10):
 
     return best_score, total_score / n, worst_score, best_solution, best_time, total_time / n, worst_time, best_diff, total_diff / n, all_num_perturbations / n
 
+
 if __name__ == '__main__':
     instances = [
         '../data/kroA200.tsp',
@@ -66,9 +75,9 @@ if __name__ == '__main__':
     ]
     local_algorithms = [
         MSLS,
-        ILS,
-        LNS,
-        LNS_no_LS,
+        # ILS,
+        # LNS,
+        # LNS_no_LS,
     ]
 
     time_limiter = None
