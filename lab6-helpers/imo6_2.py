@@ -5,6 +5,7 @@ import tsplib95
 import math
 import time
 from collections import deque
+import json
 
 def load_tsplib_instance(filename):
     problem = tsplib95.load(filename)
@@ -676,7 +677,20 @@ def main_repeated_runs(filename, T=60, pop_size=20, use_local_search=True, use_m
         best_overall[2],
         title="Najlepsze rozwiązanie"
     )
-    print(best_overall)
+    cykl1 = [int(x) for x in best_overall[0]]
+    cykl2 = [int(x) for x in best_overall[1]]
+    koszt = int(best_overall[2])
+
+    najlepsze_rozwiazanie = {
+        "cykl1": cykl1,
+        "cykl2": cykl2,
+        "koszt": koszt
+    }
+
+    with open("../Lab6 - Testy wypuklosci i wlasna metoda/src/najlepsze_rozwiazanie.json", "w") as f:
+        json.dump([najlepsze_rozwiazanie], f, indent=2)
+
+    print("Zapisano do pliku najlepsze_rozwiazanie.json")
 
 
 

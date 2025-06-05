@@ -64,7 +64,7 @@ def exchange(path1, path2, distances):
     return path1, path2, did_exchange
 
 
-def traverse_greedy_edge(starting_paths, distances, _):
+def traverse_greedy_edge(starting_paths, distances):
     path1, path2 = starting_paths
     again = True
     while again:
