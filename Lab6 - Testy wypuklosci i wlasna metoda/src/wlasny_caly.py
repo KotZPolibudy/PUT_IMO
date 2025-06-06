@@ -1,4 +1,5 @@
 import time
+import json
 from tabulate import tabulate
 from utils import *
 # starters
@@ -110,8 +111,17 @@ if __name__ == '__main__':
 
             results.append(
                 [insta, algo_name, found_best, found_avg, found_worst, bt, avgt, wt, diff_best, diff_avg, "-" if pert_avg == 0 else pert_avg])
-            save_path = f"../best_paths_swojstarter/{i}/{os.path.basename(algo_name)}.png"
-            show_paths(data, *found_best_paths, save_path)
+            # save_path = f"../best_paths_swojstarter/{i}/{os.path.basename(algo_name)}.png"
+            save_path = None
+            show_paths(data, *found_best_paths, save_path, show=True)
+            best_solution_dict = {
+                "cykl1": found_best_paths[0],
+                "cykl2": found_best_paths[1],
+                "koszt": int(found_best)  # upewnij się, że to nie np. numpy.int32
+            }
+            save_json_path = f"../best_paths_swojstarter/{i}/{algo_name}_najlepsze_rozwiazanie.json"
+            with open(save_json_path, "w") as f:
+                json.dump([best_solution_dict], f, indent=2)
 
     headers = ["Instance", "Algorytm", "Best", "Avg", "Worst", "Best Time", "Avg Time", "Worst Time", "Best Diff", "Avg Diff", "Avg Perturbations"]
     print(tabulate(results, headers=headers, tablefmt="grid"))

@@ -32,7 +32,7 @@ Stosowane miary podobieństwa to:
 \end{enumerate}
 
 
-\section{Własna Metoda}\label{sec:wasna-metoda}
+\section{Własna Metoda}\label{sec:wlasna-metoda}
 
 \subsection{Pierwsza heurystyka konstrukcyjna}\label{subsec:pierwsza-heurystyka-konstukcyjna}
 
@@ -64,14 +64,29 @@ Wygląda on następująco:
 
 \subsection{Ulepszenie naszej heurystyki konstrukcyjnej}\label{subsec:ulepszenie-naszej-heurystyki-konstrukcyjnej}
 
-TODO
-Ulepszenie poprzez lepszy podział
-Trzeba wypróbować kilka, Kmeans, DBSCAN, etc.
+Ulepszona zostaje przede wszystkim metoda podziału na dwa podproblemy, samo budowanie wciąż odbywa się za pomocą dwużalu, jak poprzednio.
+
+Metoda podziału:
+\begin{enumerate}
+    \item Dla zbioru wierzchołków poza starting\_nodes:
+    \begin{enumerate}
+        \item Wytnij z macierzy odległości podmacierz sub\_distances dla tych wierzchołków startowych
+        \item Zbuduj macierz podobieństwa $similarity[i][j] = 1 / (distance[i][j] + \epsilon)$
+        \item Ustaw similarity[i][i] = 0 (brak krawędzi własnych)
+        \item Oblicz znormalizowany Laplasjan macierzy podobieństwa: L
+        \item Wyznacz drugi najmniejszy wektor własny L (wektor Fiedlera)
+        \item Posortuj wierzchołki względem wartości wektora Fiedlera
+        \item Podziel posortowaną listę na pół, względem indeksów
+    \end{enumerate}
+    \item Rozwiąż TSP osobno na każdej połowie wierzchołków
+\end{enumerate}
 
 \subsection{Finalna własna metoda}\label{subsec:finalna-wasna-metoda}
 
-TODO
-Finalnie zdecydowaliśmy się zastosować Large Neighbourhood Search
+Finalnie zdecydowaliśmy się zastosować Large Neighbourhood Search na wynikach heurystyki konstrukcyjnej opisanej powyżej.
+Z racji że z badań wynikło że druga z prezentowanych heurystyk konstrukcyjnych ma mniej stabilne (raz lepsze, raz gorsze) wyniki,
+to zdecydowaliśmy się aby jako rozwiązanie początkowe wybierać najlepsze spośród jednego całkowicie losowego i 10 generowanych każdą z tych heurystyk.
+
 
 
 \subsection{Wyniki obliczeniowe dla algorytmów}\label{subsec:wyniki-obliczeniowe-dla-algorytmow}
@@ -122,7 +137,7 @@ Finalnie zdecydowaliśmy się zastosować Large Neighbourhood Search
 \hline
 \texttt{Konstrukcyjna - spec} & 30525 & 33952.1 & 39328 & 0.230375 & 0.244698 & - \\
 \hline
-\texttt{Konstrukcyjna + LNS} & 29887 & 30282.2 & 30650 & 281.464 & 282.115 & 292.586 & 5568.3 \\
+\texttt{Konstrukcyjna + LNS} & 29876 & 30029.2 & 30650 & 281.464 & 282.115 & 292.586 & 5568.3 \\
 \hline
 \end{tabular}
 }
