@@ -50,7 +50,7 @@ def badanie_wypuklosci_do_najlepszego(plik_optimow, plik_najlepszego):
     return wyniki_do_naj_pary, wyniki_do_naj_krawedzie
 
 
-def rysuj_wykres(wyniki, tytul, etykieta_y):
+def rysuj_wykres(wyniki, tytul, etykieta_y, nazwa_pliku=None):
     x, y = zip(*wyniki)
     plt.figure(figsize=(8, 6))
     plt.scatter(x, y, alpha=0.6)
@@ -62,18 +62,33 @@ def rysuj_wykres(wyniki, tytul, etykieta_y):
     plt.text(min(x), max(y), f'Wsp. korelacji: {r:.4f}', fontsize=12, color='blue')
     plt.grid(True)
     plt.tight_layout()
+
+    if nazwa_pliku:
+        plt.savefig(nazwa_pliku)
+        print(f"Zapisano wykres do pliku: {nazwa_pliku}")
+
     plt.show()
 
 
 if __name__ == "__main__":
-    plik_optimow = "lokalne_optimy_kroA.json"
-    plik_najlepszego = "best_paths_swojstarter/kroA/najlepsze_rozwiazanie.json"
+    plik_optimow = "lokalne_optimy_kroB.json"
+    plik_najlepszego = "LNS_najlepsze_rozwiazanie_kroB.json"
 
     wyniki_do_naj_pary, wyniki_do_naj_krawedzie = badanie_wypuklosci_do_najlepszego(
         plik_optimow, plik_najlepszego
     )
 
-    rysuj_wykres(wyniki_do_naj_pary, "Podobieństwo do najlepszego – pary wierzchołków",
-                 "Podobieństwo do najlepszego (pary)")
-    rysuj_wykres(wyniki_do_naj_krawedzie, "Podobieństwo do najlepszego – krawędzie",
-                 "Podobieństwo do najlepszego (krawędzie)")
+    rysuj_wykres(
+        wyniki_do_naj_pary,
+        "Podobieństwo do najlepszego – pary wierzchołków",
+        "Podobieństwo do najlepszego (pary)",
+        "../wypuklosci/wykres_podobienstwo_pary_kroB.png"
+    )
+
+    rysuj_wykres(
+        wyniki_do_naj_krawedzie,
+        "Podobieństwo do najlepszego – krawędzie",
+        "Podobieństwo do najlepszego (krawędzie)",
+        "../wypuklosci/wykres_podobienstwo_krawedzie_kroB.png"
+    )
+
