@@ -91,7 +91,9 @@ Finalnie zdecydowaliśmy się zastosować Large Neighbourhood Search
 \hline
 \texttt{HAE +M +LS} & 29975 & 30872.7 & 31499 & 269.287 & 269.296 & 269.306 & 12946.9 \\
 \hline
-\texttt{nasz - konstukcyjna} & 30293.00 & 33044.22 & 36854.00 & - & - & - & - \\
+\texttt{Konstrukcyjna - lab1} & 30426 & 32764.1 & 36894 & 0.0829609 & 0.0889215 & 0.12391 & - \\
+\hline
+\texttt{Konstrukcyjna - spec} & 30293 & 33044.2 & 36854 & 0.231492 & 0.240892 & 0.277627 & - \\
 \hline
 \texttt{nasz - cały } & x & x & x & x & x & x & x \\
 \hline
@@ -116,7 +118,9 @@ Finalnie zdecydowaliśmy się zastosować Large Neighbourhood Search
 \hline
 \texttt{HAE +M +LS} & 30604 & 31231 & 31837 & 279.949 & 279.959 & 279.975 & 12954.5 \\
 \hline
-\texttt{nasz - konstukcyjna} & 31218.00 & 33317.82 & 36913.00 & - & - & - & - \\
+\texttt{Konstrukcyjna - lab1} & 31466 & 33462.3 & 36604 & 0.0833449 & 0.0880821 & 0.110299 & - \\
+\hline
+\texttt{Konstrukcyjna - spec} & 30525 & 33952.1 & 39328 & 0.230375 & 0.244698 & - \\
 \hline
 \texttt{nasz - cały } & x & x & x & x & x & x & x \\
 \hline
@@ -126,6 +130,54 @@ Finalnie zdecydowaliśmy się zastosować Large Neighbourhood Search
 \end{table}
 
 \subsection{Wizualizacje najlepszych wyników}\label{subsec:wizualizacje}
+
+
+\subsubsection{RandomStart}
+\begin{figure}[H]
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths_constructions/kroA200/randomstart}
+        \caption{kroA200, losowe rozwiązanie}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths_constructions/kroB200/randomstart}
+        \caption{kroB200, losowe rozwiązanie}
+    \end{minipage}\label{fig:figure33}
+\end{figure}
+
+
+\subsubsection{split-lab1}
+\begin{figure}[H]
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths_constructions/kroA200/split_paths_regret_TSP}
+        \caption{kroA200, heurystyka konstukcyjna z podziałem}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths_constructions/kroB200/split_paths_regret_TSP}
+        \caption{kroB200, heurystyka konstukcyjna z podziałem}
+    \end{minipage}\label{fig:figure34}
+\end{figure}
+
+
+\subsubsection{spectral-split}
+\begin{figure}[H]
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths_constructions/kroA200/spectral_split_two_regret}
+        \caption{kroA200, heurystyka konstukcyjna z podziałem spektralnym}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths_constructions/kroB200/spectral_split_two_regret}
+        \caption{kroB200, heurystyka konstukcyjna z podziałem spektralnym}
+    \end{minipage}\label{fig:figure35}
+\end{figure}
 
 \subsubsection{MSLS}
 \begin{figure}[H]

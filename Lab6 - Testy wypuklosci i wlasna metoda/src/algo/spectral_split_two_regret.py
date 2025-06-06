@@ -3,10 +3,12 @@ from scipy.sparse.csgraph import laplacian
 from scipy.sparse.linalg import eigsh
 
 def spectral_split_two_regret(distances, starting_nodes):
+    distances = np.array(distances)
+
     def balanced_spectral_split(distances_submatrix):
         m = len(distances_submatrix)
 
-        # Zamień odległości na podobieństwo (im mniejsza odległość, tym większe podobieństwo)
+        # Zamień odległości na podobieństwo
         similarity = 1 / (distances_submatrix + 1e-6)
         np.fill_diagonal(similarity, 0)
 
@@ -15,14 +17,11 @@ def spectral_split_two_regret(distances, starting_nodes):
         _, vecs = eigsh(L, k=2, which='SM')
         fiedler = vecs[:, 1]
 
-        # Posortuj indeksy według wartości wektora Fiedlera
+        # Podział na dwie równe grupy
         sorted_nodes = np.argsort(fiedler)
-
-        # Równy podział
         mid = m // 2
         group1 = sorted_nodes[:mid]
         group2 = sorted_nodes[mid:]
-
         return group1.tolist(), group2.tolist()
 
     def two_regret_heuristic(path, nodes, distances, use_weights=False, w1=1, w2=-1):
@@ -64,21 +63,14 @@ def spectral_split_two_regret(distances, starting_nodes):
 
     n = len(distances)
     start1, start2 = starting_nodes
-
-    # Lista pozostałych wierzchołków (bez startowych)
     all_nodes = [i for i in range(n) if i not in starting_nodes]
-
-    # Macierz odległości tylko dla pozostałych wierzchołków
     sub_distances = distances[np.ix_(all_nodes, all_nodes)]
 
-    # Podział z użyciem spektralnej metody
     group1_idx, group2_idx = balanced_spectral_split(sub_distances)
 
-    # Zamiana lokalnych indeksów na globalne
     nodes1 = [all_nodes[i] for i in group1_idx]
     nodes2 = [all_nodes[i] for i in group2_idx]
 
-    # Dodaj wierzchołki startowe
     path1 = two_regret_heuristic([start1, start1], [start1] + nodes1, distances)
     path2 = two_regret_heuristic([start2, start2], [start2] + nodes2, distances)
 
