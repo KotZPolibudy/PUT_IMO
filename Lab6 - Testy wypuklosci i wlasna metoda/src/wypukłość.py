@@ -86,11 +86,12 @@ def rysuj_wykres(wyniki, tytul, etykieta_y):
     plt.text(min(x), max(y), f'Wsp. korelacji: {r:.4f}', fontsize=12, color='blue')
     plt.grid(True)
     plt.tight_layout()
+    # plt.savefig("kroB"+tytul)
     plt.show()
 
 
 if __name__ == "__main__":
-    plik_optimow = "lokalne_optimy_kroA.json"
+    plik_optimow = "lokalne_optimy_kroB.json"
     plik_najlepszego = "najlepsze_rozwiazanie.json"
 
     wyniki_pary, wyniki_krawedzie, wyniki_do_naj_pary, wyniki_do_naj_krawedzie = badanie_wypuklosci(

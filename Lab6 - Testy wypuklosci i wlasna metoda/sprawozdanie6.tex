@@ -76,16 +76,119 @@ Finalnie zdecydowaliśmy się zastosować Large Neighbourhood Search
 
 \subsection{Wyniki obliczeniowe dla algorytmów}\label{subsec:wyniki-obliczeniowe-dla-algorytmow}
 
-TODO
-TABELKA Z WYNIKAMI
+\begin{table}[ht]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|c||c|c|c||c|c|c||c|}
+\hline
+\textbf{Algorytm} & \textbf{Best} & \textbf{Avg} & \textbf{Worst} & \textbf{Best Time} & \textbf{Avg Time} & \textbf{Worst Time} & \textbf{Avg Iterations} \\
+\hline
+\texttt{MSLS} & 34630 & 35375.7 & 35862 & 235.639 & 269.287 & 327.604 & - \\
+\hline
+\texttt{ILS} & 31016 & 31919.8 & 33193 & 270.753 & 270.851 & 270.946 & 4977.8 \\
+\hline
+\texttt{LNS} & 29690 & 30559.4 & 32006 & 272.054 & 272.242 & 272.595 & 5714.6 \\
+\hline
+\texttt{HAE +M +LS} & 29975 & 30872.7 & 31499 & 269.287 & 269.296 & 269.306 & 12946.9 \\
+\hline
+\texttt{nasz - konstukcyjna} & x & x & x & x & x & x & - \\
+\hline
+\texttt{nasz - cały } & x & x & x & x & x & x & x \\
+\hline
+\end{tabular}
+}
+\caption{Wyniki dla \texttt{kroA200}}\label{tab:table}
+\end{table}
+
+
+\begin{table}[ht]
+\centering
+\resizebox{\textwidth}{!}{
+\begin{tabular}{|c||c|c|c||c|c|c||c|}
+\hline
+\textbf{Algorytm} & \textbf{Best} & \textbf{Avg} & \textbf{Worst} & \textbf{Best Time} & \textbf{Avg Time} & \textbf{Worst Time} & \textbf{Avg Iterations} \\
+\hline
+\texttt{MSLS} & 34819 & 35501.6 & 36081 & 256.952 & 279.947 & 380.768 & - \\
+\hline
+\texttt{ILS} & 31475 & 32454.2 & 33343 & 281.034 & 281.280 & 281.655 & 6057.1 \\
+\hline
+\texttt{LNS} & 30092 & 30770.9 & 31762 & 282.524 & 282.865 & 283.275 & 5768.0 \\
+\hline
+\texttt{HAE +M +LS} & 30604 & 31231 & 31837 & 279.949 & 279.959 & 279.975 & 12954.5 \\
+\hline
+\texttt{nasz - konstukcyjna} & x & x & x & x & x & x & - \\
+\hline
+\texttt{nasz - cały } & x & x & x & x & x & x & x \\
+\hline
+\end{tabular}
+}
+\caption{Wyniki dla \texttt{kroB200}}\label{tab:table2}
+\end{table}
 
 \subsection{Wizualizacje najlepszych wyników}\label{subsec:wizualizacje}
 
-TODO
-ALGO1
-ALGO2
-ALGO3
-etc
+\subsubsection{MSLS}
+\begin{figure}[H]
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroA200/MSLS}
+        \caption{kroA200, losowy start}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroB200/MSLS}
+        \caption{kroB200, losowy start}
+    \end{minipage}\label{fig:figure3}
+\end{figure}
+
+\subsubsection{ILS}
+
+\begin{figure}[H]
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroA200/ILS}
+        \caption{kroA200, losowy start}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroB200/ILS}
+        \caption{kroB200, losowy start}
+    \end{minipage}\label{fig:figure1}
+\end{figure}
+
+\subsubsection{LNS}
+
+\begin{figure}[H]
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroA200/LNS}
+        \caption{kroA200, losowy start}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroB200/LNS}
+        \caption{kroB200, losowy start}
+    \end{minipage}\label{fig:figure2}
+\end{figure}
+
+\subsubsection{HAE z mutacją i lokalnym przeszukiwaniem}
+
+\begin{figure}[H]
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroA200/HAE+Mutation+LS}
+        \caption{kroA200, losowy start}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths/kroB200/HAE+Mutation+LS}
+        \caption{kroB200, losowy start}
+    \end{minipage}\label{fig:figure8}
+\end{figure}
 
 \subsection{Wnioski}\label{subsec:wnioski}
 Zaprojektowana przez nas heurystyka konstrukcyjna wykazuje się niebywałą szybkością i jest świetną opcją jeśli zależy nam na czasie.
@@ -100,13 +203,72 @@ Korzystamy z dwóch miar podobieństwa: Liczby par wierzchołków przydzielonych
 
 \subsection{Wyniki dla instancji kroA200}\label{subsec:wyniki-dla-instancji-kroa200}
 
+\begin{figure}[H]
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{wypuklosci/podobienstwo-parami-kroA}
+        \caption{podobieństwo parami - kroA}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{wypuklosci/podobienstwo-krawedziami-kroA}
+        \caption{podobieństwo krawedziami - kroA}
+    \end{minipage}\label{fig:figure11}
+\end{figure}
+
+\begin{figure}[H]
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{wypuklosci/podobienstwo-naj-parami-kroA}
+        \caption{podobieństwo parami do najlepszego- kroA}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{wypuklosci/podobienstwo-naj-krawedziami-kroA}
+        \caption{podobieństwo krawedziami do najlepszego- kroA}
+    \end{minipage}\label{fig:figure12}
+\end{figure}
+
+
 \subsection{Wyniki dla instancji kroB200}\label{subsec:wyniki-dla-instancji-krob200}
+
+\begin{figure}[H]
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{wypuklosci/podobienstwo-parami-kroB}
+        \caption{podobieństwo parami - kroB}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{wypuklosci/podobienstwo-krawedziami-kroB}
+        \caption{podobieństwo krawedziami - kroB}
+    \end{minipage}\label{fig:figure13}
+\end{figure}
+
+\begin{figure}[H]
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{wypuklosci/podobienstwo-naj-parami-kroB}
+        \caption{podobieństwo parami do najlepszego- kroB}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{wypuklosci/podobienstwo-naj-krawedziami-kroB}
+        \caption{podobieństwo krawedziami do najlepszego- kroB}
+    \end{minipage}\label{fig:figure14}
+\end{figure}
 
 
 \subsection{Wnioski}\label{subsec:wnioski-wypuklosci}
 
-TODO
-Wnioski wnioseczki wnioskunie
+Na podstawie powyższych eksperymentów można stwierdzić że funkcja wykazuje cechy globalnej wypukłości.
+Przede wszystkim, przemawia za tym silna ujemna korelacja między wartością funkcji celu, a średnim podobieństwem do innych lokalnych minimów.
+Miara podobieństwa oparta na krawędziach zdaje się lepiej oddawać strukturę przestrzeni rozwiązań, niż ta oparta na parach wierzchołków (patrząc stricte na siłę korelacji).
+W ogólności, eksperyment pokazał że dobre rozwiązania są do siebie podobne, co jest zgodne z definicją globalnej wypukłości - choć nie implikuje że wszystkie podobne rozwiązania będą dobre.
 
 
 \section{Link do repozytorium}\label{sec:link-do-repo}
