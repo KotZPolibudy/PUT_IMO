@@ -27,7 +27,7 @@ def use_start(distances, starters, n=100):
 
     return best_paths, best_koszt
 
-def use_local_algo(algo, distances, time_limiter=None, starters_list=None, n=10):
+def use_local_algo(algo, distances, time_limiter=None, starters_list=None, n=3):
     if starters_list is None:
         starters_list = [randomstart, split_paths_regret_TSP, spectral_split_two_regret]
     best_score = float('inf')

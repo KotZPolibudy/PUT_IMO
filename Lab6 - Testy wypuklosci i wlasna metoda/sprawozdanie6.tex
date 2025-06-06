@@ -95,7 +95,7 @@ Finalnie zdecydowaliśmy się zastosować Large Neighbourhood Search
 \hline
 \texttt{Konstrukcyjna - spec} & 30293 & 33044.2 & 36854 & 0.231492 & 0.240892 & 0.277627 & - \\
 \hline
-\texttt{nasz - cały } & x & x & x & x & x & x & x \\
+\texttt{Konstrukcyjna + LNS} & 29865 & 30063.7 & 30129 & 260.821 & 262.142 & 274.1 & 5084.6 \\
 \hline
 \end{tabular}
 }
@@ -122,7 +122,7 @@ Finalnie zdecydowaliśmy się zastosować Large Neighbourhood Search
 \hline
 \texttt{Konstrukcyjna - spec} & 30525 & 33952.1 & 39328 & 0.230375 & 0.244698 & - \\
 \hline
-\texttt{nasz - cały } & x & x & x & x & x & x & x \\
+\texttt{Konstrukcyjna + LNS} & 29887 & 30282.2 & 30650 & 281.464 & 282.115 & 292.586 & 5568.3 \\
 \hline
 \end{tabular}
 }
@@ -242,9 +242,28 @@ Finalnie zdecydowaliśmy się zastosować Large Neighbourhood Search
     \end{minipage}\label{fig:figure8}
 \end{figure}
 
+\subsubsection{LNS z lepszym startem}
+
+\begin{figure}[H]
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths_swojstarter/kroA200/LNS}
+        \caption{kroA200, losowy start}
+    \end{minipage}
+    \hfill
+    \begin{minipage}[t]{0.45\textwidth}
+        \centering
+        \includegraphics[width=\linewidth]{best_paths_swojstarter/kroB200/LNS}
+        \caption{kroB200, losowy start}
+    \end{minipage}\label{fig:figure99}
+\end{figure}
+
 \subsection{Wnioski}\label{subsec:wnioski}
-Zaprojektowana przez nas heurystyka konstrukcyjna wykazuje się niebywałą szybkością i jest świetną opcją jeśli zależy nam na czasie.
-W przypadku, gdy dążymy do jak najdokładniejszych rozwiązań nie zważając tak na czas, to połączenie jej z TODO algorytmem TODO robi TODO
+Zaprojektowana przez nas heurystyka konstrukcyjna wykazuje się niebywałą szybkością jak na jakość otrzymywanych wyników i jest świetną opcją jeśli zależy nam na czasie.
+W przypadku, gdy dążymy do jak najdokładniejszych rozwiązań nie zważając tak na czas, to połączenie jej z LNS daje minimalnie lepsze wyniki niż wcześniej, przy zachowaniu tego samego czasu.
+Przede wszystkim, znaczną zaletą skorzystania z takiego rozwiązania początkowego jest znacznie szybsze przejście do badania dobrych rozwiązań, zamiast korzystania z lokalnego przeszukiwania aby początkowo takie zbudować.
+Dodatkowo, sama heurystyka konstrukcyjna potrafi osiągnąć wyniki poniżej 31000, więc potencjalnie najlepszym czasowo rozwiązaniem mogłoby okazać się wielokrotne zastosowanie tej heurystyki konstrukcyjnej i lokalne przeszukiwanie w wersji stromej w celu udoskonalenia tych rozwiązań.
+Wniosek ten nasuwa się przede wszystkim z obserwowanych wykresów, gdzie widać że kilka małych zamian mogłoby znacznie poprawić jakość rozwiązań, które i tak już są bardzo dobre.
 
 
 \section{Testy globalnej wypukłości}\label{sec:testy-globalnej-wypukosci}
